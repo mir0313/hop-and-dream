@@ -1705,7 +1705,6 @@ match /nicknames/{nickname} {
           }else{done();}
         });
       })();
-    })();
       /* gift system bridge: expose Firebase handles */
       window.hdFb = {
         getUser: function(){ return hdUser; },
@@ -1713,6 +1712,7 @@ match /nicknames/{nickname} {
         getAuth: function(){ return auth; },
         isReady: function(){ return fbReady; }
       };
+    })();
 
     /* ===== Hop & Dream gift + nickname system ===== */
     (function(){
