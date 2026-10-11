@@ -284,10 +284,11 @@
     @media(max-width:760px){.recipe-workshop-head{align-items:stretch;flex-direction:column}.new-recipe-btn{width:100%}.editor-layout{grid-template-columns:1fr}.editor-prediction{position:static;order:-1}.recipe-editor-dialog{max-height:94vh}.recipe.custom-recipe{min-height:0}}
     @media(max-width:520px){.editor-block h3{align-items:flex-start;flex-direction:column}.editor-block h3 small{max-width:100%}.editor-fields{grid-template-columns:1fr}.editor-field.full{grid-column:auto}.recipe-row{grid-template-columns:minmax(0,1fr) 82px 36px}.recipe-row.hop{grid-template-columns:minmax(0,1fr) 36px}.recipe-row.hop select:first-child,.recipe-row.hop select:nth-child(2),.recipe-row.hop select:nth-child(3),.recipe-row.hop .input-unit-wrap{grid-column:1}.recipe-row.hop .row-remove{grid-column:2;grid-row:2}.recipe-row.hop .format-help{grid-column:1/-1}.recipe-row.adjunct{grid-template-columns:minmax(0,1fr) 36px}.recipe-row.adjunct select,.recipe-row.adjunct .input-unit-wrap{grid-column:1}.recipe-row.adjunct .row-remove{grid-column:2;grid-row:2}.recipe-row.adjunct .format-help{grid-column:1/-1}.editor-actions>*{flex:1}.custom-card-actions{grid-template-columns:1fr 1fr}}
 
-    /* Textbook recipe library · family filters and selected-recipe sheet */
-    .recipe-filters{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 2px;padding:8px;background:#2b160f;border:3px solid #b86b34;box-shadow:4px 4px 0 #0d0604}.recipe-filter{appearance:none;border:2px solid #a86535;background:#4b2918;color:#f0d4a1;padding:8px 11px;cursor:pointer;font-size:.72rem}.recipe-filter.active{background:var(--gold);color:#25140d;border-color:#ffe096}.recipe-filter:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+    /* Searchable recipe library · compact controls and selected-recipe sheet */
+    .recipe-library-toolbar{margin:14px 0 2px;padding:10px;background:#2b160f;border:3px solid #b86b34;box-shadow:4px 4px 0 #0d0604;color:#f0d4a1}.recipe-search-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,.34fr);gap:8px}.recipe-field{display:grid;gap:5px;min-width:0}.recipe-field label{font-family:"Galmuri11","Courier New",monospace;font-size:.62rem;color:#dcb981}.recipe-field input,.recipe-field select{width:100%;min-width:0;height:42px;border:2px solid #a86535;border-radius:0;background:#fff0c7;color:#2b1710;padding:8px 10px;box-shadow:2px 2px 0 #0d0604}.recipe-field input:focus,.recipe-field select:focus{outline:3px solid var(--gold);outline-offset:2px}.recipe-filters{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:5px;margin:9px 0 0}.recipe-filter{appearance:none;min-width:0;border:2px solid #a86535;background:#4b2918;color:#f0d4a1;padding:8px 4px;cursor:pointer;font-size:.67rem;white-space:nowrap}.recipe-filter.active{background:var(--gold);color:#25140d;border-color:#ffe096}.recipe-filter:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.recipe-result-line{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:29px;margin-top:7px;font-size:.65rem;color:#dcb981}.recipe-clear{appearance:none;border:2px solid #a86535;background:#d9ae70;color:#25140d;padding:5px 8px;cursor:pointer}.recipe-clear[hidden]{display:none}.recipe-empty{grid-column:1/-1;border:3px dashed #b86b34;padding:22px;color:#ffe4aa;background:rgba(25,10,6,.28);text-align:center}.recipe-sort-facts{display:flex;gap:5px;flex-wrap:wrap;margin:-1px 0 8px}.recipe-sort-facts span{border:1px solid var(--line);background:var(--panel2);padding:2px 5px;color:var(--muted);font-size:.58rem}.recipe-sort-facts .rated{color:var(--green)}
     .family-chip{display:inline-block;border:2px solid var(--line);background:color-mix(in srgb,var(--blue) 18%,var(--panel2));padding:3px 6px;font-size:.58rem;line-height:1.2;white-space:nowrap}.recipe-hint{grid-column:1/-1;color:var(--muted);font-size:.63rem;margin-top:-4px}.recipe-full-detail{grid-column:1/-1;border:3px solid var(--green);background:color-mix(in srgb,var(--green) 9%,var(--panel));padding:11px;margin-top:4px;text-align:left}.recipe-full-detail h4{margin:0 0 8px;color:var(--green);font-family:"Galmuri11","Courier New",monospace;font-size:.76rem}.recipe-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.recipe-detail-grid>div{border:2px solid var(--line);background:var(--panel2);padding:8px;font-size:.68rem;line-height:1.55}.recipe-detail-grid strong{display:block;color:var(--green);font-family:"Galmuri11","Courier New",monospace;font-size:.63rem;margin-bottom:3px}.recipe-reference{margin-top:8px;font-size:.62rem;color:var(--muted);line-height:1.5}.recipe.selected{min-height:0}.recipe.selected .recipe-hint{display:none}
-    @media(max-width:520px){.recipe-filters{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.recipe-filter{padding:8px 3px;font-size:.65rem}.recipe-detail-grid{grid-template-columns:1fr}.recipe-full-detail{padding:9px}}
+    @media(max-width:760px){.recipe-filters{grid-template-columns:repeat(5,minmax(0,1fr))}}
+    @media(max-width:520px){.recipe-library-toolbar{position:sticky;top:86px;z-index:19;margin-left:-3px;margin-right:-3px;padding:7px}.recipe-search-row{grid-template-columns:minmax(0,1fr) 112px;gap:6px}.recipe-field label{font-size:.57rem}.recipe-field input,.recipe-field select{height:38px;padding:6px 8px;font-size:.72rem}.recipe-filters{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-top:7px}.recipe-filter{min-height:34px!important;padding:5px 2px;font-size:.61rem}.recipe-result-line{min-height:24px;margin-top:4px}.recipe-clear{min-height:30px!important;padding:3px 7px}.recipe-detail-grid{grid-template-columns:1fr}.recipe-full-detail{padding:9px}}
 
     /* Device-responsive layout · native scrolling remains unchanged */
     .screen,.game-grid,.game-grid>*,.panel,.recipe,.recipe-content,.dialog,.editor-layout,.editor-form{min-width:0}
@@ -426,7 +427,11 @@
       <button class="career-visit-btn" id="careerBtn">양조장·펍 탐방 →</button>
     </section>
     <section class="recipe-workshop-head" aria-label="자작 레시피 작업실"><div><strong>내 레시피 작업실</strong><small>기준 스타일을 골라 나만의 몰트 빌과 홉 스케줄을 설계하세요.</small></div><button class="new-recipe-btn" id="newRecipeBtn">＋ 새 레시피 만들기</button></section>
-    <nav class="recipe-filters" id="recipeFilters" aria-label="맥주 스타일 계열 필터"><button class="recipe-filter active" data-recipe-filter="all" aria-pressed="true">전체</button><button class="recipe-filter" data-recipe-filter="ale" aria-pressed="false">에일</button><button class="recipe-filter" data-recipe-filter="lager" aria-pressed="false">라거</button><button class="recipe-filter" data-recipe-filter="belgian" aria-pressed="false">벨기에</button><button class="recipe-filter" data-recipe-filter="wheat" aria-pressed="false">밀맥주</button><button class="recipe-filter" data-recipe-filter="ipa" aria-pressed="false">IPA</button></nav>
+    <section class="recipe-library-toolbar" aria-label="레시피 검색과 정렬">
+      <div class="recipe-search-row"><div class="recipe-field"><label for="recipeSearch">레시피 이름 검색</label><input id="recipeSearch" type="search" autocomplete="off" placeholder="한글 또는 English"></div><div class="recipe-field"><label for="recipeSort">정렬</label><select id="recipeSort"><option value="name">이름순</option><option value="difficulty">난이도순</option><option value="rating">평점순</option></select></div></div>
+      <nav class="recipe-filters" id="recipeFilters" aria-label="맥주 스타일 필터"><button class="recipe-filter active" data-recipe-filter="all" aria-pressed="true">전체</button><button class="recipe-filter" data-recipe-filter="ipa" aria-pressed="false">IPA</button><button class="recipe-filter" data-recipe-filter="neipa" aria-pressed="false">NEIPA</button><button class="recipe-filter" data-recipe-filter="lager" aria-pressed="false">라거</button><button class="recipe-filter" data-recipe-filter="stout" aria-pressed="false">스타우트</button><button class="recipe-filter" data-recipe-filter="weizen" aria-pressed="false">바이젠</button><button class="recipe-filter" data-recipe-filter="belgian" aria-pressed="false">벨지안</button><button class="recipe-filter" data-recipe-filter="sour" aria-pressed="false">사워</button><button class="recipe-filter" data-recipe-filter="other" aria-pressed="false">기타</button></nav>
+      <div class="recipe-result-line" aria-live="polite"><span id="recipeResultCount">전체 레시피</span><button class="recipe-clear" id="recipeClear" type="button" hidden>조건 초기화</button></div>
+    </section>
     <div class="recipe-grid" id="recipeGrid"></div>
     <div class="batch-notice" id="batchNotice" role="status"></div>
     <div class="batch-start-bar" id="batchStartBar" hidden>
@@ -1252,7 +1257,15 @@
   function recipeUnlocked(id,r){if(r.tier==='custom'||r.tier==='basic')return true;if(r.tier==='social')return !!C.rewardRecipes[id];if(r.tier==='mastery'){if(r.unlockType==='career')return rankLevel(C.rank)>=rankLevel(r.unlockRank);if(r.unlockType==='family')return (G.styleBatches[r.unlockFamily]||0)>=r.unlockCount;return totalBatches()>=(r.unlockAt||0)}return (r.tier==='advanced'&&G.completedBasic>=2)||(r.tier==='shop'&&G.ownedRecipes[id])}
   function masteryLockText(r){if(r.unlockType==='career')return `커리어 ${r.unlockRank==='assistant'?'조수 양조사':'정식 양조사'} 달성 시 해금`;if(r.unlockType==='family'){const n=G.styleBatches[r.unlockFamily]||0;return `${familyLabel[r.unlockFamily]||r.unlockFamily} ${n}/${r.unlockCount}회 양조 · ${Math.max(0,r.unlockCount-n)}회 남음`}const remaining=Math.max(0,(r.unlockAt||0)-totalBatches());return remaining?`${remaining}배치 남음 · 누적 ${totalBatches()} / ${r.unlockAt}배치`:`누적 ${r.unlockAt}배치 달성 · 해금 완료`}
   const familyLabel={ale:'에일',lager:'라거',belgian:'벨기에',wheat:'밀맥주',ipa:'IPA'};
-  let expandedRecipe=null,shortageShown=false,recipeFilter='all';
+  C.recipeLibrary=Object.assign({query:'',style:'all',sort:'name'},C.recipeLibrary||{});
+  let expandedRecipe=null,shortageShown=false,recipeFilter=C.recipeLibrary.style,recipeQuery=C.recipeLibrary.query,recipeSort=C.recipeLibrary.sort;
+  function syncRecipeLibraryState(){C.recipeLibrary={query:recipeQuery,style:recipeFilter,sort:recipeSort}}
+  function recipeSearchText(r){return [r.name,r.short,r.baseName].filter(Boolean).join(' ').toLocaleLowerCase('ko-KR').replace(/[\s_-]+/g,'')}
+  function recipeStyleMatch(id,r,style){const text=[id,r.name,r.short,r.baseName,r.reference].filter(Boolean).join(' ').toLocaleLowerCase('ko-KR');const ipa=r.family==='ipa'&&r.type!=='neipa',neipa=r.type==='neipa',lager=r.family==='lager',stout=/stout|스타우트/.test(text),weizen=/weizen|바이젠|헤페바이젠/.test(text),belgian=r.family==='belgian'||/belgian|벨지안|벨기에/.test(text),sour=/sour|사워|gose|고제/.test(text);if(style==='all')return true;if(style==='ipa')return ipa;if(style==='neipa')return neipa;if(style==='lager')return lager;if(style==='stout')return stout;if(style==='weizen')return weizen;if(style==='belgian')return belgian;if(style==='sour')return sour;return style==='other'&&!ipa&&!neipa&&!lager&&!stout&&!weizen&&!belgian&&!sour}
+  function recipeDifficulty(r){let weight=r.tier==='basic'?0:r.tier==='custom'?1:2;if(r.type==='neipa')weight+=2;if((r.boil||60)>=90)weight++;if((r.abv||0)>=8)weight++;if(r.dryRec||(r.adjunctSchedule||[]).length)weight++;return weight>=4?3:weight>=2?2:1}
+  function recipeRating(id){const scores=(C.finishedBeers||[]).filter(beer=>beer.recipe===id&&Number.isFinite(+beer.score)).map(beer=>+beer.score);return scores.length?Math.max(...scores):-1}
+  function recipeSortLabel(level){return ['','쉬움','보통','어려움'][level]}
+  function resetRecipeLibrary(){recipeFilter='all';recipeQuery='';recipeSort='name';expandedRecipe=null;syncRecipeLibraryState();$('#recipeSearch').value='';$('#recipeSort').value='name';recipeCards()}
   function recipeDetailMarkup(id,r){
     const legacyMalts=['twoRow','rice','flakedBarley','roastedBarley'],legacyYeasts=['irish'],scale=S.batchVolume/baseBatch(r);
     const maltBill=Object.entries(r.req).filter(([key])=>maltIds.includes(key)||legacyMalts.includes(key)).map(([key,q])=>`${itemMeta[key]&&itemMeta[key][0]||key} ${fmt(q*scale)}kg`).join(' · ')||'—';
@@ -1263,21 +1276,22 @@
     return `<section class="recipe-full-detail" aria-label="${r.name} 전체 레시피"><h4>${S.batchVolume} L ${r.tier==='custom'?'자작 배치 · 수정 가능':'교과서 배치 · 권장 레시피'}</h4><div class="recipe-detail-grid"><div><strong>몰트 빌</strong>${maltBill}</div><div><strong>홉 스케줄</strong>${hops}</div><div><strong>효모·발효</strong>${yeast}<br>${r.ferm[0]===r.ferm[1]?r.ferm[0]+'°C':r.ferm[0]+'~'+r.ferm[1]+'°C'} 권장</div>${adjuncts?`<div><strong>기타 투입</strong>${adjuncts}</div>`:''}<div><strong>당화·끓이기·잔</strong>${r.mash}°C · ${r.mashTime||60}분 당화<br>${r.boil}분 끓이기${r.type==='neipa'?'(비터링 홉 0g)':''} · ${glassName(id)}</div>${process}</div><p class="recipe-reference">기준: ${r.reference||'게임 내 스타일 가이드'} · 목표 OG ${r.og.toFixed(3)} / FG ${(r.fg!=null?r.fg:1+((r.og-1)*(1-r.atten))).toFixed(3)} / ABV ${r.abv}% / IBU ${Math.round(r.ibu)} / SRM ${r.srm}</p></section>`
   }
   function recipeCards(){
+    syncRecipeLibraryState();
     $$('#recipeFilters [data-recipe-filter]').forEach(button=>{const on=button.dataset.recipeFilter===recipeFilter;button.classList.toggle('active',on);button.setAttribute('aria-pressed',String(on))});
-    const sections=[['custom','내 레시피',customRecipeIds.length?'수정·삭제하거나 바로 양조':'아직 저장한 레시피가 없습니다'],['basic','기본 레시피','게임 시작부터 이용 가능'],['mastery','도전 해금',`총 6종 · 배치 수 / 커리어 / 스타일 숙련 조건`],['social','인연 레시피','NPC 호감도와 평판 이벤트로 획득'],['shop','상점 구매','상점의 레시피 탭에서 구매']];
+    $('#recipeSearch').value=recipeQuery;$('#recipeSort').value=recipeSort;
+    const normalizedQuery=recipeQuery.toLocaleLowerCase('ko-KR').replace(/[\s_-]+/g,'');
     const tierLabel={basic:'기본',advanced:'고급',mastery:'도전',social:'인연',shop:'상점',custom:'자작'};
-    $('#recipeGrid').innerHTML=sections.map(([tier,title,desc])=>{
-      const entries=Object.entries(recipes).filter(([,r])=>r.tier===tier&&(recipeFilter==='all'||r.family===recipeFilter));
-      if(!entries.length&&!(tier==='custom'&&recipeFilter==='all'))return'';
-      const empty=tier==='custom'&&!entries.length?'<div class="my-recipe-empty">저장된 자작 레시피가 여기에 표시됩니다. 위 버튼에서 첫 레시피를 설계해보세요.</div>':'';
-      return `<div class="tier-title"><span>${title}</span><small>${desc}</small></div>`+empty+entries.map(([id,r])=>{
-        const locked=!recipeUnlocked(id,r),selected=S.recipe===id;
-        const lockText=r.tier==='shop'?`상점 구매 · ${won(effectiveRecipePrice(id))}${id==='weizen'&&C.weizenDiscount?' (제주 혜택)':''}`:r.tier==='mastery'?masteryLockText(r):r.tier==='social'?`${npcInfo[r.giftNpc].name}의 호감도·평판 이벤트에서 획득`:'현재 이용할 수 없음';
-        const fg=r.fg!=null?r.fg:1+((r.og-1)*(1-r.atten));
-        const actions=r.tier==='custom'?`<div class="custom-card-actions"><button class="custom-card-action" data-edit-custom="${id}">수정</button><button class="custom-card-action delete" data-delete-custom="${id}">${pendingDeleteId===id?'정말 삭제':'삭제'}</button></div>`:'';
-        const details=selected?recipeDetailMarkup(id,r):locked?'':`<p class="recipe-hint">선택하면 몰트 빌·홉 스케줄 전체 보기</p>`;
-        return `<article class="recipe ${r.tier==='custom'?'custom-recipe':''} ${locked?'locked':''} ${selected?'selected':''}" data-recipe="${id}" role="button" tabindex="0" aria-pressed="${selected}" aria-disabled="${locked}"><div class="recipe-art">${cardGlass(id,r,locked)}</div><div class="recipe-content"><div class="recipe-title-line"><strong class="recipe-name">${r.name}</strong><span class="family-chip">${familyLabel[r.family]||'기타'}</span><span class="tier-badge ${r.tier}">${tierLabel[r.tier]}</span></div>${locked?`<p class="recipe-lock-copy ${r.tier==='mastery'?'progress-lock':''}">${lockText}</p>`:''}<div class="target-profile"><strong>${r.tier==='custom'?'BASE '+r.baseName+' /':'TARGET /'}</strong> ${r.profile}</div><div class="recipe-temps" aria-label="권장 온도"><span>배치 <b>${S.batchVolume}L</b></span><span>당화 <b>${r.mash}°C</b></span><span>발효 <b>${r.ferm[0]===r.ferm[1]?r.ferm[0]+'°C':r.ferm[0]+'~'+r.ferm[1]+'°C'}</b></span></div></div><div class="detail-specs" aria-label="목표 수치"><div><small>OG</small><b>${r.og.toFixed(3)}</b></div><div><small>FG</small><b>${fg.toFixed(3)}</b></div><div><small>ABV</small><b>${r.abv}%</b></div><div><small>IBU</small><b>${Math.round(r.ibu)}</b></div><div><small>SRM</small><b>${r.srm}</b></div></div>${details}${actions}</article>`
-      }).join('')
+    const entries=Object.entries(recipes).filter(([id,r])=>r.tier!=='template'&&recipeStyleMatch(id,r,recipeFilter)&&(!normalizedQuery||recipeSearchText(r).includes(normalizedQuery))).sort((a,b)=>{const [aid,ar]=a,[bid,br]=b;if(recipeSort==='difficulty')return recipeDifficulty(ar)-recipeDifficulty(br)||ar.name.localeCompare(br.name,'ko');if(recipeSort==='rating')return recipeRating(bid)-recipeRating(aid)||ar.name.localeCompare(br.name,'ko');return ar.name.localeCompare(br.name,'ko')});
+    const active=recipeFilter!=='all'||!!normalizedQuery||recipeSort!=='name';
+    $('#recipeResultCount').textContent=`${entries.length}개 레시피${normalizedQuery?` · “${recipeQuery.trim()}” 검색`:''}`;$('#recipeClear').hidden=!active;
+    if(!entries.length){$('#recipeGrid').innerHTML='<div class="recipe-empty"><strong>조건에 맞는 레시피가 없습니다.</strong><br><small>검색어를 줄이거나 다른 스타일을 골라보세요.</small></div>';return}
+    $('#recipeGrid').innerHTML=entries.map(([id,r])=>{
+      const locked=!recipeUnlocked(id,r),selected=S.recipe===id,difficulty=recipeDifficulty(r),rating=recipeRating(id);
+      const lockText=r.tier==='shop'?`상점 구매 · ${won(effectiveRecipePrice(id))}${id==='weizen'&&C.weizenDiscount?' (제주 혜택)':''}`:r.tier==='mastery'?masteryLockText(r):r.tier==='social'?`${npcInfo[r.giftNpc].name}의 호감도·평판 이벤트에서 획득`:'현재 이용할 수 없음';
+      const fg=r.fg!=null?r.fg:1+((r.og-1)*(1-r.atten));
+      const actions=r.tier==='custom'?`<div class="custom-card-actions"><button class="custom-card-action" data-edit-custom="${id}">수정</button><button class="custom-card-action delete" data-delete-custom="${id}">${pendingDeleteId===id?'정말 삭제':'삭제'}</button></div>`:'';
+      const details=selected?recipeDetailMarkup(id,r):locked?'':`<p class="recipe-hint">선택하면 몰트 빌·홉 스케줄 전체 보기</p>`;
+      return `<article class="recipe ${r.tier==='custom'?'custom-recipe':''} ${locked?'locked':''} ${selected?'selected':''}" data-recipe="${id}" role="button" tabindex="0" aria-pressed="${selected}" aria-disabled="${locked}"><div class="recipe-art">${cardGlass(id,r,locked)}</div><div class="recipe-content"><div class="recipe-title-line"><strong class="recipe-name">${r.name}</strong><span class="family-chip">${familyLabel[r.family]||'기타'}</span><span class="tier-badge ${r.tier}">${tierLabel[r.tier]}</span></div><div class="recipe-sort-facts"><span>난이도 ${recipeSortLabel(difficulty)}</span><span class="${rating>=0?'rated':''}">내 평점 ${rating>=0?Math.round(rating)+'점':'미양조'}</span></div>${locked?`<p class="recipe-lock-copy ${r.tier==='mastery'?'progress-lock':''}">${lockText}</p>`:''}<div class="target-profile"><strong>${r.tier==='custom'?'BASE '+r.baseName+' /':'TARGET /'}</strong> ${r.profile}</div><div class="recipe-temps" aria-label="권장 온도"><span>배치 <b>${S.batchVolume}L</b></span><span>당화 <b>${r.mash}°C</b></span><span>발효 <b>${r.ferm[0]===r.ferm[1]?r.ferm[0]+'°C':r.ferm[0]+'~'+r.ferm[1]+'°C'}</b></span></div></div><div class="detail-specs" aria-label="목표 수치"><div><small>OG</small><b>${r.og.toFixed(3)}</b></div><div><small>FG</small><b>${fg.toFixed(3)}</b></div><div><small>ABV</small><b>${r.abv}%</b></div><div><small>IBU</small><b>${Math.round(r.ibu)}</b></div><div><small>SRM</small><b>${r.srm}</b></div></div>${details}${actions}</article>`
     }).join('');
   }
   function setBatchVolume(volume,rescale=true){
@@ -1456,47 +1470,47 @@
   function drawAll(active){$$('canvas.scene').forEach(cv=>drawScene(cv,String(cv.closest('.screen').dataset.step),active))}
   function animateGlass(){const cv=document.querySelector('[data-step="6"] canvas');let f=0;function frame(){f=Math.min(1,f+.06);const c=cv.getContext('2d');c.clearRect(0,0,cv.width,cv.height);px(c,0,0,cv.width,cv.height,'#14231d');px(c,0,260,cv.width,40,'#243a2e');beerGlass(c,85,25,150,245,f);if(f<1&&!matchMedia('(prefers-reduced-motion: reduce)').matches)requestAnimationFrame(frame)}frame()}
 
-    /* ===== Hop & Dream save system (GitHub Pages / self-hosted) ===== */
-    const HD_SAVE_KEY='hopDreamSaveV1';
-    let hdStorageOK=true;
-    try{localStorage.setItem('__hd_t','1');localStorage.removeItem('__hd_t');}catch(e){hdStorageOK=false;}
-    function hdCollect(){
-      const cC=JSON.parse(JSON.stringify(C));
-      try{Object.values(cC.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){}
-      const customs={};
-      customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=recipes[id];});
-      return {v:1,savedAt:Date.now(),G:JSON.parse(JSON.stringify(G)),C:cC,customs,customRecipeIds:customRecipeIds.slice(),customSequence};
-    }
-    function hdSave(){if(!hdStorageOK)return;try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(hdCollect()));}catch(e){}}
-    function hdLoad(){
-      if(!hdStorageOK)return false;
-      let d=null;
-      try{d=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){return false;}
-      if(!d||d.v!==1||!d.G||!d.C)return false;
-      try{
-        Object.keys(G).forEach(k=>delete G[k]);Object.assign(G,d.G);
-        Object.keys(C).forEach(k=>delete C[k]);Object.assign(C,d.C);
-        customRecipeIds.length=0;
-        Object.keys(d.customs||{}).forEach(id=>{recipes[id]=d.customs[id];});
-        (d.customRecipeIds||[]).forEach(id=>{if(recipes[id]&&customRecipeIds.indexOf(id)<0)customRecipeIds.push(id);});
-        customSequence=d.customSequence||(customRecipeIds.length+1);
-        return true;
-      }catch(e){return false;}
-    }
-    const hdRestored=hdLoad();
-    setInterval(hdSave,15000);
-    window.addEventListener('pagehide',hdSave);
-    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')hdSave();});
-    /* reset-save button next to sound toggle */
-    (function(){
-      const sb=document.getElementById('soundBtn');if(!sb)return;
-      const b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
-      b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}location.reload();}});
-      sb.after(b);
-    })();
-    if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
-    /* ===== end save system ===== */
-
+  /* ===== Hop & Dream save system (GitHub Pages / self-hosted) ===== */
+  const HD_SAVE_KEY='hopDreamSaveV1';
+  let hdStorageOK=true;
+  try{localStorage.setItem('__hd_t','1');localStorage.removeItem('__hd_t');}catch(e){hdStorageOK=false;}
+  function hdCollect(){
+    const cC=JSON.parse(JSON.stringify(C));
+    try{Object.values(cC.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){}
+    const customs={};
+    customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=recipes[id];});
+    return {v:1,savedAt:Date.now(),G:JSON.parse(JSON.stringify(G)),C:cC,customs,customRecipeIds:customRecipeIds.slice(),customSequence};
+  }
+  function hdSave(){if(!hdStorageOK)return;try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(hdCollect()));}catch(e){}}
+  function hdLoad(){
+    if(!hdStorageOK)return false;
+    let d=null;
+    try{d=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){return false;}
+    if(!d||d.v!==1||!d.G||!d.C)return false;
+    try{
+      Object.keys(G).forEach(k=>delete G[k]);Object.assign(G,d.G);
+      Object.keys(C).forEach(k=>delete C[k]);Object.assign(C,d.C);
+      customRecipeIds.length=0;
+      Object.keys(d.customs||{}).forEach(id=>{recipes[id]=d.customs[id];});
+      (d.customRecipeIds||[]).forEach(id=>{if(recipes[id]&&customRecipeIds.indexOf(id)<0)customRecipeIds.push(id);});
+      customSequence=d.customSequence||(customRecipeIds.length+1);
+      return true;
+    }catch(e){return false;}
+  }
+  const hdRestored=hdLoad();
+  setInterval(hdSave,15000);
+  window.addEventListener('pagehide',hdSave);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')hdSave();});
+  /* reset-save button next to sound toggle */
+  (function(){
+    const sb=document.getElementById('soundBtn');if(!sb)return;
+    const b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
+    b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}location.reload();}});
+    sb.after(b);
+  })();
+  if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
+  /* ===== end save system ===== */
+    /* ===== Hop & Dream Firebase cloud sync (Google 로그인 · 선택사항) ===== */
     /* localStorage 저장 시스템은 그대로 두고, 그 위에 얹는 동기화 레이어 */
     (function(){
       'use strict';
@@ -1640,11 +1654,10 @@
       })();
     })();
     /* ===== end Firebase cloud sync ===== */
-
   recipeCards();progress();drawAll();syncHud();renderInventory();renderShop();renderBatchVolumes();updateStartBar();
   $('#batchVolumeOptions').addEventListener('click',e=>{const b=e.target.closest('[data-volume]');if(b)setBatchVolume(+b.dataset.volume)});
-  $('#careerBtn').addEventListener('click',openCareer);$('#careerEventHall').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-competition'))openCompetition();else if(b.hasAttribute('data-fair'))openFair();else if(b.hasAttribute('data-head-promotion'))promoteHead();else if(b.hasAttribute('data-found-brewery'))openBreweryFounding();else if(b.hasAttribute('data-fair-talk'))fairNpcTalk();else if(b.hasAttribute('data-facility'))buyFacility(b.dataset.facility);else if(b.hasAttribute('data-sale-customer'))sellTaproomBeer(b.dataset.saleCustomer)});$('#careerEventHall').addEventListener('change',e=>{const select=e.target.closest('[data-sale-select]');if(!select)return;const beer=(C.finishedBeers||[]).find(b=>b.id===select.value),out=select.closest('.sale-row')&&select.closest('.sale-row').querySelector('[data-price-breakdown]');if(beer&&out)out.innerHTML=priceBreakdownMarkup(beer,true)});$('#competitionSubmit').addEventListener('click',submitCompetition);$('#fairSubmit').addEventListener('click',submitFair);$('#fairModePicker').addEventListener('click',e=>{const b=e.target.closest('[data-expo-mode]');if(b)selectExpoMode(b.dataset.expoMode)});$('#fairBeerList').addEventListener('change',e=>{const checked=$$('input[name="fairBeer"]:checked');if(checked.length>3)e.target.checked=false;$('#fairSubmit').disabled=$$('input[name="fairBeer"]:checked').length===0});$('#confirmBrewery').addEventListener('click',confirmBrewery);$$('[data-tour-tab]').forEach(b=>b.addEventListener('click',()=>{tourTab=b.dataset.tourTab;expandedPlace=null;renderCareer()}));$('#venueGrid').addEventListener('click',e=>{const visit=e.target.closest('[data-visit]'),talk=e.target.closest('[data-talk]'),choice=e.target.closest('[data-talk-choice]'),serve=e.target.closest('[data-serve]'),brew=e.target.closest('[data-brew-with]'),toggle=e.target.closest('[data-venue-toggle]');if(visit){visitPlace(visit.dataset.visit);return}if(talk){talkNpc(talk.dataset.talk);return}if(choice){chooseTalk(choice.dataset.npc,choice.dataset.talkChoice);return}if(serve){serveBeer(serve.dataset.serve);return}if(brew){brewWithNpc(brew.dataset.brewWith);return}if(toggle){expandedPlace=expandedPlace===toggle.dataset.venueToggle?null:toggle.dataset.venueToggle;renderCareer()}});$('#acceptScout').addEventListener('click',acceptScout);$('#declineScout').addEventListener('click',declineScout);$('#closePromotion').addEventListener('click',()=>{$('#promotionOverlay').hidden=true});$('#closeRecipeUnlock').addEventListener('click',()=>{const o=$('#recipeUnlockOverlay'),id=o.dataset.recipe;o.hidden=true;recipeFilter='all';expandedRecipe=id||null;recipeCards();const card=id&&document.querySelector(`[data-recipe="${id}"]`);if(card)card.scrollIntoView({behavior:'smooth',block:'center'})});$('#closeSocialEvent').addEventListener('click',()=>{const o=$('#socialEventOverlay'),id=o.dataset.recipe;o.hidden=true;if(id){recipeFilter='all';expandedRecipe=id;recipeCards()}renderCareer()});
-  $('#newRecipeBtn').addEventListener('click',()=>openRecipeEditor());$('#recipeFilters').addEventListener('click',e=>{const b=e.target.closest('[data-recipe-filter]');if(!b)return;recipeFilter=b.dataset.recipeFilter;expandedRecipe=null;recipeCards()});$('#recipeGrid').addEventListener('click',e=>{const edit=e.target.closest('[data-edit-custom]');if(edit){e.stopPropagation();openRecipeEditor(edit.dataset.editCustom);return}const del=e.target.closest('[data-delete-custom]');if(del){e.stopPropagation();deleteCustomRecipe(del.dataset.deleteCustom);return}const b=e.target.closest('[data-recipe]');if(b)pickRecipe(b.dataset.recipe)});$('#recipeGrid').addEventListener('keydown',e=>{if(e.target.closest('button')||e.key!=='Enter'&&e.key!==' ')return;const b=e.target.closest('[data-recipe]');if(b){e.preventDefault();pickRecipe(b.dataset.recipe)}});$('#startBtn').addEventListener('click',beginBatch);$('#startShopBtn').addEventListener('click',()=>openOverlay('shopOverlay'));
+  $('#careerBtn').addEventListener('click',openCareer);$('#careerEventHall').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-competition'))openCompetition();else if(b.hasAttribute('data-fair'))openFair();else if(b.hasAttribute('data-head-promotion'))promoteHead();else if(b.hasAttribute('data-found-brewery'))openBreweryFounding();else if(b.hasAttribute('data-fair-talk'))fairNpcTalk();else if(b.hasAttribute('data-facility'))buyFacility(b.dataset.facility);else if(b.hasAttribute('data-sale-customer'))sellTaproomBeer(b.dataset.saleCustomer)});$('#careerEventHall').addEventListener('change',e=>{const select=e.target.closest('[data-sale-select]');if(!select)return;const beer=(C.finishedBeers||[]).find(b=>b.id===select.value),out=select.closest('.sale-row')&&select.closest('.sale-row').querySelector('[data-price-breakdown]');if(beer&&out)out.innerHTML=priceBreakdownMarkup(beer,true)});$('#competitionSubmit').addEventListener('click',submitCompetition);$('#fairSubmit').addEventListener('click',submitFair);$('#fairModePicker').addEventListener('click',e=>{const b=e.target.closest('[data-expo-mode]');if(b)selectExpoMode(b.dataset.expoMode)});$('#fairBeerList').addEventListener('change',e=>{const checked=$$('input[name="fairBeer"]:checked');if(checked.length>3)e.target.checked=false;$('#fairSubmit').disabled=$$('input[name="fairBeer"]:checked').length===0});$('#confirmBrewery').addEventListener('click',confirmBrewery);$$('[data-tour-tab]').forEach(b=>b.addEventListener('click',()=>{tourTab=b.dataset.tourTab;expandedPlace=null;renderCareer()}));$('#venueGrid').addEventListener('click',e=>{const visit=e.target.closest('[data-visit]'),talk=e.target.closest('[data-talk]'),choice=e.target.closest('[data-talk-choice]'),serve=e.target.closest('[data-serve]'),brew=e.target.closest('[data-brew-with]'),toggle=e.target.closest('[data-venue-toggle]');if(visit){visitPlace(visit.dataset.visit);return}if(talk){talkNpc(talk.dataset.talk);return}if(choice){chooseTalk(choice.dataset.npc,choice.dataset.talkChoice);return}if(serve){serveBeer(serve.dataset.serve);return}if(brew){brewWithNpc(brew.dataset.brewWith);return}if(toggle){expandedPlace=expandedPlace===toggle.dataset.venueToggle?null:toggle.dataset.venueToggle;renderCareer()}});$('#acceptScout').addEventListener('click',acceptScout);$('#declineScout').addEventListener('click',declineScout);$('#closePromotion').addEventListener('click',()=>{$('#promotionOverlay').hidden=true});$('#closeRecipeUnlock').addEventListener('click',()=>{const o=$('#recipeUnlockOverlay'),id=o.dataset.recipe;o.hidden=true;recipeFilter='all';recipeQuery='';expandedRecipe=id||null;recipeCards();const card=id&&document.querySelector(`[data-recipe="${id}"]`);if(card)card.scrollIntoView({behavior:'smooth',block:'center'})});$('#closeSocialEvent').addEventListener('click',()=>{const o=$('#socialEventOverlay'),id=o.dataset.recipe;o.hidden=true;if(id){recipeFilter='all';recipeQuery='';expandedRecipe=id;recipeCards()}renderCareer()});
+  $('#newRecipeBtn').addEventListener('click',()=>openRecipeEditor());$('#recipeFilters').addEventListener('click',e=>{const b=e.target.closest('[data-recipe-filter]');if(!b)return;recipeFilter=b.dataset.recipeFilter;expandedRecipe=null;recipeCards()});$('#recipeSearch').addEventListener('input',e=>{recipeQuery=e.target.value;expandedRecipe=null;recipeCards()});$('#recipeSort').addEventListener('change',e=>{recipeSort=e.target.value;expandedRecipe=null;recipeCards()});$('#recipeClear').addEventListener('click',()=>{resetRecipeLibrary();$('#recipeSearch').focus()});$('#recipeGrid').addEventListener('click',e=>{const edit=e.target.closest('[data-edit-custom]');if(edit){e.stopPropagation();openRecipeEditor(edit.dataset.editCustom);return}const del=e.target.closest('[data-delete-custom]');if(del){e.stopPropagation();deleteCustomRecipe(del.dataset.deleteCustom);return}const b=e.target.closest('[data-recipe]');if(b)pickRecipe(b.dataset.recipe)});$('#recipeGrid').addEventListener('keydown',e=>{if(e.target.closest('button')||e.key!=='Enter'&&e.key!==' ')return;const b=e.target.closest('[data-recipe]');if(b){e.preventDefault();pickRecipe(b.dataset.recipe)}});$('#startBtn').addEventListener('click',beginBatch);$('#startShopBtn').addEventListener('click',()=>openOverlay('shopOverlay'));
   $('#addMaltRow').addEventListener('click',()=>{readCustomSimpleFields();customDraft.maltRows.push({id:maltIds[0],kg:1});renderRecipeEditor()});$('#addHopRow').addEventListener('click',()=>{readCustomSimpleFields();const id=Object.values(hopNameId)[0],neipa=recipes[customDraft.styleId].type==='neipa';customDraft.hopRows.push({id,moment:neipa?'whirlpool':'boil15',g:10,format:'t90'});renderRecipeEditor()});$('#addAdjunctRow').addEventListener('click',()=>{readCustomSimpleFields();const id=adjunctIds[0];customDraft.adjunctRows=customDraft.adjunctRows||[];customDraft.adjunctRows.push({id,moment:adjunctDefaultMoment[id],amount:+((adjunctDefault20[id]||1)*(customDraft.batch/20)).toFixed(2)});renderRecipeEditor()});$('#customMaltRows').addEventListener('click',e=>{const b=e.target.closest('[data-remove-malt]');if(!b)return;customDraft.maltRows.splice(+b.dataset.removeMalt,1);renderRecipeEditor()});$('#customHopRows').addEventListener('click',e=>{const b=e.target.closest('[data-remove-hop]');if(!b)return;customDraft.hopRows.splice(+b.dataset.removeHop,1);renderRecipeEditor()});$('#customAdjunctRows').addEventListener('click',e=>{const b=e.target.closest('[data-remove-adjunct]');if(!b)return;customDraft.adjunctRows.splice(+b.dataset.removeAdjunct,1);renderRecipeEditor()});
   $('#recipeEditorForm').addEventListener('input',e=>{const mr=e.target.closest('[data-malt-row]'),hr=e.target.closest('[data-hop-row]'),ar=e.target.closest('[data-adjunct-row]');if(mr){const i=+mr.dataset.maltRow,els=mr.querySelectorAll('select,input');customDraft.maltRows[i]={id:els[0].value,kg:+els[1].value||0}}else if(hr){const i=+hr.dataset.hopRow,els=hr.querySelectorAll('select,input');customDraft.hopRows[i]={id:els[0].value,moment:els[1].value,format:els[2].value||'t90',g:+els[3].value||0}}else if(ar){const i=+ar.dataset.adjunctRow,els=ar.querySelectorAll('select,input');customDraft.adjunctRows[i]={id:els[0].value,moment:els[1].value,amount:+els[2].value||0}}updateCustomPrediction()});$('#recipeEditorForm').addEventListener('change',e=>{if(e.target.id==='customBaseStyle'){readCustomSimpleFields();applyCustomStyle(e.target.value);return}if(e.target.id==='customYeast')customDraft.yeast=e.target.value;if(e.target.getAttribute('aria-label')==='홉 포맷'){const hr=e.target.closest('[data-hop-row]'),id=e.target.value;hr.querySelector('.format-help').innerHTML=formatGuidance(id);hr.querySelector('.input-unit-wrap span').textContent=id==='abstrax-brewgas'?'mL':'g'}if(e.target.getAttribute('aria-label')==='부재료 종류'){const ar=e.target.closest('[data-adjunct-row]'),i=+ar.dataset.adjunctRow,id=e.target.value,row=customDraft.adjunctRows[i],unit=itemMeta[id][1];row.id=id;row.moment=adjunctDefaultMoment[id]||row.moment;row.amount=+((adjunctDefault20[id]||1)*(customDraft.batch/20)).toFixed(2);renderRecipeEditor();return}updateCustomPrediction()});$('#recipeEditorForm').addEventListener('submit',e=>{e.preventDefault();saveCustomRecipe()});
   $('#resetIngredients').addEventListener('click',resetIngredients);['adjustShopBtn','ingredientShopBtn'].forEach(id=>$('#'+id).addEventListener('click',()=>openOverlay('shopOverlay')));$('#ingredientConfirm').addEventListener('click',()=>{if(chargeIngredients())go(S.step+1)});$('.ingredient-lab').addEventListener('input',e=>{const input=e.target.closest('.stepper input');if(input)updateIngredientFromInput(input)});$('.ingredient-lab').addEventListener('click',e=>{const b=e.target.closest('[data-adjust]');if(!b)return;const input=b.parentElement.querySelector('input'),step=+(input.step||1);input.value=Math.max(0,(+input.value||0)+(+b.dataset.adjust)*step);updateIngredientFromInput(input)});
@@ -1672,12 +1685,10 @@
   $('#fermentBtn').addEventListener('click',startFerment);$('#restartBtn').addEventListener('click',reset);
 })();
 </script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js').catch(function () {});
-  });
-}
-</script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(function () {});
+    }
+  </script>
 </body>
 </html>
