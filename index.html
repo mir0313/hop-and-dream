@@ -369,6 +369,9 @@
       .venue-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.npc-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
     }
   </style>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 </head>
 <body>
 <main class="shell">
@@ -1401,6 +1404,138 @@
     })();
     if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
     /* ===== end save system ===== */
+    /* ===== Hop & Dream Firebase cloud sync (Google 로그인 · 선택사항) ===== */
+    /* localStorage 저장 시스템은 그대로 두고, 그 위에 얹는 동기화 레이어 */
+    (function(){
+      'use strict';
+      if(typeof firebase==='undefined')return;
+      var firebaseConfig={
+        apiKey:"AIzaSyBnoOelcJVV3ha-UPGkFoKTz0yBxEmaqeA",
+        authDomain:"hop-and-dream.firebaseapp.com",
+        projectId:"hop-and-dream",
+        storageBucket:"hop-and-dream.firebasestorage.app",
+        messagingSenderId:"189988567134",
+        appId:"1:189988567134:web:653aaa1437eb704a5e5ccf"
+      };
+      var auth=null,db=null,hdUser=null;
+      try{
+        if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+        auth=firebase.auth();db=firebase.firestore();
+      }catch(e){return;}
+      function hdApplyData(d){
+        if(!d||d.v!==1||!d.G||!d.C)return false;
+        try{
+          Object.keys(G).forEach(function(k){delete G[k];});Object.assign(G,d.G);
+          Object.keys(C).forEach(function(k){delete C[k];});Object.assign(C,d.C);
+          customRecipeIds.length=0;
+          Object.keys(d.customs||{}).forEach(function(id){recipes[id]=d.customs[id];});
+          (d.customRecipeIds||[]).forEach(function(id){if(recipes[id]&&customRecipeIds.indexOf(id)<0)customRecipeIds.push(id);});
+          customSequence=d.customSequence||(customRecipeIds.length+1);
+          return true;
+        }catch(e){return false;}
+      }
+      function hdRerender(){
+        try{recipeCards();progress();drawAll();syncHud();renderInventory();renderShop();updateStartBar();}catch(e){}
+      }
+      function hdNote(msg){var bn=document.getElementById('batchNotice');if(bn)bn.textContent=msg;}
+      function hdCloudPush(){
+        if(!hdUser||!db)return;
+        try{
+          var payload=hdCollect();
+          db.collection('saves').doc(hdUser.uid).set({data:payload,updatedAt:Date.now()}).catch(function(){});
+        }catch(e){}
+      }
+      setInterval(hdCloudPush,15000);
+      window.addEventListener('pagehide',hdCloudPush);
+      document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')hdCloudPush();});
+      function hdCloudSync(){
+        if(!hdUser||!db)return Promise.resolve();
+        var local=null;
+        try{local=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){}
+        return db.collection('saves').doc(hdUser.uid).get().then(function(snap){
+          var cloud=snap.exists?snap.data():null;
+          if(cloud&&cloud.data){
+            var cloudTime=cloud.updatedAt||cloud.data.savedAt||0;
+            var localTime=(local&&local.savedAt)||0;
+            if(!local||cloudTime>localTime){
+              if(hdApplyData(cloud.data)){
+                try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(cloud.data));}catch(e){}
+                hdRerender();
+                hdNote('클라우드 기록을 불러왔습니다. 다른 기기와 동기화되었습니다.');
+              }
+            }else if(localTime>cloudTime){
+              hdCloudPush();
+            }
+          }else if(local){
+            hdCloudPush();
+          }
+        }).catch(function(){});
+      }
+      function hdRenderAuthUI(){
+        var old=document.getElementById('googleLoginBtn');if(old&&old.parentNode)old.parentNode.removeChild(old);
+        var oldP=document.getElementById('hdProfileWrap');if(oldP&&oldP.parentNode)oldP.parentNode.removeChild(oldP);
+        var anchor=document.getElementById('wipeSaveBtn')||document.getElementById('soundBtn');
+        if(!anchor)return;
+        if(hdUser){
+          var wrap=document.createElement('span');
+          wrap.id='hdProfileWrap';wrap.className='hud-btn';
+          wrap.style.cssText='display:inline-flex;align-items:center;gap:4px;';
+          wrap.title=hdUser.displayName||hdUser.email||'';
+          if(hdUser.photoURL){
+            var img=document.createElement('img');
+            img.src=hdUser.photoURL;img.alt='';
+            img.style.cssText='width:20px;height:20px;border-radius:50%;vertical-align:middle;';
+            img.onerror=function(){this.remove();};
+            wrap.appendChild(img);
+          }
+          var nm=document.createElement('span');
+          var dn=hdUser.displayName||(hdUser.email||'').split('@')[0]||'';
+          nm.textContent=dn.length>8?dn.slice(0,8)+'…':dn;
+          wrap.appendChild(nm);
+          var out=document.createElement('button');
+          out.className='hud-btn';out.id='googleLogoutBtn';out.textContent='로그아웃';
+          out.addEventListener('click',function(){auth.signOut();});
+          wrap.appendChild(out);
+          anchor.after(wrap);
+        }else{
+          var b=document.createElement('button');
+          b.className='hud-btn';b.id='googleLoginBtn';b.textContent='Google 로그인';
+          b.title='Google 계정으로 로그인하면 여러 기기에서 기록을 공유할 수 있습니다';
+          b.addEventListener('click',hdGoogleSignIn);
+          anchor.after(b);
+        }
+      }
+      function hdGoogleSignIn(){
+        var provider=new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).catch(function(e){
+          var c=e&&e.code;
+          if(c==='auth/popup-blocked'||c==='auth/popup-closed-by-user'||c==='auth/cancelled-popup-request'){
+            auth.signInWithRedirect(provider);
+          }
+        });
+      }
+      auth.getRedirectResult().catch(function(){});
+      auth.onAuthStateChanged(function(user){
+        hdUser=user||null;
+        hdRenderAuthUI();
+        if(hdUser)hdCloudSync();
+      });
+      (function(){
+        var wb=document.getElementById('wipeSaveBtn');if(!wb)return;
+        var clone=wb.cloneNode(true);
+        wb.replaceWith(clone);
+        clone.addEventListener('click',function(){
+          if(!confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?'))return;
+          try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}
+          var done=function(){location.reload();};
+          if(hdUser&&db){
+            db.collection('saves').doc(hdUser.uid).delete().then(done).catch(done);
+          }else{done();}
+        });
+      })();
+    })();
+    /* ===== end Firebase cloud sync ===== */
+
   recipeCards();progress();drawAll();syncHud();renderInventory();renderShop();updateStartBar();
   $('#careerBtn').addEventListener('click',openCareer);$$('[data-tour-tab]').forEach(b=>b.addEventListener('click',()=>{tourTab=b.dataset.tourTab;expandedPlace=null;renderCareer()}));$('#venueGrid').addEventListener('click',e=>{const visit=e.target.closest('[data-visit]'),talk=e.target.closest('[data-talk]'),choice=e.target.closest('[data-talk-choice]'),serve=e.target.closest('[data-serve]'),brew=e.target.closest('[data-brew-with]'),toggle=e.target.closest('[data-venue-toggle]');if(visit){visitPlace(visit.dataset.visit);return}if(talk){talkNpc(talk.dataset.talk);return}if(choice){chooseTalk(choice.dataset.npc,choice.dataset.talkChoice);return}if(serve){serveBeer(serve.dataset.serve);return}if(brew){brewWithNpc(brew.dataset.brewWith);return}if(toggle){expandedPlace=expandedPlace===toggle.dataset.venueToggle?null:toggle.dataset.venueToggle;renderCareer()}});$('#acceptScout').addEventListener('click',acceptScout);$('#declineScout').addEventListener('click',declineScout);$('#closePromotion').addEventListener('click',()=>{$('#promotionOverlay').hidden=true});$('#closeRecipeUnlock').addEventListener('click',()=>{const o=$('#recipeUnlockOverlay'),id=o.dataset.recipe;o.hidden=true;recipeFilter='all';expandedRecipe=id||null;recipeCards();const card=id&&document.querySelector(`[data-recipe="${id}"]`);if(card)card.scrollIntoView({behavior:'smooth',block:'center'})});$('#closeSocialEvent').addEventListener('click',()=>{const o=$('#socialEventOverlay'),id=o.dataset.recipe;o.hidden=true;if(id){recipeFilter='all';expandedRecipe=id;recipeCards()}renderCareer()});
   $('#newRecipeBtn').addEventListener('click',()=>openRecipeEditor());$('#recipeFilters').addEventListener('click',e=>{const b=e.target.closest('[data-recipe-filter]');if(!b)return;recipeFilter=b.dataset.recipeFilter;expandedRecipe=null;recipeCards()});$('#recipeGrid').addEventListener('click',e=>{const edit=e.target.closest('[data-edit-custom]');if(edit){e.stopPropagation();openRecipeEditor(edit.dataset.editCustom);return}const del=e.target.closest('[data-delete-custom]');if(del){e.stopPropagation();deleteCustomRecipe(del.dataset.deleteCustom);return}const b=e.target.closest('[data-recipe]');if(b)pickRecipe(b.dataset.recipe)});$('#recipeGrid').addEventListener('keydown',e=>{if(e.target.closest('button')||e.key!=='Enter'&&e.key!==' ')return;const b=e.target.closest('[data-recipe]');if(b){e.preventDefault();pickRecipe(b.dataset.recipe)}});$('#startBtn').addEventListener('click',beginBatch);$('#startShopBtn').addEventListener('click',()=>openOverlay('shopOverlay'));
