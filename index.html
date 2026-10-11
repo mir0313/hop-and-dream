@@ -1408,7 +1408,6 @@
     /* localStorage 저장 시스템은 그대로 두고, 그 위에 얹는 동기화 레이어 */
     (function(){
       'use strict';
-      if(typeof firebase==='undefined')return;
       var firebaseConfig={
         apiKey:"AIzaSyBnoOelcJVV3ha-UPGkFoKTz0yBxEmaqeA",
         authDomain:"hop-and-dream.firebaseapp.com",
@@ -1417,11 +1416,26 @@
         messagingSenderId:"189988567134",
         appId:"1:189988567134:web:653aaa1437eb704a5e5ccf"
       };
-      var auth=null,db=null,hdUser=null;
-      try{
-        if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
-        auth=firebase.auth();db=firebase.firestore();
-      }catch(e){return;}
+      var auth=null,db=null,hdUser=null,fbReady=false;
+      function hdFbInit(){
+        if(fbReady)return true;
+        if(typeof firebase==='undefined')return false;
+        try{
+          if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+          auth=firebase.auth();db=firebase.firestore();
+          fbReady=true;
+          auth.getRedirectResult().catch(function(){});
+          auth.onAuthStateChanged(function(user){
+            hdUser=user||null;
+            hdRenderAuthUI();
+            if(hdUser)hdCloudSync();
+          });
+          return true;
+        }catch(e){return false;}
+      }
+      hdFbInit();
+      setTimeout(hdFbInit,2000);
+      setTimeout(hdFbInit,5000);
       function hdApplyData(d){
         if(!d||d.v!==1||!d.G||!d.C)return false;
         try{
@@ -1506,6 +1520,10 @@
         }
       }
       function hdGoogleSignIn(){
+        if(!hdFbInit()){
+          hdNote('Google 로그인을 불러오지 못했습니다. 광고 차단 확장 프로그램을 꺼보거나 잠시 후 다시 시도해주세요.');
+          return;
+        }
         var provider=new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider).catch(function(e){
           var c=e&&e.code;
@@ -1514,12 +1532,7 @@
           }
         });
       }
-      auth.getRedirectResult().catch(function(){});
-      auth.onAuthStateChanged(function(user){
-        hdUser=user||null;
-        hdRenderAuthUI();
-        if(hdUser)hdCloudSync();
-      });
+      hdRenderAuthUI();
       (function(){
         var wb=document.getElementById('wipeSaveBtn');if(!wb)return;
         var clone=wb.cloneNode(true);
