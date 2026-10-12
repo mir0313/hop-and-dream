@@ -1,5 +1,5 @@
 /* 홉 앤 드림 서비스워커 - 오프라인 플레이 지원 (cache-first) */
-const CACHE = 'hop-dream-v26';
+const CACHE = 'hop-dream-v27';
 const ASSETS = [
   './',
   './index.html',
@@ -34,7 +34,8 @@ const ASSETS = [
   './assets/npc/pixel/sua_neutral.webp',
   './assets/npc/pixel/sua_serious.webp',
   './assets/npc/pixel/sua_smile.webp',
-  './assets/npc/pixel/sua_surprised.webp'
+  './assets/npc/pixel/sua_surprised.webp',
+  './assets/npc/pixel/guide_fairy.webp'
 ];
 
 self.addEventListener('install', function (e) {
