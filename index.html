@@ -2091,54 +2091,68 @@ service cloud.firestore {
 
   if(location.hostname==='artifact-capture.invalid')window.addEventListener('keydown',e=>{if(e.key==='F7'){document.querySelector('.gueuze-blender')?.scrollIntoView()}else if(e.key==='F8'){window.__hdAudit.seedV37();openMyBrewery()}else if(e.key==='F9'){window.__hdAudit.seedV37();tourTab='brewery';expandedPlace='hongdae';openTour();document.querySelector('[data-venue-toggle="hongdae"]')?.scrollIntoView()}else if(e.key==='F10'){window.__hdAudit.seedV37();openCareer()}});
   /* ===== Hop & Dream save system (GitHub Pages / self-hosted) ===== */
-  const HD_SAVE_KEY='hopDreamSaveV1';
-  /* 초기화(기록 초기화) 중에는 자동저장이 동작하지 않도록 하는 전역 플래그.
-     기록 초기화 버튼 클릭 시 true로 세우고 location.reload() — reload 과정에서
-     pagehide/visibilitychange 핸들러가 메모리 내 G/C를 다시 저장해 초기화를
-     무효화하던 버그(v25) 방지. */
-  window.__hdResetting=false;
-  let hdStorageOK=true;
-  try{localStorage.setItem('__hd_t','1');localStorage.removeItem('__hd_t');}catch(e){hdStorageOK=false;}
-  function hdCollect(){
-    const cC=JSON.parse(JSON.stringify(C));
-    try{Object.values(cC.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){}
-    const customs={};
-    customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=recipes[id];});
-    return {v:1,savedAt:Date.now(),G:JSON.parse(JSON.stringify(G)),C:cC,customs,customRecipeIds:customRecipeIds.slice(),customSequence};
-  }
-  function hdSave(){if(window.__hdResetting||!hdStorageOK)return;try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(hdCollect()));}catch(e){}}
-  function hdLoad(){
-    if(!hdStorageOK)return false;
-    let d=null;
-    try{d=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){return false;}
-    if(!d||d.v!==1||!d.G||!d.C)return false;
-    try{
-      Object.keys(G).forEach(k=>delete G[k]);Object.assign(G,d.G);
-      Object.keys(C).forEach(k=>delete C[k]);Object.assign(C,d.C);
-      customRecipeIds.length=0;
-      Object.keys(d.customs||{}).forEach(id=>{recipes[id]=d.customs[id];});
-      (d.customRecipeIds||[]).forEach(id=>{if(recipes[id]&&customRecipeIds.indexOf(id)<0)customRecipeIds.push(id);});
-      customSequence=d.customSequence||(customRecipeIds.length+1);
-      return true;
-    }catch(e){return false;}
-  }
-  const hdRestored=hdLoad();
-  setInterval(hdSave,15000);
-  window.addEventListener('pagehide',hdSave);
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')hdSave();});
-  /* reset-save button: 네이티브 설정 행의 #wipeSaveBtn에 연결 (없으면 HUD에 폴백 생성) */
-  (function(){
-    let b=document.getElementById('wipeSaveBtn');
-    if(!b){
-      const sb=document.getElementById('soundBtn');if(!sb)return;
-      b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
-      sb.after(b);
+  /* [모듈 경계] 이 블록은 독립 IIFE로 감싸져 있음 (v39.1 파일럿).
+     - 외부에서 사용: window.hdSaveSys.{KEY,save,load,collect}, window.__hdResetting
+     - 그 외 모든 식별자는 IIFE 내부에 격리 → 아티팩트와 이름 충돌 불가
+       (2026-10-12 hdCollect 충돌 교훈: 인젝션의 hdCollect가 아티팩트의
+        hdCollect(list,item,limit) 배열 유틸을 덮어써 히스토리 오염 발생.
+        → 인젝션 측은 hdCollectSave로 이름 변경 + IIFE 격리로 재발 방지)
+     - 게임 전역(G,C,recipes,customRecipeIds 등)은 런타임에 참조하므로
+       부트 앵커 앞 삽입 위치를 유지할 것. */
+  window.hdSaveSys=(function(){
+    'use strict';
+    const HD_SAVE_KEY='hopDreamSaveV1';
+    /* 초기화(기록 초기화) 중에는 자동저장이 동작하지 않도록 하는 전역 플래그.
+       기록 초기화 버튼 클릭 시 true로 세우고 location.reload() — reload 과정에서
+       pagehide/visibilitychange 핸들러가 메모리 내 G/C를 다시 저장해 초기화를
+       무효화하던 버그(v25) 방지. */
+    window.__hdResetting=false;
+    let hdStorageOK=true;
+    try{localStorage.setItem('__hd_t','1');localStorage.removeItem('__hd_t');}catch(e){hdStorageOK=false;}
+    function hdCollectSave(){
+      const cC=JSON.parse(JSON.stringify(C));
+      try{Object.values(cC.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){}
+      const customs={};
+      customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=recipes[id];});
+      return {v:1,savedAt:Date.now(),G:JSON.parse(JSON.stringify(G)),C:cC,customs,customRecipeIds:customRecipeIds.slice(),customSequence};
     }
-    b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){window.__hdResetting=true;try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}location.reload();}});
+    function hdSave(){if(window.__hdResetting||!hdStorageOK)return;try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(hdCollectSave()));}catch(e){}}
+    function hdLoad(){
+      if(!hdStorageOK)return false;
+      let d=null;
+      try{d=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){return false;}
+      if(!d||d.v!==1||!d.G||!d.C)return false;
+      try{
+        Object.keys(G).forEach(k=>delete G[k]);Object.assign(G,d.G);
+        Object.keys(C).forEach(k=>delete C[k]);Object.assign(C,d.C);
+        customRecipeIds.length=0;
+        Object.keys(d.customs||{}).forEach(id=>{recipes[id]=d.customs[id];});
+        (d.customRecipeIds||[]).forEach(id=>{if(recipes[id]&&customRecipeIds.indexOf(id)<0)customRecipeIds.push(id);});
+        customSequence=d.customSequence||(customRecipeIds.length+1);
+        return true;
+      }catch(e){return false;}
+    }
+    const hdRestored=hdLoad();
+    setInterval(hdSave,15000);
+    window.addEventListener('pagehide',hdSave);
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')hdSave();});
+    /* reset-save button: 네이티브 설정 행의 #wipeSaveBtn에 연결 (없으면 HUD에 폴백 생성) */
+    (function(){
+      let b=document.getElementById('wipeSaveBtn');
+      if(!b){
+        const sb=document.getElementById('soundBtn');if(!sb)return;
+        b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
+        sb.after(b);
+      }
+      b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){window.__hdResetting=true;try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}location.reload();}});
+    })();
+    if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
+    /* 외부 인터페이스: 이 4개만 밖에서 씀 */
+    return {KEY:HD_SAVE_KEY,save:hdSave,load:hdLoad,collect:hdCollectSave};
   })();
-  if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
   /* ===== end save system ===== */
 
+/* --- 삽입 위치 2: 앵커 바로 앞 (저장 블록 뒤) --- */
     /* ===== Hop & Dream Firebase cloud sync (Google 로그인 · 선택사항) ===== */
     /* localStorage 저장 시스템은 그대로 두고, 그 위에 얹는 동기화 레이어 */
     (function(){
@@ -2199,7 +2213,7 @@ service cloud.firestore {
       function hdCloudPush(){
         if(window.__hdResetting||!hdUser||!db)return;
         try{
-          var payload=hdCollect();
+          var payload=window.hdSaveSys.collect();
           db.collection('saves').doc(hdUser.uid).set({data:payload,updatedAt:Date.now()}).catch(function(){});
         }catch(e){}
       }
@@ -2209,7 +2223,7 @@ service cloud.firestore {
       function hdCloudSync(){
         if(!hdUser||!db)return Promise.resolve();
         var local=null;
-        try{local=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){}
+        try{local=JSON.parse(localStorage.getItem(window.hdSaveSys.KEY));}catch(e){}
         return db.collection('saves').doc(hdUser.uid).get().then(function(snap){
           var cloud=snap.exists?snap.data():null;
           if(cloud&&cloud.data){
@@ -2217,7 +2231,7 @@ service cloud.firestore {
             var localTime=(local&&local.savedAt)||0;
             if(!local||cloudTime>localTime){
               if(hdApplyData(cloud.data)){
-                try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(cloud.data));}catch(e){}
+                try{localStorage.setItem(window.hdSaveSys.KEY,JSON.stringify(cloud.data));}catch(e){}
                 hdRerender();
                 hdNote('클라우드 기록을 불러왔습니다. 다른 기기와 동기화되었습니다.');
               }
@@ -2286,7 +2300,7 @@ service cloud.firestore {
           /* 초기화 플래그: reload 중 pagehide/visibilitychange 자동저장(hdSave·hdCloudPush)이
              메모리 내 G/C를 다시 저장/업로드해 초기화를 무효화하던 버그(v25) 방지 */
           window.__hdResetting=true;
-          try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}
+          try{localStorage.removeItem(window.hdSaveSys.KEY);}catch(e){}
           var done=function(){location.reload();};
           if(hdUser&&db){
             db.collection('saves').doc(hdUser.uid).delete().then(done).catch(function(e){try{console.warn('[hd] cloud wipe failed',e);}catch(_){}done();});
@@ -2456,7 +2470,7 @@ service cloud.firestore {
         }).then(function(){
           pendingGifts=[];
           try{
-            if(typeof hdSave!=='undefined') hdSave();
+            if(window.hdSaveSys)window.hdSaveSys.save();
             if(typeof syncHud!=='undefined') syncHud();
             if(typeof recipeCards!=='undefined') recipeCards();
             if(typeof renderShop!=='undefined') renderShop();
@@ -2576,9 +2590,7 @@ service cloud.firestore {
       }
     })();
     /* ===== end gift + nickname system ===== */
-
 /* ===== end Firebase cloud sync ===== */
-
   initializeDailyAndStreak();initializeSeason();ensureMonthlySeason();initializeWeatherMarket();updateAchievements();
   [
     ['recipeCards',recipeCards],['progress',progress],['drawAll',drawAll],['syncHud',syncHud],
