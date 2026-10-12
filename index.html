@@ -1530,52 +1530,6 @@ service cloud.firestore {
   function updateMissions(score){if(C.rank!=='assistant')return;C.missions.forEach(m=>{const matches=m.recipe===S.recipe||(m.recipe==='neipaAny'&&current().type==='neipa');if(!m.done&&matches&&score>=m.target)m.done=true});if(C.missions.length===3&&C.missions.every(m=>m.done)){C.rank='brewer';$('#promotionKicker').textContent='CAREER CLEAR · PROMOTION';$('#promotionTitle').textContent='정식 양조사 승진!';$('#promotionQuote').textContent='세 번의 미션을 모두 통과했습니다.';$('#promotionCopy').innerHTML='이제 양조 보상은 <strong>1.6×</strong>. 다음 배치부터 당신의 이름으로 맥주가 출고됩니다.';showPromotion()}syncCareerUI()}
   function showPromotion(){const o=$('#promotionOverlay');o.hidden=false;const d=o.querySelector('.story-dialog');for(let i=0;i<28;i++){const q=document.createElement('i');q.className='promo-confetti';q.style.left=(Math.random()*100)+'%';q.style.background=['#ffc34f','#df782d','#7da653','#fff0bd'][i%4];q.style.setProperty('--x',(Math.random()*180-90)+'px');q.style.animationDelay=(Math.random()*.4)+'s';d.appendChild(q);setTimeout(()=>q.remove(),2300)}resultSound(95)}
   function showRecipeUnlock(id){const r=recipes[id],o=$('#recipeUnlockOverlay'),d=o.querySelector('.story-dialog');$('#recipeUnlockTitle').textContent=r.name+' 해금!';$('#recipeUnlockQuote').textContent=`“조건을 채웠군. 이제 이 레시피를 네 공정으로 증명해봐.”`;$('#recipeUnlockCopy').innerHTML=`<strong>${masteryLockText(r)}</strong> · 도전 레시피가 열렸습니다. 레시피 목록에서 전체 스펙을 확인하고 바로 양조할 수 있습니다.`;o.dataset.recipe=id;o.dataset.pendingBatch='';o.hidden=false;for(let i=0;i<28;i++){const q=document.createElement('i');q.className='promo-confetti';q.style.left=(Math.random()*100)+'%';q.style.background=['#ffc34f','#df782d','#7da653','#fff0bd'][i%4];q.style.setProperty('--x',(Math.random()*180-90)+'px');q.style.animationDelay=(Math.random()*.4)+'s';d.appendChild(q);setTimeout(()=>q.remove(),2300)}resultSound(95);setTimeout(()=>$('#closeRecipeUnlock').focus(),0)}
-  function drawVenue(canvas,id,t=0){
-    const c=canvas.getContext('2d'),p=places[id],cs=p.palette,W=canvas.width,H=canvas.height,sec=t/1000;c.imageSmoothingEnabled=false;c.clearRect(0,0,W,H);px(c,0,0,W,H,cs[2]);px(c,0,78,W,H-78,'#2a1810');for(let x=0;x<W;x+=32)px(c,x,80,30,3,'#5c3824');px(c,0,0,W,6,cs[1]);
-    if(p.art==='brewery'){
-      px(c,12,18,78,58,cs[0]);px(c,19,25,64,44,'#e9bc62');px(c,26,32,50,30,cs[2]);
-      [112,202].forEach((x,i)=>{px(c,x+8,20,60,10,'#d8dfd7');px(c,x,30,76,48,'#aebbb1');px(c,x+8,37,60,36,i?cs[0]:cs[1]);px(c,x+17,45,42,20,'#51665c');px(c,x+26,50,24,10,'#d7c17c');for(let b=0;b<4;b++){const by=64-((sec*12+b*13+i*5)%25);px(c,x+22+b*9,by,4,4,'#f3d77d')}const a=sec*1.6+i,cx=x+38,cy=52;px(c,cx-8,cy-8,16,16,'#efe0b8');px(c,cx-1,cy-1,2,2,'#44251a');c.strokeStyle='#9b3225';c.lineWidth=2;c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+Math.cos(a)*6,cy+Math.sin(a)*6);c.stroke()});
-      for(let s=0;s<4;s++){const sy=22-((sec*13+s*11)%34),sx=132+s*15;px(c,sx,sy,7+(s%2)*3,5,'rgba(240,229,194,.7)')}
-      if(id==='jeju'){px(c,0,60,72,18,'#527b45');px(c,10,47,42,13,'#6c9857')}
-    }else{
-      const flick=Math.floor(sec*5)%7!==0;px(c,14,17,126,48,cs[0]);px(c,21,24,112,34,flick?cs[1]:'#6b5435');px(c,28,31,98,20,cs[2]);px(c,38,37,13,7,flick?'#ffe682':'#7c6640');px(c,58,37,13,7,flick?'#ffe682':'#7c6640');px(c,78,37,13,7,flick?'#ffe682':'#7c6640');
-      px(c,154,18,150,60,'#503221');px(c,160,57,144,21,cs[0]);px(c,174,30,11,28,'#d7b470');px(c,204,30,11,28,'#d7b470');px(c,234,30,11,28,'#d7b470');
-      const clink=Math.floor(sec*3)%2,gy=48-clink*2;px(c,176,gy,10,13,'#efc967');px(c,189,gy-3,10,13,'#efc967');px(c,183,gy+12,3,7,'#e8dfc7');px(c,192,gy+10,3,9,'#e8dfc7');
-      px(c,260,24,10,34,'#b8c4b9');px(c,270,23,22,8,'#b8c4b9');px(c,287,29,5,18,'#b8c4b9');if(Math.floor(sec*4)%3!==0)px(c,288,46,4,18,'#f2c34f');px(c,281,63,18,5,'#e9ded0');
-      px(c,36,65,14,13,'#20140f');px(c,33,53,20,14,'#20140f');px(c,76,65,14,13,'#20140f');px(c,73,53,20,14,'#20140f');px(c,52,63,10,5,'#e7bd58');px(c,66,61,10,5,'#e7bd58')
-    }
-  }
-  function drawVenueScene(canvas,id,t=0){
-    const c=canvas.getContext('2d'),p=places[id],W=canvas.width,H=canvas.height,s=t/1000;c.imageSmoothingEnabled=false;c.clearRect(0,0,W,H);
-    const brick=(base,line)=>{px(c,0,0,W,H,base);for(let y=0;y<H;y+=32){px(c,0,y,W,3,line);for(let x=(y/32%2)*32;x<W;x+=64)px(c,x,y,3,32,line)}};
-    if(p.art==='pub'){
-      brick('#17101a','#291728');px(c,0,266,W,124,'#12090d');px(c,0,262,W,6,p.palette[0]);
-      px(c,25,26,196,86,'#2a1223');px(c,31,32,184,74,p.palette[0]);px(c,39,40,168,58,'#160d17');const flick=Math.floor(s*5)%9!==0;px(c,53,56,18,18,flick?p.palette[1]:'#5d4732');px(c,79,56,74,18,flick?p.palette[1]:'#5d4732');px(c,161,56,18,18,flick?p.palette[1]:'#5d4732');px(c,61,82,108,5,p.palette[0]);
-      for(let i=0;i<8;i++){const x=270+i*39;px(c,x,38,22,80,'#3b241d');px(c,x+5,45,12,48,['#c56434','#d1a23e','#4e7c66'][i%3]);px(c,x+7,27,8,13,'#d4ba86')}
-      px(c,246,120,365,16,'#85502e');px(c,246,136,365,92,'#2d1715');for(let i=0;i<7;i++){const x=267+i*49;px(c,x,151,30,51,'#191014');px(c,x+6,159,18,31,p.palette[i%2]);px(c,x+10,146,10,9,'#c7b68d')}
-      px(c,30,151,152,91,'#24151b');px(c,42,164,128,9,'#b06e35');for(let i=0;i<4;i++){px(c,51+i*29,180,18,39,'#d4bf91');px(c,55+i*29,186,10,27,['#d88a2d','#9e3d2d','#e1b745','#55291f'][i]);}
-      for(let i=0;i<5;i++){const yy=124-((s*13+i*23)%80),xx=295+i*54;px(c,xx,yy,5,5,'rgba(246,196,92,.42)')}
-    }else{
-      brick('#3a2118','#54301e');px(c,0,276,W,114,'#24130e');px(c,0,272,W,5,'#b56b31');
-      px(c,24,22,175,105,'#6a3b20');px(c,32,30,159,89,'#e09b47');px(c,42,40,139,69,'#3d2318');px(c,54,53,115,8,'#ce7d36');px(c,54,70,82,6,'#a95d2b');
-      [235,400].forEach((x,j)=>{px(c,x+18,34,106,13,'#e1b26e');px(c,x,47,142,188,'#8d502a');px(c,x+8,55,126,166,'#c87935');px(c,x+20,65,102,144,'#7b4325');px(c,x+50,91,42,42,'#dfb268');px(c,x+60,101,22,22,'#493023');px(c,x+12,220,118,15,'#55301e');px(c,x+22,235,18,34,'#6e432a');px(c,x+102,235,18,34,'#6e432a');const a=s*1.4+j;c.save();c.translate(x+71,112);c.rotate(a);px(c,-3,-25,6,50,'#f0ca7d');px(c,-25,-3,50,6,'#f0ca7d');c.restore()});
-      for(let i=0;i<5;i++){const yy=46-((s*14+i*19)%58);px(c,285+i*47,yy,13+(i%2)*5,7,'rgba(250,225,175,.56)')}
-      px(c,38,170,142,71,'#5d341e');px(c,48,181,122,8,'#c17835');px(c,57,198,25,28,'#bd7435');px(c,96,193,25,33,'#dd9a49');px(c,136,201,23,25,'#a95f2c');
-    }
-    if(p.art==='pub'){
-      /* 병 라벨, 펜던트 조명, 테이블 반사광 */
-      for(let i=0;i<8;i++){const x=275+i*39;px(c,x+7,67,8,3,['#f4d36a','#8bd0cf','#e2746d'][i%3]);px(c,x+8,77,6,2,'rgba(255,244,205,.65)')}
-      [92,198,510].forEach((x,i)=>{px(c,x,0,3,34,'#513129');px(c,x-9,31,21,7,'#2c1618');px(c,x-13,38,29,5,p.palette[i%2]);px(c,x-7,43,17,4,'rgba(255,221,139,.72)')});
-      px(c,23,246,190,8,'#8c4b2a');px(c,32,254,172,4,'rgba(243,163,80,.3)');
-    }else{
-      /* 탱크 이음새, 배관, 게이지와 증기 */
-      [235,400].forEach((x,i)=>{for(let y=78;y<205;y+=28)px(c,x+8,y,126,3,'rgba(255,211,134,.32)');px(c,x+126,70,12,11,'#e2b36f');px(c,x+135,74,28,5,'#b87339');px(c,x+158,74,5,40,'#8b522e');px(c,x+150,108,21,6,'#d79a52');px(c,x+68,103,6,20,'#f4d38a');px(c,x+57,112,28,4,'#6b3523')});
-      px(c,192,154,43,7,'#c67939');px(c,185,154,8,66,'#92532c');px(c,180,212,18,8,'#d59a54');
-      for(let i=0;i<8;i++){const yy=34-((s*16+i*17)%64),xx=230+i*38;px(c,xx,yy,8+(i%3)*3,4,'rgba(255,229,184,.42)')}
-    }
-    px(c,0,H-32,W,32,'#100708');for(let x=0;x<W;x+=48)px(c,x,H-32,3,32,'#2d1713')
-  }
-  /* Scene portrait system v3 · bespoke characters integrated with seven distinct venues */
   function drawVenueScene(canvas,id,t=0){
     const c=canvas.getContext('2d'),W=canvas.width,H=canvas.height,s=Math.max(W/640,H/390),ox=(W-640*s)/2,oy=(H-390*s)/2,sec=t/1000,p=places[id],pal=p.palette;
     c.imageSmoothingEnabled=false;c.clearRect(0,0,W,H);c.save();c.translate(ox,oy);c.scale(s,s);
@@ -1845,14 +1799,14 @@ service cloud.firestore {
   function bgmTone(freq,dur=.32,gain=.012){if(muted||!C.audio.bgm)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime;o.type='triangle';o.frequency.value=freq;g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+dur)}catch(e){}}
   function bgmScene(){return!$('#shopOverlay').hidden?'shop':screenKey()==='0'?'main':'brew'}
   function startBgm(){clearInterval(bgmTimer);if(muted||!C.audio.bgm)return;const notes={main:[261.6,329.6,392,329.6],brew:[220,293.7,330,293.7],shop:[392,493.9,523.3,493.9]};bgmStep=0;bgmTimer=setInterval(()=>{const seq=notes[bgmScene()]||notes.main;bgmTone(seq[bgmStep++%seq.length])},620)}
-  function updateSettingsState(){ensureManagementState();const allOff=muted;$('#settingsSoundState').textContent=allOff?'모든 소리 꺼짐':`배경음악 ${C.audio.bgm?'켜짐':'꺼짐'} · 효과음 ${C.audio.sfx?'켜짐':'꺼짐'}`;$('#bgmToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.bgm));$('#bgmToggle').textContent=!allOff&&C.audio.bgm?'켜짐':'꺼짐';$('#sfxToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.sfx));$('#sfxToggle').textContent=!allOff&&C.audio.sfx?'켜짐':'꺼짐';if(allOff||!C.audio.bgm)clearInterval(bgmTimer);else startBgm();try{const t=document.getElementById('settingsUidText'),b=document.getElementById('copyUidBtn');if(window.hdFb&&window.hdFb.isReady()){const u=window.hdFb.getUser();if(t&&b&&u&&u.uid){t.textContent=u.uid;b.hidden=false}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}const nt=document.getElementById('settingsNicknameText');if(nt&&window.hdGiftNickname)nt.textContent=window.hdGiftNickname}catch(e){}}
+  function updateSettingsState(){ensureManagementState();const allOff=muted;$('#settingsSoundState').textContent=allOff?'모든 소리 꺼짐':`배경음악 ${C.audio.bgm?'켜짐':'꺼짐'} · 효과음 ${C.audio.sfx?'켜짐':'꺼짐'}`;$('#bgmToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.bgm));$('#bgmToggle').textContent=!allOff&&C.audio.bgm?'켜짐':'꺼짐';$('#sfxToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.sfx));$('#sfxToggle').textContent=!allOff&&C.audio.sfx?'켜짐':'꺼짐';if(allOff||!C.audio.bgm)clearInterval(bgmTimer);else startBgm();try{const t=document.getElementById('settingsUidText'),b=document.getElementById('copyUidBtn');if(window.hdFb&&window.hdFb.isReady()){const u=window.hdFb.getUser();if(t&&b&&u&&u.uid){t.textContent=u.uid;b.hidden=false}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}const nt=document.getElementById('settingsNicknameText');if(nt)nt.textContent=window.hdGiftNickname||'설정되지 않음'}catch(e){console.warn('[hd] settings state update failed',e);}}
   function giftBoxLabel(g){if(g.type==='funds')return `자금 ${won(+g.amount||0)}`;if(g.type==='ingredient'){const meta=itemMeta[g.id];return `재료 ${meta?meta[0]:g.id} ${+g.qty||0}${meta?meta[1]:''}`}if(g.type==='recipe')return `레시피 ${recipes[g.id]?recipes[g.id].name:g.id}`;return '선물'}
   function openGiftBoxFromSettings(){
     const status=$('#settingsGiftStatus'),list=$('#giftClaimList'),title=$('#giftClaimTitle');let h=null,user=null;
-    try{h=window.hdFb;if(h&&typeof h.isReady==='function'&&h.isReady())user=h.getUser&&h.getUser()}catch(e){}
+    try{h=window.hdFb;if(h&&typeof h.isReady==='function'&&h.isReady())user=h.getUser&&h.getUser()}catch(e){console.warn('[hd] giftbox auth lookup failed',e);}
     if(!user||!user.uid){status.textContent='Google 로그인 후 이용 가능';return}
     status.textContent='';closeOverlay('settingsOverlay');title.textContent='🎁 선물함';list.innerHTML='<div class="empty-record">선물함을 확인하는 중입니다.</div>';openOverlay('giftClaimOverlay');
-    try{window.dispatchEvent(new CustomEvent('hd:giftbox:open'))}catch(e){}
+    try{window.dispatchEvent(new CustomEvent('hd:giftbox:open'))}catch(e){console.warn('[hd] giftbox open event failed',e);}
     const db=h.getDb&&h.getDb();if(!db){list.innerHTML='<div class="empty-record">받을 수 있는 선물이 없습니다.</div>';return}
     db.collection('gifts').doc(user.uid).get().then(snap=>{const items=snap.exists&&Array.isArray((snap.data()||{}).items)?snap.data().items:[];if(!items.length){list.innerHTML='<div class="empty-record">받을 수 있는 선물이 없습니다.</div>';return}title.textContent=`🎁 선물함 · ${items.length}개`;list.innerHTML=items.map(g=>`<div class="settings-row"><div><strong>${safeText(giftBoxLabel(g))}</strong><small>보낸 사람: ${safeText(g.from||'관리자')}</small></div></div>`).join('')}).catch(()=>{list.innerHTML='<div class="empty-record">선물함을 불러오지 못했습니다. 잠시 후 다시 확인해주세요.</div>'})
   }
@@ -2059,7 +2013,7 @@ service cloud.firestore {
   function communityNickname(ctx){const name=String(C.social.nickname||window.hdGiftNickname||(ctx&&ctx.user&&ctx.user.displayName)||'').trim().slice(0,18);return name||(ctx&&ctx.user&&ctx.user.uid?ctx.user.uid.slice(0,6):'브루어')}
   function communityDate(value){try{const d=value&&typeof value.toDate==='function'?value.toDate():value instanceof Date?value:new Date(value||Date.now());return d.toLocaleDateString('ko-KR',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}catch(e){return '방금 전'}}
   function setCommunityNotice(message,type,target){const id=target||(communityTab==='board'?'boardNotice':communityTab==='market'?'marketNotice':communityTab==='cert'?'certNotice':'shareNotice'),el=$('#'+id);if(!el)return;el.textContent=message||'';el.classList.toggle('error',type==='error')}
-  function communityCooldown(kind){const key='hdCommunityCooldown_'+kind,now=Date.now();let last=communityCooldownMemory[key]||0;try{last=Math.max(last,+localStorage.getItem(key)||0)}catch(e){}const wait=30000-(now-last);if(wait>0){setCommunityNotice(`${Math.ceil(wait/1000)}초 뒤에 다시 작성할 수 있어요.`,'error');return false}communityCooldownMemory[key]=now;try{localStorage.setItem(key,String(now))}catch(e){}return true}
+  function communityCooldown(kind){const key='hdCommunityCooldown_'+kind,now=Date.now();let last=communityCooldownMemory[key]||0;try{last=Math.max(last,+localStorage.getItem(key)||0)}catch(e){console.warn('[hd] cooldown read failed',e);}const wait=30000-(now-last);if(wait>0){setCommunityNotice(`${Math.ceil(wait/1000)}초 뒤에 다시 작성할 수 있어요.`,'error');return false}communityCooldownMemory[key]=now;try{localStorage.setItem(key,String(now))}catch(e){console.warn('[hd] cooldown write failed',e);}return true}
   function switchCommunityTab(tab){communityTab=tab;$$('[data-community-tab]').forEach(button=>button.setAttribute('aria-selected',String(button.dataset.communityTab===tab)));$$('.community-pane').forEach(pane=>pane.hidden=pane.id!=='communityPane'+({share:'Share',board:'Board',market:'Market',cert:'Cert'}[tab]));if(tab==='board')loadPosts();if(tab==='market')loadMarket();if(tab==='cert')loadCerts()}
   function communityEmpty(message){return `<div class="community-empty">${safeText(message)}</div>`}
   function requireCommunityDb(target){const ctx=communityContext();if(ctx)return ctx;const el=$('#'+target);if(el)el.innerHTML=communityEmpty('커뮤니티 연결을 준비하고 있어요. 잠시 후 다시 열어주세요.');return null}
@@ -2111,12 +2065,12 @@ service cloud.firestore {
     try{localStorage.setItem('__hd_t','1');localStorage.removeItem('__hd_t');}catch(e){hdStorageOK=false;}
     function hdCollectSave(){
       const cC=JSON.parse(JSON.stringify(C));
-      try{Object.values(cC.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){}
+      try{Object.values(cC.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){console.warn('[hd] npc history trim failed',e);}
       const customs={};
       customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=recipes[id];});
       return {v:1,savedAt:Date.now(),G:JSON.parse(JSON.stringify(G)),C:cC,customs,customRecipeIds:customRecipeIds.slice(),customSequence};
     }
-    function hdSave(){if(window.__hdResetting||!hdStorageOK)return;try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(hdCollectSave()));}catch(e){}}
+    function hdSave(){if(window.__hdResetting||!hdStorageOK)return;try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(hdCollectSave()));}catch(e){console.warn('[hd] local save failed',e);}}
     function hdLoad(){
       if(!hdStorageOK)return false;
       let d=null;
@@ -2144,7 +2098,7 @@ service cloud.firestore {
         b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
         sb.after(b);
       }
-      b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){window.__hdResetting=true;try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}location.reload();}});
+      b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){window.__hdResetting=true;try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){console.warn('[hd] local wipe failed',e);}location.reload();}});
     })();
     if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
     /* 외부 인터페이스: 이 4개만 밖에서 씀 */
@@ -2174,7 +2128,7 @@ service cloud.firestore {
           auth=firebase.auth();db=firebase.firestore();
           try{storage=firebase.storage();}catch(e){storage=null;}
           fbReady=true;
-          auth.getRedirectResult().catch(function(){});
+          auth.getRedirectResult().catch(function(e){console.warn('[hd] getRedirectResult failed',e);});
           auth.onAuthStateChanged(function(user){
             hdUser=user||null;
             hdRenderAuthUI();
@@ -2185,7 +2139,7 @@ service cloud.firestore {
               if(typeof updateSettingsState==='function')updateSettingsState();
               var gs=document.getElementById('settingsGiftStatus');
               if(gs&&hdUser)gs.textContent='';
-            }catch(e){}
+            }catch(e){console.warn('[hd] auth UI update failed',e);}
             if(hdUser)hdCloudSync();
           });
           return true;
@@ -2207,15 +2161,15 @@ service cloud.firestore {
         }catch(e){return false;}
       }
       function hdRerender(){
-        try{recipeCards();progress();drawAll();syncHud();renderInventory();renderShop();updateStartBar();}catch(e){}
+        try{recipeCards();progress();drawAll();syncHud();renderInventory();renderShop();updateStartBar();}catch(e){console.warn('[hd] rerender after cloud sync failed',e);}
       }
       function hdNote(msg){var bn=document.getElementById('batchNotice');if(bn)bn.textContent=msg;}
       function hdCloudPush(){
         if(window.__hdResetting||!hdUser||!db)return;
         try{
           var payload=window.hdSaveSys.collect();
-          db.collection('saves').doc(hdUser.uid).set({data:payload,updatedAt:Date.now()}).catch(function(){});
-        }catch(e){}
+          db.collection('saves').doc(hdUser.uid).set({data:payload,updatedAt:Date.now()}).catch(function(e){console.warn('[hd] cloud push failed',e);});
+        }catch(e){console.warn('[hd] cloud push error',e);}
       }
       setInterval(hdCloudPush,15000);
       window.addEventListener('pagehide',hdCloudPush);
@@ -2223,7 +2177,7 @@ service cloud.firestore {
       function hdCloudSync(){
         if(!hdUser||!db)return Promise.resolve();
         var local=null;
-        try{local=JSON.parse(localStorage.getItem(window.hdSaveSys.KEY));}catch(e){}
+        try{local=JSON.parse(localStorage.getItem(window.hdSaveSys.KEY));}catch(e){console.warn('[hd] local save parse failed',e);}
         return db.collection('saves').doc(hdUser.uid).get().then(function(snap){
           var cloud=snap.exists?snap.data():null;
           if(cloud&&cloud.data){
@@ -2231,7 +2185,7 @@ service cloud.firestore {
             var localTime=(local&&local.savedAt)||0;
             if(!local||cloudTime>localTime){
               if(hdApplyData(cloud.data)){
-                try{localStorage.setItem(window.hdSaveSys.KEY,JSON.stringify(cloud.data));}catch(e){}
+                try{localStorage.setItem(window.hdSaveSys.KEY,JSON.stringify(cloud.data));}catch(e){console.warn('[hd] cloud save write failed',e);}
                 hdRerender();
                 hdNote('클라우드 기록을 불러왔습니다. 다른 기기와 동기화되었습니다.');
               }
@@ -2241,7 +2195,7 @@ service cloud.firestore {
           }else if(local){
             hdCloudPush();
           }
-        }).catch(function(){});
+        }).catch(function(e){console.warn('[hd] cloud sync failed',e);});
       }
       function hdRenderAuthUI(){
         var old=document.getElementById('googleLoginBtn');if(old&&old.parentNode)old.parentNode.removeChild(old);
@@ -2300,7 +2254,7 @@ service cloud.firestore {
           /* 초기화 플래그: reload 중 pagehide/visibilitychange 자동저장(hdSave·hdCloudPush)이
              메모리 내 G/C를 다시 저장/업로드해 초기화를 무효화하던 버그(v25) 방지 */
           window.__hdResetting=true;
-          try{localStorage.removeItem(window.hdSaveSys.KEY);}catch(e){}
+          try{localStorage.removeItem(window.hdSaveSys.KEY);}catch(e){console.warn('[hd] local wipe failed',e);}
           var done=function(){location.reload();};
           if(hdUser&&db){
             db.collection('saves').doc(hdUser.uid).delete().then(done).catch(function(e){try{console.warn('[hd] cloud wipe failed',e);}catch(_){}done();});
@@ -2319,7 +2273,6 @@ service cloud.firestore {
       };
     })();
     // ===== PART F: 선물+닉네임 JS 블록 =====
-/* ANCHOR: '/* ===== end Firebase cloud sync ===== *\/' 바로 앞에 삽입. 전체 코드는 아래. */
 /* ===== Hop & Dream gift + nickname system ===== */
     (function(){
       'use strict';
@@ -2340,7 +2293,7 @@ service cloud.firestore {
               return '<option value="'+id+'">'+itemMeta[id][0]+' ('+itemMeta[id][1]+')</option>';
             }).join('');
           }
-        }catch(e){}
+        }catch(e){console.warn('[hd] gift item options failed',e);}
         try{
           var rsel=document.getElementById('giftRecipe');
           if(rsel && !rsel.options.length && typeof recipes!=='undefined'){
@@ -2348,7 +2301,7 @@ service cloud.firestore {
               return '<option value="'+id+'">'+(recipes[id].name||id)+'</option>';
             }).join('');
           }
-        }catch(e){}
+        }catch(e){console.warn('[hd] gift recipe options failed',e);}
       }
 
       /* --- resolve nickname or UID to UID --- */
@@ -2414,7 +2367,7 @@ service cloud.firestore {
               hdShowGiftClaim(items);
             }
           }
-        }).catch(function(){});
+        }).catch(function(e){console.warn('[hd] gift check failed',e);});
       }
 
       function hdGiftLabel(g){
@@ -2429,7 +2382,7 @@ service cloud.firestore {
             var rn=(typeof recipes!=='undefined'&&recipes[g.id])?recipes[g.id].name:g.id;
             return '레시피 '+rn;
           }
-        }catch(e){}
+        }catch(e){console.warn('[hd] gift label failed',e);}
         return g.type||'선물';
       }
 
@@ -2464,7 +2417,7 @@ service cloud.firestore {
               }
             }
           });
-        }catch(e){}
+        }catch(e){console.warn('[hd] gift claim apply failed',e);}
         db.collection('gifts').doc(u.uid).delete().catch(function(){
           return db.collection('gifts').doc(u.uid).set({items:[]},{merge:true});
         }).then(function(){
@@ -2475,11 +2428,11 @@ service cloud.firestore {
             if(typeof recipeCards!=='undefined') recipeCards();
             if(typeof renderShop!=='undefined') renderShop();
             if(typeof renderInventory!=='undefined') renderInventory();
-          }catch(e){}
+          }catch(e){console.warn('[hd] gift claim save failed',e);}
           if(typeof closeOverlay!=='undefined') closeOverlay('giftClaimOverlay');
           var bn=document.getElementById('batchNotice');
           if(bn) bn.textContent='🎁 선물을 수령했습니다!';
-        }).catch(function(){});
+        }).catch(function(e){console.warn('[hd] gift claim finalize failed',e);});
       }
 
       /* --- nickname --- */
@@ -2531,7 +2484,7 @@ service cloud.firestore {
               if(nt) nt.textContent=d.nickname;
             }
           }
-        }).catch(function(){});
+        }).catch(function(e){console.warn('[hd] nickname load failed',e);});
       }
 
       /* --- wire up UI --- */
@@ -2562,7 +2515,7 @@ service cloud.firestore {
           function fallback(){
             var ta=document.createElement('textarea');
             ta.value=u.uid; document.body.appendChild(ta); ta.select();
-            try{document.execCommand('copy');}catch(e){}
+            try{document.execCommand('copy');}catch(e){console.warn('[hd] clipboard fallback failed',e);}
             document.body.removeChild(ta); done();
           }
         });
@@ -2579,7 +2532,7 @@ service cloud.firestore {
         });
         // periodic gift check (every 60s)
         setInterval(function(){
-          try{ var ff=fb(); if(ff&&ff.getUser()) hdCheckGifts(); }catch(e){}
+          try{ var ff=fb(); if(ff&&ff.getUser()) hdCheckGifts(); }catch(e){console.warn('[hd] periodic gift check failed',e);}
         },60000);
       }
 
@@ -2645,7 +2598,8 @@ service cloud.firestore {
   <script>
     if('serviceWorker' in navigator){
       window.addEventListener('load',function(){
-        navigator.serviceWorker.register('./sw.js').catch(function(e){});
+        /* PWA: 서비스워커 등록 (오프라인 플레이). 수동 주입 — 소스 파일 deploy/pwa-injection.js 참조 */
+        navigator.serviceWorker.register('./sw.js').catch(function(e){console.warn('[hd] service worker registration failed',e);});
       });
     }
   </script>
