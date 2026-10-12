@@ -752,7 +752,7 @@
 <div class="overlay achievement-popup-overlay" id="achievementPopup" hidden><section class="dialog achievement-popup" role="dialog" aria-modal="true" aria-labelledby="achievementPopupTitle"><div class="achievement-popup-icon" aria-hidden="true">🏆</div><small>ACHIEVEMENT UNLOCKED</small><h2 id="achievementPopupTitle">🏆 업적 달성!</h2><div class="achievement-popup-name" id="achievementPopupName"></div><p class="achievement-popup-desc" id="achievementPopupDesc"></p><div class="achievement-popup-reward" id="achievementPopupReward"></div><button class="accept-btn" id="closeAchievementPopup">확인</button></section></div>
 <div class="overlay" id="seasonPopup" hidden><section class="dialog story-dialog season-popup" role="dialog" aria-modal="true" aria-labelledby="seasonPopupTitle"><span class="season-symbol" id="seasonPopupSymbol" aria-hidden="true">🍂</span><small class="story-kicker">SEASONAL BREWING EVENT</small><h2 id="seasonPopupTitle">가을이 왔어요!</h2><p id="seasonPopupCopy">가을 한정 레시피와 재료가 열렸습니다.</p><div class="story-actions"><button class="accept-btn" id="closeSeasonPopup">한정 레시피 보기</button><button class="decline-btn" id="dismissSeasonPopup">나중에</button></div></section></div>
 <div class="overlay" id="giftClaimOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="giftClaimTitle"><div class="dialog-head"><div><small>GIFT BOX</small><h2 id="giftClaimTitle">🎁 선물함</h2></div><button class="close-btn" data-close="giftClaimOverlay" aria-label="선물함 닫기">닫기</button></div><div id="giftClaimList" class="settings-panel"></div><div class="admin-actions" style="margin-top:12px"><button class="admin-action" type="button" id="giftClaimBtn">수령하기</button></div></section></div>
-<div class="overlay" id="settingsOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><small>GAME OPTIONS</small><h2 id="settingsTitle">설정</h2></div><button class="close-btn" data-close="settingsOverlay" aria-label="설정 닫기">닫기</button></div><div class="settings-panel"><div class="settings-row"><div><strong>배경음악</strong><small>메인·양조·상점에서 서로 다른 루프가 재생됩니다.</small></div><button type="button" class="sound-switch" id="bgmToggle" aria-pressed="true">켜짐</button></div><div class="settings-row"><div><strong>효과음</strong><small>버튼, 보상, 양조 결과, 업적 효과음입니다.</small></div><button type="button" class="sound-switch" id="sfxToggle" aria-pressed="true">켜짐</button></div><span id="settingsSoundState" class="sr-only">모든 소리 켜짐</span><div class="settings-row"><div><strong>가이드 동반 양조</strong><small>민지와 함께 레시피 선택부터 시음까지 한 배치를 직접 양조합니다. 완료 보상은 한 번만 지급됩니다.</small></div><button type="button" class="settings-action" id="restartTutorialBtn">튜토리얼 다시 보기</button></div><div class="settings-row"><div><strong>버전 정보</strong><small>홉 앤 드림 양조 시뮬레이션</small></div><button type="button" class="version-trigger" id="versionNumber" aria-label="버전 2.1.0">v2.1.0</button></div><div class="settings-row"><div><strong>내 UID</strong><small id="settingsUidText">Google 로그인 후 이용 가능</small></div><button type="button" class="hud-btn" id="copyUidBtn" hidden>복사</button></div><div class="settings-row"><div><strong>선물함</strong><small>도착한 선물을 확인하고 수령합니다.</small></div><button type="button" class="settings-action" id="openGiftBoxBtn">🎁 선물함</button></div><div class="settings-feedback" id="settingsGiftStatus" role="status"></div><div class="settings-row"><div><strong>닉네임</strong><small id="settingsNicknameText">설정되지 않음</small></div><div style="display:flex;gap:6px;align-items:center"><input id="nicknameInput" class="admin-select" style="width:110px" maxlength="12" placeholder="2~12자"><button type="button" class="hud-btn" id="setNicknameBtn">설정</button></div></div><div class="career-notice" id="nicknameStatus" role="status" style="padding:0 12px"></div></div></section></div>
+<div class="overlay" id="settingsOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><small>GAME OPTIONS</small><h2 id="settingsTitle">설정</h2></div><button class="close-btn" data-close="settingsOverlay" aria-label="설정 닫기">닫기</button></div><div class="settings-panel"><div class="settings-row"><div><strong>배경음악</strong><small>메인·양조·상점에서 서로 다른 루프가 재생됩니다.</small></div><button type="button" class="sound-switch" id="bgmToggle" aria-pressed="true">켜짐</button></div><div class="settings-row"><div><strong>효과음</strong><small>버튼, 보상, 양조 결과, 업적 효과음입니다.</small></div><button type="button" class="sound-switch" id="sfxToggle" aria-pressed="true">켜짐</button></div><span id="settingsSoundState" class="sr-only">모든 소리 켜짐</span><div class="settings-row"><div><strong>가이드 동반 양조</strong><small>민지와 함께 레시피 선택부터 시음까지 한 배치를 직접 양조합니다. 완료 보상은 한 번만 지급됩니다.</small></div><button type="button" class="settings-action" id="restartTutorialBtn">튜토리얼 다시 보기</button></div><div class="settings-row"><div><strong>버전 정보</strong><small>홉 앤 드림 양조 시뮬레이션</small></div><button type="button" class="version-trigger" id="versionNumber" aria-label="버전 2.1.0">v2.1.0</button></div><div class="settings-row"><div><strong>내 UID</strong><small id="settingsUidText">Google 로그인 후 이용 가능</small></div><button type="button" class="hud-btn" id="copyUidBtn" hidden>복사</button></div><div class="settings-row"><div><strong>선물함</strong><small>도착한 선물을 확인하고 수령합니다.</small></div><button type="button" class="settings-action" id="openGiftBoxBtn">🎁 선물함</button></div><div class="settings-feedback" id="settingsGiftStatus" role="status"></div><div class="settings-row"><div><strong>닉네임</strong><small id="settingsNicknameText">설정되지 않음</small></div><div style="display:flex;gap:6px;align-items:center"><input id="nicknameInput" class="admin-select" style="width:110px" maxlength="12" placeholder="2~12자"><button type="button" class="hud-btn" id="setNicknameBtn">설정</button></div></div><div class="career-notice" id="nicknameStatus" role="status" style="padding:0 12px"></div><div class="settings-row" style="border-color:var(--red)"><div><strong>기록 초기화</strong><small>저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작합니다.</small></div><button type="button" class="admin-action negative" id="wipeSaveBtn">기록 초기화</button></div></div></section></div>
 <div class="overlay" id="adminLoginOverlay" hidden><section class="dialog story-dialog" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle"><small class="story-kicker">RESTRICTED ACCESS</small><h2 id="adminLoginTitle">관리자 인증</h2><form class="admin-login-form" id="adminLoginForm"><p>Google 로그인 계정의 관리자 권한을 확인합니다.</p><button class="admin-action" type="submit">권한 다시 확인</button><div class="career-notice" id="adminLoginNotice" role="alert"></div></form></section></div>
 <div class="overlay" id="adminOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="adminTitle"><div class="dialog-head"><div><small>BREWERY CONTROL ROOM</small><h2 id="adminTitle">관리자 패널</h2></div><button class="close-btn" data-close="adminOverlay" aria-label="관리자 패널 닫기">닫기</button></div><div class="admin-grid"><section class="admin-control"><strong>자금</strong><p id="adminCashValue">현재 ₩100,000</p><button class="admin-action" type="button" id="adminAddCash">+ ₩1,000,000</button></section><section class="admin-control"><strong>레시피 · 상점 재료</strong><p>모든 레시피와 홉·몰트·효모·부재료를 엽니다.</p><button class="admin-action" type="button" id="adminUnlockRecipes">전체 해금</button></section><section class="admin-control"><strong>평판</strong><p id="adminReputationValue">현재 0</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-reputation="100">+100</button><button class="admin-action negative" type="button" data-admin-reputation="-100">-100</button></div></section><section class="admin-control"><strong>일수</strong><p id="adminDayValue">현재 1일</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-day="10">+10일</button><button class="admin-action negative" type="button" data-admin-day="-10">-10일</button></div></section><section class="admin-control"><strong>계절 변경</strong><p id="adminSeasonValue">실제 날짜 기준</p><select class="admin-select" id="adminSeasonSelect" aria-label="테스트 계절 선택"><option value="">실제 날짜 사용</option><option value="spring">🌸 봄</option><option value="summer">☀️ 여름</option><option value="autumn">🍂 가을</option><option value="winter">❄️ 겨울</option></select></section><section class="admin-control full"><strong>NPC 호감도</strong><label class="sr-only" for="adminNpcSelect">NPC 선택</label><select class="admin-select" id="adminNpcSelect"></select><p id="adminNpcValue">현재 호감도 0</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-affection="1">+1</button><button class="admin-action negative" type="button" data-admin-affection="-1">-1</button></div></section><section class="admin-control full"><strong>Firestore Security Rules · 전체 파일</strong><p>Firebase 콘솔의 규칙 탭에 아래 내용을 통째로 붙여넣고 게시하세요.</p><textarea class="admin-rules" id="firestoreRulesText" readonly spellcheck="false">rules_version = '2';
 service cloud.firestore {
@@ -2121,12 +2121,15 @@ service cloud.firestore {
   setInterval(hdSave,15000);
   window.addEventListener('pagehide',hdSave);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')hdSave();});
-  /* reset-save button next to sound toggle */
+  /* reset-save button: 네이티브 설정 행의 #wipeSaveBtn에 연결 (없으면 HUD에 폴백 생성) */
   (function(){
-    const sb=document.getElementById('soundBtn');if(!sb)return;
-    const b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
+    let b=document.getElementById('wipeSaveBtn');
+    if(!b){
+      const sb=document.getElementById('soundBtn');if(!sb)return;
+      b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
+      sb.after(b);
+    }
     b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){window.__hdResetting=true;try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){}location.reload();}});
-    sb.after(b);
   })();
   if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
   /* ===== end save system ===== */
@@ -2156,6 +2159,14 @@ service cloud.firestore {
           auth.onAuthStateChanged(function(user){
             hdUser=user||null;
             hdRenderAuthUI();
+            /* 로그인 상태 변경 시 설정·선물함 UI도 갱신 (v38: UID 미표시·선물함 로그인 미인식 버그 수정).
+               기존에는 HUD 로그인 버튼만 갱신되어, 설정 화면을 먼저 열어둔 경우
+               UID가 "Google 로그인 후 이용 가능"으로 멈춰 있었음. */
+            try{
+              if(typeof updateSettingsState==='function')updateSettingsState();
+              var gs=document.getElementById('settingsGiftStatus');
+              if(gs&&hdUser)gs.textContent='';
+            }catch(e){}
             if(hdUser)hdCloudSync();
           });
           return true;
@@ -2216,7 +2227,7 @@ service cloud.firestore {
       function hdRenderAuthUI(){
         var old=document.getElementById('googleLoginBtn');if(old&&old.parentNode)old.parentNode.removeChild(old);
         var oldP=document.getElementById('hdProfileWrap');if(oldP&&oldP.parentNode)oldP.parentNode.removeChild(oldP);
-        var anchor=document.getElementById('wipeSaveBtn')||document.getElementById('soundBtn');
+        var anchor=document.getElementById('soundBtn');
         if(!anchor)return;
         if(hdUser){
           var wrap=document.createElement('span');
@@ -2277,8 +2288,9 @@ service cloud.firestore {
           }else{done();}
         });
       })();
-    })();
-      /* gift system bridge: expose Firebase handles */
+      /* gift system bridge: Firebase 핸들을 외부에 노출.
+         반드시 이 IIFE 내부에 둘 것 (밖에 두면 hdUser/db/auth/fbReady 스코프 버그로
+         UID 미표시·선물함 로그인 미인식·랭킹 미표시 발생 — v37 실기기 버그 원인). */
       window.hdFb = {
         getUser: function(){ return hdUser; },
         getDb: function(){ return db; },
@@ -2286,7 +2298,8 @@ service cloud.firestore {
         getStorage: function(){ return storage; },
         isReady: function(){ return fbReady; }
       };
-/* ===== Hop & Dream gift + nickname system ===== */
+    })();
+    /* ===== Hop & Dream gift + nickname system ===== */
     (function(){
       'use strict';
       window.hdGiftNickname = '';
@@ -2556,7 +2569,9 @@ service cloud.firestore {
       }
     })();
     /* ===== end gift + nickname system ===== */
-    /* ===== end Firebase cloud sync ===== */
+
+/* ===== end Firebase cloud sync ===== */
+
   initializeDailyAndStreak();initializeSeason();ensureMonthlySeason();initializeWeatherMarket();updateAchievements();
   [
     ['recipeCards',recipeCards],['progress',progress],['drawAll',drawAll],['syncHud',syncHud],
