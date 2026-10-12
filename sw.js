@@ -1,5 +1,5 @@
 /* 홉 앤 드림 서비스워커 - 오프라인 플레이 지원 (cache-first) */
-const CACHE = 'hop-dream-v17';
+const CACHE = 'hop-dream-v18';
 const ASSETS = [
   './',
   './index.html',
