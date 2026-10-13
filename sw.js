@@ -1,10 +1,10 @@
 /* 홉 앤 드림 서비스워커 - 오프라인 플레이 지원
- * v54: 네비게이션 (v52에서 도입, 유지). 요청(index.html)은 network-first로 변경.
+ * v55: 네비게이션 (v52에서 도입, 유지). 요청(index.html)은 network-first로 변경.
  * 이유: cache-first라서 일반 URL 접속 시 구버전이 서빙되고 강력 새로고침으로도
  * 안 바뀌는 문제 (3차 플레이테스트에서 v2.1.0이 계속 뜸). 네비게이션만
  * 네트워크 우선으로 바꾸고, 이미지·에셋은 cache-first 유지 (오프라인 보존).
  * 네트워크 실패 시 캐시 폴백 유지. */
-const CACHE = 'hop-dream-v54';
+const CACHE = 'hop-dream-v55';
 const ASSETS = [
   './',
   './index.html',
