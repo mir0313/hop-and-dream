@@ -2136,7 +2136,7 @@ service cloud.firestore {
 
   if(location.hostname==='artifact-capture.invalid')window.addEventListener('keydown',e=>{if(e.key==='F7'){document.querySelector('.gueuze-blender')?.scrollIntoView()}else if(e.key==='F8'){window.__hdAudit.seedV37();openMyBrewery()}else if(e.key==='F9'){window.__hdAudit.seedV37();tourTab='brewery';expandedPlace='hongdae';openTour();document.querySelector('[data-venue-toggle="hongdae"]')?.scrollIntoView()}else if(e.key==='F10'){window.__hdAudit.seedV37();openCareer()}});
   // ⚠️ DO NOT DELETE — ensureMonthlySeason(): 월간 랭킹 시즌 초기화. 빠지면 시즌 점수 동기화·명예의 전당이 동작하지 않음 (v37 시즌제). 부트 앵커 순서 유지.
-  /* ===== Hop & Dream save system (GitHub Pages / self-hosted) ===== */
+    /* ===== Hop & Dream save system (GitHub Pages / self-hosted) ===== */
   /* ⚠️ DO NOT DELETE — 이 블록은 독립 IIFE(window.hdSaveSys) 모듈 경계.
      - IIFE를 풀거나 window.hdSaveSys 노출을 지우면 firebase/gift 호출부 4곳이
        깨지고, 전역 이름 충돌(hdCollect 사건, v40)이 재발할 수 있음.
@@ -2199,7 +2199,7 @@ service cloud.firestore {
     return {KEY:HD_SAVE_KEY,save:hdSave,load:hdLoad,collect:hdCollectSave};
   })();
   /* ===== end save system ===== */
-    /* ===== Hop & Dream Firebase cloud sync (Google 로그인 · 선택사항) ===== */
+/* ===== Hop & Dream Firebase cloud sync (Google 로그인 · 선택사항) ===== */
     /* localStorage 저장 시스템은 그대로 두고, 그 위에 얹는 동기화 레이어 */
     (function(){
       'use strict';
@@ -2366,6 +2366,10 @@ service cloud.firestore {
         isReady: function(){ return fbReady; }
       };
     })();
+    // ⚠️ DO NOT DELETE — PART F: 선물+닉네임 JS 블록. 선물함 발송·수령·닉네임 시스템 전체.
+// 이 블록이 빠지면 선물함 UI는 남아도 발송·수령이 전부 동작하지 않음.
+// PART C/D/E(선물 UI)는 아티팩트 네이티브이므로 여기 중복 삽입 금지.
+/* ANCHOR: '/* ===== end Firebase cloud sync ===== *\/' 바로 앞에 삽입. 전체 코드는 아래. */
 /* ===== Hop & Dream gift + nickname system ===== */
     (function(){
       'use strict';
@@ -2637,7 +2641,7 @@ service cloud.firestore {
     })();
     /* ===== end gift + nickname system ===== */
     /* ===== end Firebase cloud sync ===== */
-  initializeDailyAndStreak();initializeSeason();ensureMonthlySeason();initializeWeatherMarket();updateAchievements();
+initializeDailyAndStreak();initializeSeason();ensureMonthlySeason();initializeWeatherMarket();updateAchievements();
   [
     ['recipeCards',recipeCards],['progress',progress],['drawAll',drawAll],['syncHud',syncHud],
     ['renderInventory',renderInventory],['renderShop',renderShop],['renderBatchVolumes',renderBatchVolumes],
