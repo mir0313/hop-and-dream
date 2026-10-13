@@ -807,7 +807,7 @@
 <div class="overlay achievement-popup-overlay" id="achievementPopup" hidden><section class="dialog achievement-popup" role="dialog" aria-modal="true" aria-labelledby="achievementPopupTitle"><div class="achievement-popup-icon" aria-hidden="true">🏆</div><small>ACHIEVEMENT UNLOCKED</small><h2 id="achievementPopupTitle">🏆 업적 달성!</h2><div class="achievement-popup-name" id="achievementPopupName"></div><p class="achievement-popup-desc" id="achievementPopupDesc"></p><div class="achievement-popup-reward" id="achievementPopupReward"></div><button class="accept-btn" id="closeAchievementPopup">확인</button></section></div>
 <div class="overlay" id="seasonPopup" hidden><section class="dialog story-dialog season-popup" role="dialog" aria-modal="true" aria-labelledby="seasonPopupTitle"><span class="season-symbol" id="seasonPopupSymbol" aria-hidden="true">🍂</span><small class="story-kicker">SEASONAL BREWING EVENT</small><h2 id="seasonPopupTitle">가을이 왔어요!</h2><p id="seasonPopupCopy">가을 한정 레시피와 재료가 열렸습니다.</p><div class="story-actions"><button class="accept-btn" id="closeSeasonPopup">한정 레시피 보기</button><button class="decline-btn" id="dismissSeasonPopup">나중에</button></div></section></div>
 <div class="overlay" id="giftClaimOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="giftClaimTitle"><div class="dialog-head"><div><small>GIFT BOX</small><h2 id="giftClaimTitle">🎁 선물함</h2></div><button class="close-btn" data-close="giftClaimOverlay" aria-label="선물함 닫기">닫기</button></div><div id="giftClaimList" class="settings-panel"></div><div class="admin-actions" style="margin-top:12px"><button class="admin-action" type="button" id="giftClaimBtn">수령하기</button></div></section></div>
-<div class="overlay" id="settingsOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><small>GAME OPTIONS</small><h2 id="settingsTitle">설정</h2></div><button class="close-btn" data-close="settingsOverlay" aria-label="설정 닫기">닫기</button></div><div class="settings-panel"><div class="settings-row"><div><strong>배경음악</strong><small>메인·양조·상점에서 서로 다른 루프가 재생됩니다.</small></div><button type="button" class="sound-switch" id="bgmToggle" aria-pressed="true">켜짐</button></div><div class="settings-row"><div><strong>효과음</strong><small>버튼, 보상, 양조 결과, 업적 효과음입니다.</small></div><button type="button" class="sound-switch" id="sfxToggle" aria-pressed="true">켜짐</button></div><span id="settingsSoundState" class="sr-only">모든 소리 켜짐</span><div class="settings-row"><div><strong>가이드 동반 양조</strong><small>민지와 함께 레시피 선택부터 시음까지 한 배치를 직접 양조합니다. 완료 보상은 한 번만 지급됩니다.</small></div><button type="button" class="settings-action" id="restartTutorialBtn">튜토리얼 다시 보기</button></div><div class="settings-row"><div><strong>버전 정보</strong><small>홉 앤 드림 양조 시뮬레이션</small></div><button type="button" class="version-trigger" id="versionNumber" aria-label="버전 51">v51</button></div><div class="settings-row"><div><strong>내 UID</strong><small id="settingsUidText">Google 로그인 후 이용 가능</small></div><button type="button" class="hud-btn" id="copyUidBtn" hidden>복사</button></div><div class="settings-row"><div><strong>선물함</strong><small>도착한 선물을 확인하고 수령합니다.</small></div><button type="button" class="settings-action" id="openGiftBoxBtn">🎁 선물함</button></div><div class="settings-feedback" id="settingsGiftStatus" role="status"></div><div class="settings-row"><div><strong>닉네임</strong><small id="settingsNicknameText">설정되지 않음</small></div><div style="display:flex;gap:6px;align-items:center"><input id="nicknameInput" class="admin-select" style="width:110px" maxlength="12" placeholder="2~12자"><button type="button" class="hud-btn" id="setNicknameBtn">설정</button></div></div><div class="career-notice" id="nicknameStatus" role="status" style="padding:0 12px"></div><div class="settings-row" style="border-color:var(--red)"><div><strong>기록 초기화</strong><small>저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작합니다.</small></div><button type="button" class="admin-action negative" id="wipeSaveBtn">기록 초기화</button></div></div></section></div>
+<div class="overlay" id="settingsOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><small>GAME OPTIONS</small><h2 id="settingsTitle">설정</h2></div><button class="close-btn" data-close="settingsOverlay" aria-label="설정 닫기">닫기</button></div><div class="settings-panel"><div class="settings-row"><div><strong>배경음악</strong><small>메인·양조·상점에서 서로 다른 루프가 재생됩니다.</small></div><button type="button" class="sound-switch" id="bgmToggle" aria-pressed="true">켜짐</button></div><div class="settings-row"><div><strong>효과음</strong><small>버튼, 보상, 양조 결과, 업적 효과음입니다.</small></div><button type="button" class="sound-switch" id="sfxToggle" aria-pressed="true">켜짐</button></div><span id="settingsSoundState" class="sr-only">모든 소리 켜짐</span><div class="settings-row"><div><strong>가이드 동반 양조</strong><small>민지와 함께 레시피 선택부터 시음까지 한 배치를 직접 양조합니다. 완료 보상은 한 번만 지급됩니다.</small></div><button type="button" class="settings-action" id="restartTutorialBtn">튜토리얼 다시 보기</button></div><div class="settings-row"><div><strong>버전 정보</strong><small>홉 앤 드림 양조 시뮬레이션</small></div><button type="button" class="version-trigger" id="versionNumber" aria-label="버전 52">v52</button></div><div class="settings-row"><div><strong>내 UID</strong><small id="settingsUidText">Google 로그인 후 이용 가능</small></div><button type="button" class="hud-btn" id="copyUidBtn" hidden>복사</button></div><div class="settings-row"><div><strong>선물함</strong><small>도착한 선물을 확인하고 수령합니다.</small></div><button type="button" class="settings-action" id="openGiftBoxBtn">🎁 선물함</button></div><div class="settings-feedback" id="settingsGiftStatus" role="status"></div><div class="settings-row"><div><strong>닉네임</strong><small id="settingsNicknameText">설정되지 않음</small></div><div style="display:flex;gap:6px;align-items:center"><input id="nicknameInput" class="admin-select" style="width:110px" maxlength="12" placeholder="2~12자"><button type="button" class="hud-btn" id="setNicknameBtn">설정</button></div></div><div class="career-notice" id="nicknameStatus" role="status" style="padding:0 12px"></div><div class="settings-row" style="border-color:var(--red)"><div><strong>기록 초기화</strong><small>저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작합니다.</small></div><button type="button" class="admin-action negative" id="wipeSaveBtn">기록 초기화</button></div></div></section></div>
 <div class="overlay" id="adminLoginOverlay" hidden><section class="dialog story-dialog" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle"><small class="story-kicker">RESTRICTED ACCESS</small><h2 id="adminLoginTitle">관리자 인증</h2><form class="admin-login-form" id="adminLoginForm"><p>Google 로그인 계정의 관리자 권한을 확인합니다.</p><button class="admin-action" type="submit">권한 다시 확인</button><div class="career-notice" id="adminLoginNotice" role="alert"></div></form></section></div>
 <div class="overlay" id="adminOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="adminTitle"><div class="dialog-head"><div><small>BREWERY CONTROL ROOM</small><h2 id="adminTitle">관리자 패널</h2></div><button class="close-btn" data-close="adminOverlay" aria-label="관리자 패널 닫기">닫기</button></div><div class="admin-grid"><section class="admin-control"><strong>자금</strong><p id="adminCashValue">현재 ₩100,000</p><button class="admin-action" type="button" id="adminAddCash">+ ₩1,000,000</button></section><section class="admin-control"><strong>레시피 · 상점 재료</strong><p>모든 레시피와 홉·몰트·효모·부재료를 엽니다.</p><button class="admin-action" type="button" id="adminUnlockRecipes">전체 해금</button></section><section class="admin-control"><strong>평판</strong><p id="adminReputationValue">현재 0</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-reputation="100">+100</button><button class="admin-action negative" type="button" data-admin-reputation="-100">-100</button></div></section><section class="admin-control"><strong>일수</strong><p id="adminDayValue">현재 1일</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-day="10">+10일</button><button class="admin-action negative" type="button" data-admin-day="-10">-10일</button></div></section><section class="admin-control"><strong>계절 변경</strong><p id="adminSeasonValue">실제 날짜 기준</p><select class="admin-select" id="adminSeasonSelect" aria-label="테스트 계절 선택"><option value="">실제 날짜 사용</option><option value="spring">🌸 봄</option><option value="summer">☀️ 여름</option><option value="autumn">🍂 가을</option><option value="winter">❄️ 겨울</option></select></section><section class="admin-control full"><strong>NPC 호감도</strong><label class="sr-only" for="adminNpcSelect">NPC 선택</label><select class="admin-select" id="adminNpcSelect"></select><p id="adminNpcValue">현재 호감도 0</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-affection="1">+1</button><button class="admin-action negative" type="button" data-admin-affection="-1">-1</button></div></section><section class="admin-control full"><strong>Firestore Security Rules · 전체 파일</strong><p>Firebase 콘솔의 규칙 탭에 아래 내용을 통째로 붙여넣고 게시하세요.</p><textarea class="admin-rules" id="firestoreRulesText" readonly spellcheck="false">rules_version = '2';
 service cloud.firestore {
@@ -1244,7 +1244,7 @@ service cloud.firestore {
   function maxAffection(){return Math.max(...Object.values(C.npcs).map(x=>x.affection))}
   function effectiveRecipePrice(id){const r=recipes[id];return id==='weizen'&&C.weizenDiscount?Math.round(r.price*.8):r.price}
   function syncCareerUI(){
-    const m=rankMeta(),done=C.missions.filter(x=>x.done).length;$('#careerRank').innerHTML=`${m.name}<br>${m.mult.toFixed(1)}×`;$('#careerNext').textContent=m.next;$('#careerCondition').textContent=m.condition;$('#careerRep').textContent='평판 '+fmt(C.reputation);$('#careerFriend').textContent='최고 호감도 '+fmt(maxAffection());const hint=$('#careerHint');hint.hidden=!C.flavorHint;hint.textContent=C.flavorHint?'향미 힌트 · '+C.flavorHint:'';$('#hudRep').textContent='평판 '+fmt(C.reputation);const board=$('#missionBoard');
+    const m=rankMeta(),done=C.missions.filter(x=>x.done).length;$('#careerRank').innerHTML=`${m.name}<br>${m.mult.toFixed(1)}×`;$('#careerNext').textContent=m.next;$('#careerCondition').textContent=m.condition;$('#careerRep').textContent='평판 '+fmt(C.reputation);$('#careerFriend').textContent='최고 호감도 '+fmt(maxAffection());const hint=$('#careerHint');hint.hidden=!C.flavorHint;hint.textContent=C.flavorHint?'향미 힌트 · '+C.flavorHint:'';$('#hudRep').textContent='평판 '+fmt(C.reputation);const cdEl=$('#careerDay');if(cdEl)cdEl.textContent=`게임 DAY ${C.day} · CAREER · 평판 ${fmt(C.reputation)} · ${m.name}`;const board=$('#missionBoard');
     if(C.rank==='assistant'||C.rank==='brewer'){board.hidden=false;board.innerHTML=`<strong>양조 미션 ${done}/3</strong>`+C.missions.map(x=>`<div class="mission-row ${x.done?'done':''}"><i class="mission-box" aria-hidden="true"></i><span>${x.label}</span><b class="mission-score">${x.done?'완료':'진행 중'}</b></div>`).join('')}else{board.hidden=true;board.innerHTML=''}
     const breweryButton=$('#breweryBtn');if(breweryButton)breweryButton.textContent=C.breweryName?'내 양조장 →':'내 양조장 · 잠김';
     updateMainQuests();
@@ -1298,7 +1298,7 @@ service cloud.firestore {
     const st=C.npcs[p.npc],talked=st.lastTalk===C.day,last=C.lastBrew,low=last&&last.score<70,state=VN[p.npc]||{expression:'normal',line:npc.talk};
     const expressionLabel={normal:'기본',smile:'미소',surprised:'놀람',serious:'진지'}[state.expression]||'기본';
     const portrait=vnPortraitMarkup(p.npc,state.expression,`${p.name}에서 ${expressionLabel} 표정의 ${npc.name}`);
-    return `<div class="venue-detail" id="venue-detail-${id}"><div class="venue-event"><span class="event-label">${p.art==='pub'?'PUB NIGHT':'BREWERY DAY'}</span><span><strong>${p.event}</strong><br>${p.benefit}</span></div>${menuMarkup(p)}<section class="vn-stage" aria-label="${p.name}에서 ${npc.name}와 대화">${portrait}<span class="vn-expression">${expressionLabel} 표정</span><div class="vn-dialogue"><span class="vn-nameplate">${npc.name} · ${npc.role}</span><p class="vn-line" id="vn-line-${p.npc}" data-full-line="${state.line.replace(/"/g,'&quot;')}">${state.line}<i class="vn-caret" aria-hidden="true"></i></p></div></section><div class="vn-meta"><strong>${p.event}</strong><span>호감도 ${fmt(st.affection)}/100</span><div class="affection-track"><div class="affection-fill" style="width:${st.affection}%"></div></div><span>${low?'최근 맥주 반응 보통':last?'최근 맥주 반응 좋음':'아직 대접할 맥주 없음'}</span></div>${C.choiceNpc===p.npc&&!talked?`<div class="talk-choices"><strong>${conversationPrompt(p.npc)}</strong>${(talkChoices[p.npc]||[]).map(c=>`<button class="talk-choice" data-talk-choice="${c.key}" data-npc="${p.npc}">“${c.text}”</button>`).join('')}</div>`:''}<div class="event-progress"><span class="event-chip ${C.events[p.npc+'Advice']?'done':''}">조언 이벤트 · 호감도 25</span>${socialEvents[p.npc].recipe?`<span class="event-chip ${C.events[p.npc+'Recipe']?'done':''}">레시피 이벤트 · 호감도 55 / 평판 ${socialEvents[p.npc].rep}</span>`:''}</div>${npcRequestMarkup(p.npc)}<div class="vn-actions" aria-label="대화 선택지"><button class="visit-btn" data-visit="${id}" ${G.cash<p.fee?'disabled':''}>${G.cash<p.fee?'자금 부족':`탐방 · ${won(p.fee)}`}</button><button class="npc-action" data-talk="${p.npc}" ${talked?'disabled':''}>${talked?'오늘 대화 완료':C.choiceNpc===p.npc?'선택지 닫기':'대화하기 · 무료'}</button><button class="npc-action" data-serve="${p.npc}" ${last?'':'disabled'}>맥주 대접${last?` · ${last.score}점`:''}</button><button class="npc-action" data-brew-with="${p.npc}" ${st.affection<50||G.cash<30000?'disabled':''}>함께 양조 · ₩30,000</button><button class="npc-action primary-action" data-collab-brew="${p.npc}" ${st.affection<50||G.cash<30000?'disabled':''}>🤝 함께 양조하기</button></div></div>`
+    return `<div class="venue-detail" id="venue-detail-${id}"><div class="venue-event"><span class="event-label">${p.art==='pub'?'PUB NIGHT':'BREWERY DAY'}</span><span><strong>${p.event}</strong><br>${p.benefit}</span></div>${menuMarkup(p)}<section class="vn-stage" aria-label="${p.name}에서 ${npc.name}와 대화">${portrait}<span class="vn-expression">${expressionLabel} 표정</span><div class="vn-dialogue"><span class="vn-nameplate">${npc.name} · ${npc.role}</span><p class="vn-line" id="vn-line-${p.npc}" data-full-line="${state.line.replace(/"/g,'&quot;')}">${state.line}<i class="vn-caret" aria-hidden="true"></i></p></div></section><div class="vn-meta"><strong>${p.event}</strong><span>호감도 ${fmt(st.affection)}/100</span><div class="affection-track"><div class="affection-fill" style="width:${st.affection}%"></div></div><span>${low?'최근 맥주 반응 보통':last?'최근 맥주 반응 좋음':'아직 대접할 맥주 없음'}</span></div>${C.choiceNpc===p.npc&&!talked?`<div class="talk-choices"><strong>${conversationPrompt(p.npc)}</strong>${(talkChoices[p.npc]||[]).map(c=>`<button class="talk-choice" data-talk-choice="${c.key}" data-npc="${p.npc}">“${c.text}”</button>`).join('')}</div>`:''}<div class="event-progress"><span class="event-chip ${C.events[p.npc+'Advice']?'done':''}">조언 이벤트 · 호감도 25</span>${socialEvents[p.npc].recipe?`<span class="event-chip ${C.events[p.npc+'Recipe']?'done':''}">레시피 이벤트 · 호감도 55 / 평판 ${socialEvents[p.npc].rep}</span>`:''}</div>${npcRequestMarkup(p.npc)}<div class="vn-actions" aria-label="대화 선택지"><button class="visit-btn" data-visit="${id}" ${G.cash<p.fee?'disabled':''}>${G.cash<p.fee?'자금 부족':`탐방 · ${won(p.fee)}`}</button><button class="npc-action" data-talk="${p.npc}" ${talked?'disabled':''}>${talked?'오늘 대화 완료':C.choiceNpc===p.npc?'선택지 닫기':'대화하기 · 무료'}</button><button class="npc-action" data-serve="${p.npc}" ${last?'':'disabled'}>맥주 대접${last?` · ${last.score}점`:''}</button><button class="npc-action" data-brew-with="${p.npc}" ${st.affection<50||G.cash<30000?'disabled':''}>양조 토크 · ₩30,000</button><button class="npc-action primary-action" data-collab-brew="${p.npc}" ${st.affection<50||G.cash<30000?'disabled':''}>🤝 함께 양조하기</button></div></div>`
   }
   function headEligible(){return C.rank==='brewer'&&C.reputation>=600&&totalBatches()>=25&&(C.compWins||0)>=2}
   function competitionReady(){return C.lastCompetitionDay==null||C.day-C.lastCompetitionDay>=10}
@@ -1562,7 +1562,7 @@ service cloud.firestore {
   function fermentDialTemp(score,r){if(!r)return 15+score*.075;return r.ferm[0]-4+score/100*((r.ferm[1]+4)-(r.ferm[0]-4))}
   function fermentDialScore(temp,r){if(!r)return clamp((temp-15)/.075,0,100);const lo=r.ferm[0]-4,hi=r.ferm[1]+4;return clamp((temp-lo)/(hi-lo)*100,0,100)}
   function miniGrade(type,value){if(type==='mash')return value>=9?'S':value>=7?'A':value>=4?'B':'C';if(type==='ferment'){const fr=current();if(fr){const ft=fermentDialTemp(value,fr),flo=fr.ferm[0],fhi=fr.ferm[1];return ft>=flo+(fhi-flo)*.25&&ft<=fhi-(fhi-flo)*.25?'S':ft>=flo-.5&&ft<=fhi+.5?'A':ft>=flo-1.5&&ft<=fhi+1.5?'B':'C'}return value>=48&&value<=62?'S':value>=38&&value<=72?'A':value>=22&&value<=84?'B':'C'}if(type==='dryhop')return value>=61&&value<=69?'S':value>=52&&value<=78?'A':value>=32&&value<=92?'B':'C';return value>=77&&value<=83?'S':value>=70&&value<=89?'A':value>=50&&value<=96?'B':'C'}
-  function startMini(type){ensureManagementState();pauseGuideCard();cancelAnimationFrame(miniFrame);miniType=type;miniScore=0;miniRounds=0;miniVisited=new Set();miniStart=performance.now();const title={mash:'매시를 골고루 저어주기',ferment:'온도 컨트롤러 조절',dryhop:'드라이홉 투입 타이밍',bottle:'헤드스페이스 남기기'}[type],copy={mash:'실제 주걱으로 젓듯 매시통 전체를 고르게 문지르면 온도 편차가 줄어듭니다.',ferment:'발효 냉장고의 다이얼을 급격하지 않게 움직여 적정 설정 온도에 맞추세요.',dryhop:'바늘이 좌우로 왕복합니다. 발효 후반의 초록 구간(61~69%)에 바늘이 들어왔을 때 홉 투입을 누르세요.',bottle:'맥주가 차오르는 병을 보고 넘치기 전에 적정 헤드스페이스를 남기세요.'}[type],arena=$('#minigameArena');$('#minigameTitle').textContent=title;$('#minigameCopy').textContent=copy;$('#minigameGrade').hidden=true;$('#minigameNotice').textContent='';$('#minigameActions').innerHTML='<button class="decline-btn" data-mini-skip>건너뛰기 · B 등급</button>';openOverlay('minigameOverlay');if(type==='mash'){arena.innerHTML=`${miniTutorial(type)}<div class="mash-vat"><div class="mash-surface" aria-label="손가락으로 저을 매시통">${Array.from({length:9},(_,i)=>`<i data-stir-zone="${i}"></i>`).join('')}<span class="mash-paddle"></span></div><p>골고루 저은 영역 <b>0</b>/9</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>젓기 완료</button>');const surface=arena.querySelector('.mash-surface'),paddle=arena.querySelector('.mash-paddle'),out=arena.querySelector('.mash-vat b');const stir=e=>{const r=surface.getBoundingClientRect(),x=Math.max(0,Math.min(r.width-1,e.clientX-r.left)),y=Math.max(0,Math.min(r.height-1,e.clientY-r.top)),col=Math.floor(x/(r.width/3)),row=Math.floor(y/(r.height/3)),idx=row*3+col;miniVisited.add(idx);surface.querySelector(`[data-stir-zone="${idx}"]`).classList.add('stirred');paddle.style.transform=`translate(${x-10}px,${y-34}px) rotate(-28deg)`;out.textContent=miniVisited.size};surface.addEventListener('pointerdown',e=>{surface.setPointerCapture(e.pointerId);stir(e)});surface.addEventListener('pointermove',e=>{if(surface.hasPointerCapture(e.pointerId))stir(e)})}else if(type==='ferment'){const fr=current(),flo=fr?fr.ferm[0]:18,fhi=fr?fr.ferm[1]:20,fSet=isNeipa()?S.nFermTemp:S.fermTemp;arena.innerHTML=`${miniTutorial(type)}<div class="temp-controller"><span class="controller-display"><small>SET TEMP</small><b>${fSet.toFixed(1)}°C</b></span><div class="dial-wrap"><span class="dial-target"></span><button class="temp-dial" aria-label="온도 컨트롤러 다이얼"></button></div><p>초록 범위 ${flo}–${fhi}°C · 다이얼을 조금씩 돌려 미세 조정하세요</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>온도 설정 완료</button>');miniScore=fermentDialScore(fSet,fr);const dial=arena.querySelector('.temp-dial'),out=arena.querySelector('.controller-display b'),dialTarget=arena.querySelector('.dial-target');const tsLo=fermentDialScore(flo+(fhi-flo)*.25,fr),tsHi=fermentDialScore(fhi-(fhi-flo)*.25,fr);dialTarget.style.left=tsLo+'%';dialTarget.style.width=Math.max(2,tsHi-tsLo)+'%';let dialAngle=null;const pointerAngle=e=>{const r=dial.getBoundingClientRect();return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI},paintDial=()=>{dial.style.transform=`rotate(${-120+miniScore*2.4}deg)`;out.textContent=fermentDialTemp(miniScore,fr).toFixed(1)+'°C'},turn=e=>{if(dialAngle==null)return;const angle=pointerAngle(e);let delta=angle-dialAngle;if(delta>180)delta-=360;if(delta<-180)delta+=360;miniScore=clamp(miniScore+clamp(delta,-16,16)*.08,0,100);dialAngle=angle;paintDial()};paintDial();dial.addEventListener('pointerdown',e=>{e.preventDefault();dial.setPointerCapture(e.pointerId);dialAngle=pointerAngle(e)});dial.addEventListener('pointermove',e=>{if(dial.hasPointerCapture(e.pointerId))turn(e)});const endDial=e=>{if(dial.hasPointerCapture(e.pointerId))dial.releasePointerCapture(e.pointerId);dialAngle=null};dial.addEventListener('pointerup',endDial);dial.addEventListener('pointercancel',endDial)}else if(type==='dryhop'){arena.innerHTML=`${miniTutorial(type)}<div class="ferment-clock"><div class="ferment-progress"><span class="hop-window"></span><i class="ferm-marker"></i></div><div class="ferm-days"><span>초기</span><span>활성 발효</span><span>후반</span><span>종료</span></div><p>발효 경과 <b>0</b>%</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>홉 투입</button>');const marker=arena.querySelector('.ferm-marker'),out=arena.querySelector('.ferment-clock b');(function tick(t){const el=(((t-miniStart)%12000)+12000)%12000/1000;miniScore=el<6?el/6*100:(12-el)/6*100;marker.style.left=`${miniScore}%`;out.textContent=Math.round(miniScore);miniFrame=requestAnimationFrame(tick)})(performance.now())}else{arena.innerHTML=`${miniTutorial(type)}<div class="bottle-fill-game"><div class="fill-bottle"><span class="beer-fill"></span><i class="fill-line"></i></div><p>병입량 <b>0</b>% · 목 부분의 헤드스페이스를 남기세요</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>충전 멈추기</button>');const fill=arena.querySelector('.beer-fill'),out=arena.querySelector('.bottle-fill-game b');(function tick(t){miniScore=Math.min(100,(t-miniStart)/160);fill.style.height=`${miniScore}%`;out.textContent=Math.round(miniScore);if(miniScore<100)miniFrame=requestAnimationFrame(tick)})(performance.now())}}
+  function startMini(type){ensureManagementState();pauseGuideCard();cancelAnimationFrame(miniFrame);miniType=type;miniScore=0;miniRounds=0;miniVisited=new Set();miniStart=performance.now();const title={mash:'매시를 골고루 저어주기',ferment:'온도 컨트롤러 조절',dryhop:'드라이홉 투입 타이밍',bottle:'헤드스페이스 남기기'}[type],copy={mash:'실제 주걱으로 젓듯 매시통 전체를 고르게 문지르면 온도 편차가 줄어듭니다.',ferment:'발효 냉장고의 다이얼을 급격하지 않게 움직여 적정 설정 온도에 맞추세요.',dryhop:'바늘이 좌우로 왕복합니다. 발효 후반의 초록 구간(61~69%)에 바늘이 들어왔을 때 홉 투입을 누르세요.',bottle:'맥주가 차오르는 병을 보고 넘치기 전에 적정 헤드스페이스를 남기세요.'}[type],arena=$('#minigameArena');$('#minigameTitle').textContent=title;$('#minigameCopy').textContent=copy;$('#minigameGrade').hidden=true;$('#minigameNotice').textContent='';$('#minigameActions').innerHTML='<button class="decline-btn" data-mini-skip>건너뛰기 · B 등급</button>';openOverlay('minigameOverlay');if(type==='mash'){arena.innerHTML=`${miniTutorial(type)}<div class="mash-vat"><div class="mash-surface" aria-label="손가락으로 저을 매시통">${Array.from({length:9},(_,i)=>`<i data-stir-zone="${i}"></i>`).join('')}<span class="mash-paddle"></span></div><p>골고루 저은 영역 <b>0</b>/9</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>젓기 완료</button>');const surface=arena.querySelector('.mash-surface'),paddle=arena.querySelector('.mash-paddle'),out=arena.querySelector('.mash-vat b');const stir=e=>{const r=surface.getBoundingClientRect(),x=Math.max(0,Math.min(r.width-1,e.clientX-r.left)),y=Math.max(0,Math.min(r.height-1,e.clientY-r.top)),col=Math.floor(x/(r.width/3)),row=Math.floor(y/(r.height/3)),idx=row*3+col;miniVisited.add(idx);surface.querySelector(`[data-stir-zone="${idx}"]`).classList.add('stirred');paddle.style.transform=`translate(${x-10}px,${y-34}px) rotate(-28deg)`;out.textContent=miniVisited.size};surface.addEventListener('pointerdown',e=>{surface.setPointerCapture(e.pointerId);stir(e)});surface.addEventListener('pointermove',e=>{if(surface.hasPointerCapture(e.pointerId))stir(e)})}else if(type==='ferment'){const fr=current(),flo=fr?fr.ferm[0]:18,fhi=fr?fr.ferm[1]:20,fSet=isNeipa()?S.nFermTemp:S.fermTemp;arena.innerHTML=`${miniTutorial(type)}<div class="temp-controller"><span class="controller-display"><small>SET TEMP</small><b>${fSet.toFixed(1)}°C</b></span><div class="dial-wrap"><span class="dial-target"></span><button class="temp-dial" aria-label="온도 컨트롤러 다이얼"></button></div><p>초록 범위 ${flo}–${fhi}°C · 다이얼을 조금씩 돌려 미세 조정하세요</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>온도 설정 완료</button>');miniScore=fermentDialScore(fSet,fr);const dial=arena.querySelector('.temp-dial'),out=arena.querySelector('.controller-display b'),dialTarget=arena.querySelector('.dial-target');const tsLo=fermentDialScore(flo+(fhi-flo)*.25,fr),tsHi=fermentDialScore(fhi-(fhi-flo)*.25,fr);dialTarget.style.left=tsLo+'%';dialTarget.style.width=Math.max(2,tsHi-tsLo)+'%';let dialAngle=null;const pointerAngle=e=>{const r=dial.getBoundingClientRect();return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI},paintDial=()=>{dial.style.transform=`rotate(${-120+miniScore*2.4}deg)`;out.textContent=fermentDialTemp(miniScore,fr).toFixed(1)+'°C'},turn=e=>{if(dialAngle==null)return;const angle=pointerAngle(e);let delta=angle-dialAngle;if(delta>180)delta-=360;if(delta<-180)delta+=360;miniScore=clamp(miniScore+clamp(delta,-16,16)*.08,0,100);dialAngle=angle;paintDial()};paintDial();dial.addEventListener('pointerdown',e=>{e.preventDefault();dial.setPointerCapture(e.pointerId);dialAngle=pointerAngle(e)});dial.addEventListener('pointermove',e=>{if(dial.hasPointerCapture(e.pointerId))turn(e)});const endDial=e=>{if(dial.hasPointerCapture(e.pointerId))dial.releasePointerCapture(e.pointerId);dialAngle=null};dial.addEventListener('pointerup',endDial);dial.addEventListener('pointercancel',endDial)}else if(type==='dryhop'){arena.innerHTML=`${miniTutorial(type)}<div class="ferment-clock"><div class="ferment-progress"><span class="hop-window"></span><i class="ferm-marker"></i></div><div class="ferm-days"><span>초기</span><span>활성 발효</span><span>후반</span><span>종료</span></div><p>발효 경과 <b>0</b>%</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>홉 투입</button>');const marker=arena.querySelector('.ferm-marker'),out=arena.querySelector('.ferment-clock b');(function tick(t){const el=(((t-miniStart)%12000)+12000)%12000/1000;miniScore=el<6?el/6*100:(12-el)/6*100;marker.style.left=`${miniScore}%`;out.textContent=Math.round(miniScore);miniFrame=requestAnimationFrame(tick)})(performance.now())}else{arena.innerHTML=`${miniTutorial(type)}<div class="bottle-fill-game"><div class="fill-bottle"><span class="beer-fill"></span><i class="fill-line"></i></div><p>병입량 <b>0</b>% · 목 부분의 헤드스페이스를 남기세요</p></div>`;$('#minigameActions').insertAdjacentHTML('afterbegin','<button class="accept-btn" data-mini-stop>충전 멈추기</button>');const fill=arena.querySelector('.beer-fill'),out=arena.querySelector('.bottle-fill-game b');let fillLast=performance.now(),fillMs=0;(function tick(t){const dt=Math.min(50,Math.max(0,t-fillLast));fillLast=t;fillMs+=dt;miniScore=fillMs<=11200?fillMs/160:Math.min(100,70+(fillMs-11200)/320);fill.style.height=`${miniScore}%`;out.textContent=Math.round(miniScore);if(miniScore<100)miniFrame=requestAnimationFrame(tick)})(performance.now())}}
 
   const styleTechniqueMeta={
     style_oxygen:{stage:'bottle',title:'산소 차단',copy:'NEIPA 이송 밸브를 조절해 산소 유입을 0에 가깝게 낮추세요.',guide:'밸브 슬라이더를 오른쪽으로 천천히 움직이세요. 산소 유입 0–8%가 가장 좋습니다.'},
@@ -1589,7 +1589,7 @@ service cloud.firestore {
   }
   let miniQueue=[];
   function launchNextMini(){if(!miniQueue.length||!$('#minigameOverlay').hidden)return;const type=miniQueue.shift();if(type.startsWith('style_'))startTechniqueMini(type);else{$('#minigameKicker').textContent="BREWER'S HANDS · MINI GAME";startMini(type)}}
-  function maybeMiniGame(stage){const map={'1':'mash','3':'ferment',nferment:'ferment','4':'dryhop',dry2:'dryhop','5':'bottle',bottle:'bottle'},common=map[stage],technique=styleTechniqueForRecipe(),techniqueMeta=technique&&styleTechniqueMeta[technique],queue=[];if(common&&!S.miniGames[common])queue.push(common);if(techniqueMeta&&techniqueMeta.stage===stage&&!S.miniGames[technique])queue.push(technique);if(!queue.length)return;miniQueue=queue;setTimeout(launchNextMini,550)}
+  function maybeMiniGame(stage){const map={'1':'mash','3':'ferment',nferment:'ferment','4':'dryhop',dry2:'dryhop','5':'bottle',bottle:'bottle'},common=map[stage],technique=styleTechniqueForRecipe(),techniqueMeta=technique&&styleTechniqueMeta[technique];let queue=[];if(common&&!S.miniGames[common])queue.push(common);if(techniqueMeta&&techniqueMeta.stage===stage&&!S.miniGames[technique])queue.push(technique);queue=queue.filter(t=>t!=='dryhop'||(stage==='dry2'?sum(S.dh2Hops)>0:stage==='4'?(S.dryTiming!=='none'&&S.dryAmount>0):true));if(!queue.length)return;miniQueue=queue;setTimeout(launchNextMini,550)}
   function priceBreakdownMarkup(beer,withTaproom=true){const q=salePriceQuote(beer,withTaproom),rep=q.repMult>1?` · 평판 ×${q.repMult.toFixed(1)}`:'',tap=q.tapMult>1?` · 탭룸 ×${q.tapMult.toFixed(1)}`:'',theme=q.themeMult>1?` · 여름 테마 ×${q.themeMult.toFixed(1)}`:'',collab=q.collabMult>1?` · 협업 한정 ×${q.collabMult.toFixed(1)}`:'',condition=bottleConditionInfo(beer),fresh=q.freshnessLoss?` · 신선도 -${q.freshnessLoss}%`:' · 신선도 100%';return `<small>${q.style} · 500ml 가격 산정${agingBonusFor(beer)?` · 숙성 품질 +${agingBonusFor(beer)}`:''}</small><div class="price-equation"><span>기본가 ${won(q.base)}</span><span>+ 품질 ${won(q.quality)}</span><span>+ 재료비 ${won(q.material)}</span><strong>= 소계 ${won(q.subtotal)}</strong></div><div class="price-meta"><span>배치 실제 ${won(q.actualPer)}/잔 · 스타일 평균 ${won(q.averagePer)}/잔 · 초과분 30%</span><b>${rep}${tap}${theme}${collab}${fresh}${condition.active?` · 병입 숙성 ${condition.remaining}일 남음 · 품질 -${condition.penalty}`:''} · 100원 반올림 → ${won(q.final)}</b></div>`}
   function storageWeight(id,qty){const unit=(itemMeta[id]&&itemMeta[id][1])||'';if(unit==='kg')return qty;if(unit==='g'||unit==='mL')return qty/1000;if(unit==='팩')return qty*.5;return qty}
   function storageLoad(){return Object.entries(G.inventory).reduce((n,[id,q])=>n+storageWeight(id,+q||0),0)}
@@ -1878,6 +1878,7 @@ service cloud.firestore {
   function pickRecipe(id){
     const candidate=recipes[id];if(!recipeUnlocked(id,candidate)){$('#batchNotice').textContent=candidate.tier==='seasonal'?`${candidate.name}는 ${seasonInfo[candidate.season].name}(${seasonInfo[candidate.season].months})에만 양조할 수 있습니다.`:candidate.tier==='shop'?`${candidate.name}는 상점의 레시피 탭에서 ${won(effectiveRecipePrice(id))}에 구매할 수 있습니다.`:candidate.tier==='mastery'?`${candidate.name}: ${masteryLockText(candidate)}`:candidate.tier==='social'?`${candidate.name}는 인연 이벤트에서 받을 수 있습니다.`:'현재 이용할 수 없는 레시피입니다.';return}
     S.collabNpc=null;if(S.recipe===id)return;
+    resetBatchRuntime();
     S.recipe=id;migrateRecipeIngredientIds(recipes[id]);expandedRecipe=id;shortageShown=false;const r=current(),styleId=r.baseStyle||id;S.step=0;const scale=batchScale(r);S.ingredients=Object.fromEntries(Object.entries(recommendedBase(r)).map(([key,q])=>[key,maltIds.includes(key)?roundMaltQty(q*scale):roundQty(q*scale)]));S.materialsCharged=false;S.actualIngredientCost=0;S.styleAverageIngredientCost=0;S.mashTemp=r.mash;S.mashTime=r.mashTime||60;S.boilTime=r.boil;S.fermented=false;S.batchSettled=false;S.resultCalc=null;S.rolls={};$('#batchNotice').textContent='';
     Object.assign(S,{sanFermenter:'thorough',sanAirlock:'thorough',sanHose:'thorough',sanBottles:'thorough',eventModifier:0,eventCount:0,eventStages:{},eventNotes:[],eventFaults:[],miniGames:{}});
     if(r.type==='classic'){S.hops=r.split.map(q=>Math.round(q*scale*10)/10);S.fermTemp=Math.round((r.ferm[0]+r.ferm[1])/2);S.dryTiming=r.dryRec?'after':'none';S.dryAmount=roundHopQty((r.dryRec||0)*scale);S.aging=r.wildFerment?12:(r.family==='lager'?4:2);S.carb='bottle'}
@@ -1900,7 +1901,7 @@ service cloud.firestore {
   const processAidIds=materialDB.process_aids.map(x=>x.id);
   function inventoryTotals(){const i=G.inventory,hops=[...materialDB.hops.map(x=>x.id),'cluster'];return{malt:sum([...new Set(maltIds)].map(k=>i[k]||0)),hops:sum([...new Set(hops)].map(k=>i[k]||0)),yeast:sum([...new Set(yeastIds)].map(k=>i[k]||0))}}
   function dayLabel(){return '게임 DAY '+Math.max(1,C.day||1)}
-  function syncHud(){const t=inventoryTotals();const hdEl=$('#hudDate');if(hdEl)hdEl.textContent=dayLabel();const dcEl=$('#dayCounter');if(dcEl)dcEl.textContent=fermDayShown>0||S.fermented?batchDayLabel():dayLabel();if(lastCash!==G.cash){cashAnimate(lastCash,G.cash);lastCash=G.cash}else $('#hudCash').textContent=won(G.cash);$('#hudStock').textContent=`몰트 ${fmt(t.malt)}kg · 홉 ${fmt(t.hops)}g · 효모 ${fmt(t.yeast)}팩 · 스타산 ${fmt(G.inventory.starsan)}통 · 비타민C ${fmt(G.inventory.vitc)}g`;$('#shopCash').textContent=won(G.cash);syncCareerUI();scheduleSeasonSync()}
+  function syncHud(){const t=inventoryTotals();const hdEl=$('#hudDate');if(hdEl)hdEl.textContent=dayLabel();const dcEl=$('#dayCounter');if(dcEl)dcEl.textContent=fermDayShown>0||S.fermented?batchDayLabel():dayLabel();if(lastCash!==G.cash){cashAnimate(lastCash,G.cash);lastCash=G.cash}else $('#hudCash').textContent=won(G.cash);$('#hudStock').textContent=`몰트 ${fmt(t.malt)}kg · 홉 ${fmt(t.hops)}g · 효모 ${fmt(t.yeast)}팩 · 스타산 ${fmt(G.inventory.starsan)}통 · 비타민C ${fmt(G.inventory.vitc)}g`;$('#shopCash').textContent=won(G.cash);syncCareerUI();scheduleSeasonSync();if(window.hdSaveSys&&typeof window.hdSaveSys.save==='function')window.hdSaveSys.save()}
   function renderInventory(){ensureManagementState();const all=[...maltIds,...materialDB.hops.map(x=>x.id),'cluster',...yeastIds,...adjunctIds,...materialDB.process_aids.map(x=>x.id),'starsan'],order=[...new Set(all)].filter(id=>itemMeta[id]&&(G.inventory[id]||0)>0),load=storageLoad(),cap=storageCapacity();$('#inventoryGrid').innerHTML=`<div class="storage-summary" style="grid-column:1/-1"><strong>재료 보관 ${fmt(load)}/${cap}</strong> · ${C.facilities.fermenter?'추가 발효조 +50% 적용':'추가 발효조 구매 시 240까지 확장'}</div>`+order.map(id=>`<div class="stock-row"><span>${itemMeta[id][0]}</span><strong>${fmt(G.inventory[id])}${itemMeta[id][1]}</strong></div>`).join('')}
   function materialUnlocked(x){if(C.events&&C.events.adminRecipes)return true;const recipeLocks=x.recipes||[x.recipe].filter(Boolean);return !x.neipa&&!recipeLocks.length||(x.neipa&&unlocked())||recipeLocks.some(id=>recipes[id]&&recipeUnlocked(id,recipes[id]))}
   function recipeUnlockMaterials(id){return shopItems.filter(x=>x.recipe===id||(x.recipes||[]).includes(id)).map(x=>itemMeta[x.id][0])}
@@ -1984,9 +1985,9 @@ service cloud.firestore {
   function predictedStats(){const r=current(),z=recipeRatios(r),og=1+(r.og-1)*z.malt,atten=clamp((r.atten||((r.og-(r.fg||1.012))/(r.og-1)))*clamp(z.yeast,.55,1.15),.55,.88),fg=1+(og-1)*(1-atten),abv=(og-fg)*131.25;let iv;if(r.type==='neipa'){const rec=sum(r.wp.map(x=>x[1]))*batchScale(r);iv=r.ibu*(sum(S.wpHops)/Math.max(1,rec))}else iv=ibu();const colorWeights={'roasted-barley':7,'crystal-40':2.4,'crystal-60':3,'crystal-120':4.5,munich:1.5,wheat:.7,'flaked-oats':.65,'flaked-barley':.7,carapils:.8,'flaked-rice':.35,lactose:0,'candi-sugar-light':.1,'candi-sugar-dark':3,'sea-salt':0,coriander:0};let recColor=0,actColor=0;Object.entries(r.req).filter(([id])=>maltIds.includes(id)).forEach(([id,q])=>{const key=dbIngredientId(id),spec=resolvedIngredientStats(key,'malts'),w=colorWeights[key]||Math.max(.35,Math.min(7,(spec.lov||2)/2));recColor+=q*batchScale(r)*w;actColor+=(S.ingredients[key]||0)*w});const srm=clamp(r.srm*(recColor?actColor/recColor:z.malt),1,45);const deviation=Math.abs(1-z.malt)*42+Math.abs(1-z.yeast)*20+Math.abs(1-z.hops)*25;return{og,fg,abv,ibu:iv,srm,fit:Math.round(clamp(100-deviation,0,100)),ratios:z}}
   function missingIngredientIds(r,usage){const req=usage||actualUsage(r);return[...new Set(Object.entries(req).filter(([id,q])=>(G.inventory[dbIngredientId(id)]||0)+1e-9<q).map(([id])=>dbIngredientId(id)))]}
   function missingFor(r,usage){const req=usage||actualUsage(r);return Object.entries(req).filter(([id,q])=>(G.inventory[dbIngredientId(id)]||0)+1e-9<q).map(([id,q])=>{const key=dbIngredientId(id),m=itemMeta[key]||[resolvedIngredient(key).name,''];return `${m[0]} ${fmt(q-(G.inventory[key]||0))}${m[1]}`})}
-  function ingredientRow(id,value,rec,step,kind,index,phase){const m=itemMeta[id]||[id,kind==='malt'?'kg':kind==='yeast'?'팩':'g'],displayValue=kind==='malt'?roundMaltQty(value):kind==='hop'?value:roundQty(value),displayRec=kind==='malt'?roundMaltQty(rec):kind==='hop'?rec:roundQty(rec);return `<div class="ingredient-row"><div class="ingredient-name"><strong>${m[0]}${phase?`<span class="hop-phase">${phase}</span>`:''}</strong><small><span class="recommended-badge">권장 ${fmt(displayRec)}${m[1]}</span> · 보유 ${fmt(G.inventory[id]||0)}${m[1]}</small></div><div class="stepper"><button type="button" data-adjust="-1" aria-label="${m[0]} 줄이기">−</button><input type="number" value="${fmt(displayValue)}" min="0" step="${step}" data-kind="${kind}" data-id="${id}" data-index="${index==null?'':index}" inputmode="decimal" aria-label="${m[0]} 사용량"><button type="button" data-adjust="1" aria-label="${m[0]} 늘리기">＋</button></div><span class="stepper-unit">${m[1]}</span></div>`}
+  function ingredientRow(id,value,rec,step,kind,index,phase){const m=itemMeta[id]||[id,kind==='malt'?'kg':kind==='yeast'?'팩':'g'],displayValue=kind==='malt'?roundMaltQty(value):roundQty(value),displayRec=kind==='malt'?roundMaltQty(rec):roundQty(rec);return `<div class="ingredient-row"><div class="ingredient-name"><strong>${m[0]}${phase?`<span class="hop-phase">${phase}</span>`:''}</strong><small><span class="recommended-badge">권장 ${fmt(displayRec)}${m[1]}</span> · 보유 ${fmt(G.inventory[id]||0)}${m[1]}</small></div><div class="stepper"><button type="button" data-adjust="-1" aria-label="${m[0]} 줄이기">−</button><input type="number" value="${fmt(displayValue)}" min="0" step="${step}" data-kind="${kind}" data-id="${id}" data-index="${index==null?'':index}" inputmode="decimal" aria-label="${m[0]} 사용량"><button type="button" data-adjust="1" aria-label="${m[0]} 늘리기">＋</button></div><span class="stepper-unit">${m[1]}</span></div>`}
   function renderIngredientEditor(){if(!S.recipe)return;Object.keys(S.ingredients).forEach(id=>{if(maltIds.includes(id))S.ingredients[id]=roundMaltQty(S.ingredients[id])});['wpHops','dh1Hops','dh2Hops'].forEach(k=>S[k]=S[k].map(roundHopQty));S.dryAmount=roundHopQty(S.dryAmount);const r=current(),scale=batchScale(r),hopIds=new Set(Object.values(hopNameId));$('#maltEditor').innerHTML=Object.entries(r.req).filter(([id])=>maltIds.includes(id)).map(([id,rec])=>ingredientRow(id,S.ingredients[id]||0,roundQty(rec*scale),.1,'malt')).join('');$('#yeastEditor').innerHTML=Object.entries(r.req).filter(([id])=>yeastIds.includes(id)).map(([id,rec])=>ingredientRow(id,S.ingredients[id]||0,roundQty(rec*scale),.25,'yeast')).join('');const adjuncts=Object.entries(r.req).filter(([id])=>itemMeta[id]&&!maltIds.includes(id)&&!yeastIds.includes(id)&&!hopIds.has(id));$('#adjunctEditor').innerHTML=adjuncts.map(([id,rec])=>ingredientRow(id,S.ingredients[id]||0,roundQty(rec*scale),['sea-salt','coriander'].includes(id)?.005:.1,'other')).join('');$('#adjunctSection').hidden=!adjuncts.length;let idx=0;$('#hopScheduleEditor').innerHTML=hopSchedule(r).map(group=>group.items.map((item,i)=>{const id=hopNameId[item[0]],val=group.key==='dry'?S.dryAmount:group.values[i]||0,phase=group.labels?group.labels[i]:group.phase;return ingredientRow(id,val,item[1]*scale,5,'hop',idx++,phase).replace('data-kind="hop"',`data-kind="hop" data-group="${group.key}" data-slot="${group.slots?group.slots[i]:i}"`)}).join('')).join('');updateIngredientPreview();if(S.materialsCharged){$$('.ingredient-lab input,.ingredient-lab [data-adjust],#resetIngredients').forEach(x=>x.disabled=true);$('#ingredientConfirm').disabled=false;$('#ingredientConfirm').textContent='차감 완료 · 당화로 →'}else{$$('.ingredient-lab input,.ingredient-lab [data-adjust],#resetIngredients').forEach(x=>x.disabled=false);$('#ingredientConfirm').textContent='당화로 →'}}
-  function updateIngredientFromInput(input){let v=Math.max(0,+input.value||0),step=+(input.step||1);v=Math.round(v/step)*step;if(step<1)v=+v.toFixed(1);input.value=fmt(v);const kind=input.dataset.kind;if(kind==='malt'||kind==='yeast'||kind==='other')S.ingredients[input.dataset.id]=v;else{const group=input.dataset.group,i=+input.dataset.slot;if(group==='classic')S.hops[i]=v;else if(group==='dry')S.dryAmount=v;else if(group==='wp')S.wpHops[i]=v;else if(group==='dh1')S.dh1Hops[i]=v;else if(group==='dh2')S.dh2Hops[i]=v}updateIngredientPreview()}
+  function updateIngredientFromInput(input){let v=Math.max(0,+input.value||0),step=+(input.step||1);v=Math.round(v/step)*step;if(step<1){const dec=(String(step).split('.')[1]||'').length;v=+v.toFixed(Math.min(3,Math.max(2,dec)))}input.value=fmt(v);const kind=input.dataset.kind;if(kind==='malt'||kind==='yeast'||kind==='other')S.ingredients[input.dataset.id]=v;else{const group=input.dataset.group,i=+input.dataset.slot;if(group==='classic')S.hops[i]=v;else if(group==='dry')S.dryAmount=v;else if(group==='wp')S.wpHops[i]=v;else if(group==='dh1')S.dh1Hops[i]=v;else if(group==='dh2')S.dh2Hops[i]=v}updateIngredientPreview()}
   function updateIngredientPreview(){if(!S.recipe)return;const r=current(),p=predictedStats(),z=p.ratios;$('#predOG').textContent=p.og.toFixed(3);$('#predIBU').textContent=Math.round(p.ibu);$('#predABV').textContent=p.abv.toFixed(1)+'%';$('#predSRM').textContent=p.srm.toFixed(1);$('#styleFitPreview').innerHTML=`<strong>예상 스타일 적합도 ${p.fit}%</strong><br>${p.fit>=90?'권장 프로필에 가깝습니다.':p.fit>=65?'권장값에서 벗어나 새로운 균형이 만들어집니다.':'스타일에서 크게 벗어난 실험 배치입니다.'} · 몰트 ${Math.round(z.malt*100)}% / 홉 ${Math.round(z.hops*100)}% / 효모 ${Math.round(z.yeast*100)}%`;const notes=[];if(z.actMalt===0)notes.push('몰트가 0kg이면 발효할 당이 없어 맥주가 만들어지지 않아요.');else if(z.actMalt>10)notes.push('몰트가 10kg을 넘으면 20L 장비에서 당화 효율과 넘침을 확인하세요.');if(z.actHops>=500)notes.push('홉 500g 이상은 강한 홉 번과 흡수 손실이 예상됩니다.');if(z.actYeast===0)notes.push('효모 0팩으로는 발효가 시작되지 않아요.');else if(z.actYeast>5)notes.push('효모를 과도하게 넣으면 성장 단계가 짧아져 향미가 달라질 수 있어요.');const warn=$('#extremeWarning');warn.textContent=notes.length?'BREWER NOTE / '+notes.join(' '):'';warn.classList.toggle('show',notes.length>0);const missing=missingFor(r),short=$('#ingredientShortage');short.classList.toggle('show',missing.length>0);$('#ingredientShortageText').textContent=missing.length?'재료 부족 · '+missing.join(' · '):'';$('#ingredientConfirm').disabled=missing.length>0||z.actMalt===0||z.actYeast===0;syncAllAfterIngredient()}
   function syncAllAfterIngredient(){if(!S.recipe)return;const r=current();if(r.type==='classic'){['hop60','hop15','hop0'].forEach((id,i)=>{const el=$('#'+id);if(el)el.value=fmt(S.hops[i])});updateHops()}else{updateHopEditor('wp');updateHopEditor('dh1');updateHopEditor('dh2')}syncSide()}
   function resetIngredients(){if(!S.recipe)return;const r=current(),scale=batchScale(r);S.ingredients=Object.fromEntries(Object.entries(recommendedBase(r)).map(([id,q])=>[id,maltIds.includes(id)?roundMaltQty(q*scale):roundQty(q*scale)]));if(r.type==='classic'){S.hops=r.split.map(q=>Math.round(q*scale*10)/10);S.dryAmount=roundHopQty((r.dryRec||0)*scale)}else{S.wpHops=r.wp.map(x=>roundHopQty(x[1]*scale));S.dh1Hops=r.dh1.map(x=>roundHopQty(x[1]*scale));S.dh2Hops=r.dh2.map(x=>roundHopQty(x[1]*scale));S.vitc=roundQty(4*scale)}renderIngredientEditor()}
@@ -1998,7 +1999,7 @@ service cloud.firestore {
   function beginBatch(){if(!S.recipe)return;shortageShown=false;$('#batchNotice').textContent='';go(1);renderIngredientEditor()}
   function go(index){
     if(screenKey()==='2'&&!hopsValid())return;
-    S.step=clamp(index,0,route().length-1);const key=screenKey();stepSound();$$('.screen').forEach(x=>x.classList.toggle('active',String(x.dataset.step)===String(key)));progress();syncSide();updateStartBar();if(key==='adjust')renderIngredientEditor();drawAll();$('.shell').scrollTo({top:0,behavior:'smooth'});maybeMiniGame(key);maybeBrewEvent(key);if(key==='6'){settleBatch();syncSide();renderResult();animateGlass();const score=S.resultCalc?S.resultCalc.fit:+( $('#fitScore').textContent||0);resultSound(score);confetti(score);$('#stars').classList.remove('reveal');void $('#stars').offsetWidth;$('#stars').classList.add('reveal')}if(guideMode)renderTutorial();
+    S.step=clamp(index,0,route().length-1);const key=screenKey();stepSound();$$('.screen').forEach(x=>x.classList.toggle('active',String(x.dataset.step)===String(key)));progress();syncSide();updateStartBar();if(key==='adjust')renderIngredientEditor();if(key==='2')updateHops();drawAll();$('.shell').scrollTo({top:0,behavior:'smooth'});maybeMiniGame(key);maybeBrewEvent(key);if(key==='6'){settleBatch();syncSide();renderResult();animateGlass();const score=S.resultCalc?S.resultCalc.fit:+( $('#fitScore').textContent||0);resultSound(score);confetti(score);$('#stars').classList.remove('reveal');void $('#stars').offsetWidth;$('#stars').classList.add('reveal')}if(guideMode)renderTutorial();
   }
   function syncChoice(group,val){document.querySelectorAll(`[data-group="${group}"] .choice`).forEach(b=>b.classList.toggle('active',String(b.dataset.value)===String(val)))}
   function hopEditor(target,items,values,prefix){
@@ -2021,7 +2022,7 @@ service cloud.firestore {
       $('#nYeastName').textContent=r.yeast;$('#nFermTemp').value=S.nFermTemp;$('#nFermTempOut').textContent=S.nFermTemp+'°C';$('#nFermentCanvasLabel').textContent=S.nFermTemp+'°C · DAY 3 · KRAUSEN';$('#dh2Temp').value=S.dh2Temp;$('#dh2TempOut').textContent=S.dh2Temp+'°C';$('#dry2CanvasLabel').textContent=S.dh2Temp+'°C · COLD-SIDE HOPS';$('#wpTimeOut').textContent=S.wpTime+'분';$('#restTemp').value=S.restTemp;$('#restTempOut').textContent=S.restTemp+'°C';$('#headspace').value=S.headspace;$('#headspaceOut').textContent=S.headspace.toFixed(1)+'cm';
       syncChoice('wpTime',S.wpTime);syncChoice('restEnabled',S.restEnabled);syncChoice('restHours',S.restHours);syncChoice('dh2Time',S.dh2Time);syncChoice('crash',S.crash);syncChoice('vitc',S.vitc);hopEditor('#wpHops',r.wp,S.wpHops,'wp');hopEditor('#dh1Hops',r.dh1,S.dh1Hops,'dh1');hopEditor('#dh2Hops',r.dh2,S.dh2Hops,'dh2');updateRestRisk();updateOxidationRisk();
     }
-    ['sanFermenter','sanAirlock','sanHose','sanBottles'].forEach(k=>syncChoice(k,S[k]));updateSanitationRisk();syncSide();drawAll();syncHud();
+    ['sanFermenter','sanAirlock','sanHose','sanBottles'].forEach(k=>syncChoice(k,S[k]));updateSanitationAvailability();syncSide();drawAll();syncHud();
   }
   function ibu(){if(!S.recipe||isNeipa())return 0;const r=current(),weights=[.25,.12,.03],alphas=r.hopSlots?r.hopSlots.map(x=>x[1]):[r.alpha,r.alpha,r.alpha],scale=batchScale(r);const raw=sum(S.hops.map((g,i)=>g*weights[i]*(alphas[i]/100)*10)),base=sum(r.split.map((g,i)=>g*scale*weights[i]*(alphas[i]/100)*10));return base?raw*(r.ibu/base):0}
   function aroma(){if(!S.recipe||isNeipa())return 0;const r=current(),scale=batchScale(r),goal=r.aromaGoal||30,scaledTotal=Math.max(1,r.totalHop*scale),lateRatio=((S.hops[1]||0)*.45+(S.hops[2]||0))/scaledTotal,defLate=((r.split[1]||0)*.45+(r.split[2]||0))/Math.max(1,r.totalHop),base=goal*.55,hopPart=defLate>0?clamp(lateRatio/defLate,0,1.5)*goal*.45:goal*.3,dry=Math.min(28,(S.dryAmount/scale)*(S.dryTiming==='after'?.5:S.dryTiming==='during'?.38:0));return Math.round(clamp(base+hopPart+dry,0,100))}
@@ -2031,6 +2032,7 @@ service cloud.firestore {
   function updateAroma(){const a=aroma();$('#aromaOut').textContent=a+' / 100';$('#aromaFill').style.width=a+'%';if(S.recipe&&!isNeipa()){const r=current(),rec=(r.dryRec!=null?r.dryRec:S.recipe==='apa'?60:0)*batchScale(r),bad=rec?S.dryAmount<rec*.7||S.dryAmount>rec*1.3:S.dryAmount>0;$('#dryHopWarning').classList.toggle('show',bad);$('#dryHopTotal').textContent=fmt(S.dryAmount)}}
   function sanitationRisk(){const p={thorough:.005,rinse:.08,skip:.28};return 1-['sanFermenter','sanAirlock','sanHose','sanBottles'].reduce((x,k)=>x*(1-p[S[k]]),1)}
   function updateSanitationRisk(){const v=Math.round(sanitationRisk()*100);$('#infectionRiskOut').textContent=v+'%';$('#infectionRiskFill').style.width=v+'%'}
+  function updateSanitationAvailability(){const has=(G.inventory.starsan||0)>0;['sanFermenter','sanAirlock','sanHose','sanBottles'].forEach(k=>{if(!has&&S[k]==='thorough'){S[k]='rinse';syncChoice(k,'rinse')}document.querySelectorAll(`[data-group="${k}"] .choice`).forEach(b=>{if(b.dataset.value==='thorough'){b.disabled=!has;b.title=has?'':'스타산 재고가 없어 선택할 수 없습니다'}})});updateSanitationRisk()}
   function diacetylRisk(){if(S.restEnabled==='no')return .92;let p=.04;if(S.restTemp<21)p+=(21-S.restTemp)*.16;if(S.restHours===24)p+=.28;if(S.restHours===72)p-=.015;return clamp(p,.02,.9)}
   function updateRestRisk(){const v=Math.round(diacetylRisk()*100);$('#diacetylRiskOut').textContent=v+'%';$('#diacetylRiskFill').style.width=v+'%';$('#restControls').classList.toggle('disabled-block',S.restEnabled==='no')}
   function oxidationRisk(){const v={0:.34,2:.16,4:.04,6:.025}[S.vitc]||.34;return clamp(v+(S.headspace-.5)*.09,.02,.75)}
@@ -2085,7 +2087,8 @@ service cloud.firestore {
   function batchDayLabel(){return `배치 DAY ${Math.min(7,fermDayShown)}/7 · ${dayLabel()}`}
   function fermCanvasLabel(){return S.fermTemp+'°C · '+(S.fermented?'발효 완료':fermTimer?'발효 중':'효모 투입 대기')}
   function startFerment(){if(fermTimer)return;S.fermented=false;if(guideMode)renderTutorial();$('#fermentBtn').disabled=true;$('#fermentBtn').classList.remove('done');$('#fermNext').disabled=true;$('#fermNext').classList.remove('attention');$('#fermDoneBanner').hidden=true;$('#fermProgress').hidden=false;$('#fermProgressFill').style.width='0%';let d=0;fermDayShown=0;$('#dayCounter').textContent=batchDayLabel();$('#fermentCanvasLabel').textContent=fermCanvasLabel();$('#fermStatus').textContent='효모가 깨어났습니다… · 발효 0/7일차';drawAll(true);fermTimer=setInterval(()=>{d++;fermDayShown=d;$('#dayCounter').textContent=batchDayLabel();$('#fermentCanvasLabel').textContent=fermCanvasLabel();$('#fermProgressFill').style.width=Math.min(100,d/7*100)+'%';const remain=Math.max(0,(7-d)*.36).toFixed(1);$('#fermStatus').textContent=(d<3?'격렬한 발효 · 에어록이 빠르게 움직입니다':d<6?'본 발효 · 당도가 내려가는 중':'마무리 발효 · 효모가 가라앉는 중')+` · 발효 ${d}/7일차`+(d<7?` · 완료까지 약 ${remain}초`:'');drawAll(true);if(d>=7){clearInterval(fermTimer);fermTimer=null;S.fermented=true;$('#fermStatus').textContent='발효 완료 · 최종 비중이 안정되었습니다.';$('#fermDoneBanner').hidden=false;$('#fermentCanvasLabel').textContent=fermCanvasLabel();$('#fermentBtn').textContent='✓ 발효 완료';$('#fermentBtn').classList.add('done');$('.ferment-box').classList.remove('running');$('#fermNext').disabled=false;$('#fermNext').classList.add('attention');tone(784,.16,'triangle',.05);drawAll(false);if(guideMode)renderTutorial()}},360)}
-  function reset(){if(fermTimer){clearInterval(fermTimer);fermTimer=null}fermDayShown=0;Object.assign(S,{step:0,recipe:null,ingredients:{},materialsCharged:false,actualIngredientCost:0,styleAverageIngredientCost:0,mashTemp:66,mashTime:60,boilTime:60,hops:[48,24,12],fermTemp:19,fermented:false,dryTiming:'none',dryAmount:0,aging:1,carb:'bottle',wpTime:20,wpHops:[],nFermTemp:18,dh1Hops:[],restEnabled:'yes',restTemp:21.5,restHours:48,dh2Temp:14,dh2Time:72,dh2Hops:[],crash:48,vitc:4,headspace:1,sanFermenter:'thorough',sanAirlock:'thorough',sanHose:'thorough',sanBottles:'thorough',batchSettled:false,resultCalc:null,careerBonus:0,facilityBonus:0,flavorHint:null,rewardMultiplier:1,eventModifier:0,eventCount:0,eventStages:{},eventNotes:[],eventFaults:[],miniGames:{},miniGameBonus:0,agingPenalty:0,rolls:{},collabNpc:null});expandedRecipe=null;shortageShown=false;$('.shell').classList.remove('is-neipa');recipeCards();$('#startBtn').disabled=true;$('#batchNotice').textContent='';$('#dayCounter').textContent=dayLabel();$('#fermDoneBanner').hidden=true;$('#fermProgress').hidden=true;$('#fermNext').classList.remove('attention');$('#fermentBtn').classList.remove('done');$('#fermStatus').textContent='설정이 끝나면 발효를 시작하세요.';$('#fermentBtn').textContent='발효 시작';$('#fermentBtn').disabled=false;$('#fermNext').disabled=true;syncHud();updateStartBar();go(0)}
+  function resetBatchRuntime(){if(fermTimer){clearInterval(fermTimer);fermTimer=null}fermDayShown=0;Object.assign(S,{fermented:false,batchSettled:false,resultCalc:null,careerBonus:0,facilityBonus:0,flavorHint:null,rewardMultiplier:1,eventModifier:0,eventCount:0,eventStages:{},eventNotes:[],eventFaults:[],miniGames:{},miniGameBonus:0,agingPenalty:0,rolls:{}});$('#fermDoneBanner').hidden=true;$('#fermProgress').hidden=true;$('#fermProgressFill').style.width='0%';$('#fermNext').classList.remove('attention');$('#fermNext').disabled=true;$('#fermentBtn').classList.remove('done');$('#fermentBtn').textContent='발효 시작';$('#fermentBtn').disabled=false;$('#fermStatus').textContent='설정이 끝나면 발효를 시작하세요.';$('#dayCounter').textContent=dayLabel()}
+  function reset(){resetBatchRuntime();Object.assign(S,{step:0,recipe:null,ingredients:{},materialsCharged:false,actualIngredientCost:0,styleAverageIngredientCost:0,mashTemp:66,mashTime:60,boilTime:60,hops:[48,24,12],fermTemp:19,fermented:false,dryTiming:'none',dryAmount:0,aging:1,carb:'bottle',wpTime:20,wpHops:[],nFermTemp:18,dh1Hops:[],restEnabled:'yes',restTemp:21.5,restHours:48,dh2Temp:14,dh2Time:72,dh2Hops:[],crash:48,vitc:4,headspace:1,sanFermenter:'thorough',sanAirlock:'thorough',sanHose:'thorough',sanBottles:'thorough',batchSettled:false,resultCalc:null,careerBonus:0,facilityBonus:0,flavorHint:null,rewardMultiplier:1,eventModifier:0,eventCount:0,eventStages:{},eventNotes:[],eventFaults:[],miniGames:{},miniGameBonus:0,agingPenalty:0,rolls:{},collabNpc:null});expandedRecipe=null;shortageShown=false;$('.shell').classList.remove('is-neipa');recipeCards();$('#startBtn').disabled=true;$('#batchNotice').textContent='';syncHud();updateStartBar();go(0)}
   function px(ctx,x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
   function drawScene(canvas,step,active){const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;const W=canvas.width,H=canvas.height;c.clearRect(0,0,W,H);px(c,0,0,W,H,'#14231d');px(c,0,220,W,80,'#243a2e');for(let x=0;x<W;x+=40)px(c,x,220,2,80,'#385343');for(let x=0;x<W;x+=80)px(c,x,255,80,3,'#18271f');px(c,30,30,130,120,'#20382c');px(c,42,42,106,96,'#d4c47f');px(c,50,50,90,80,'#6c9b73');px(c,58,58,74,64,'#a8c18d');
     if(step==='1'){pot(c,245,95,'#d38a2a');px(c,275,62,90,9,'#8eaa94');px(c,285,46,11,18,'#8eaa94');px(c,325,35,11,28,'#8eaa94');px(c,362,45,11,18,'#8eaa94');for(let i=0;i<6;i++)px(c,260+i*34,232+(i%2)*10,18,24,'#e35c34')}
@@ -2190,71 +2193,167 @@ service cloud.firestore {
 
   if(location.hostname==='artifact-capture.invalid')window.addEventListener('keydown',e=>{if(e.key==='F7'){document.querySelector('.gueuze-blender')?.scrollIntoView()}else if(e.key==='F8'){window.__hdAudit.seedV37();openMyBrewery()}else if(e.key==='F9'){window.__hdAudit.seedV37();tourTab='brewery';expandedPlace='hongdae';openTour();document.querySelector('[data-venue-toggle="hongdae"]')?.scrollIntoView()}else if(e.key==='F10'){window.__hdAudit.seedV37();openCareer()}});
   // ⚠️ DO NOT DELETE — ensureMonthlySeason(): 월간 랭킹 시즌 초기화. 빠지면 시즌 점수 동기화·명예의 전당이 동작하지 않음 (v37 시즌제). 부트 앵커 순서 유지.
-  /* ===== Hop & Dream save system (GitHub Pages / self-hosted) ===== */
-  /* ⚠️ DO NOT DELETE — 이 블록은 독립 IIFE(window.hdSaveSys) 모듈 경계.
-     - IIFE를 풀거나 window.hdSaveSys 노출을 지우면 firebase/gift 호출부 4곳이
-       깨지고, 전역 이름 충돌(hdCollect 사건, v40)이 재발할 수 있음.
-     - 외부에서 사용: window.hdSaveSys.{KEY,save,load,collect}, window.__hdResetting
-     - 그 외 모든 식별자는 IIFE 내부에 격리 → 아티팩트와 이름 충돌 불가
-       (2026-10-12 hdCollect 충돌 교훈: 인젝션의 hdCollect가 아티팩트의
-        hdCollect(list,item,limit) 배열 유틸을 덮어써 히스토리 오염 발생.
-        → 인젝션 측은 hdCollectSave로 이름 변경 + IIFE 격리로 재발 방지)
-     - 게임 전역(G,C,recipes,customRecipeIds 등)은 런타임에 참조하므로
-       부트 앵커 앞 삽입 위치를 유지할 것. */
-  window.hdSaveSys=(function(){
-    'use strict';
-    const HD_SAVE_KEY='hopDreamSaveV1';
-    /* 초기화(기록 초기화) 중에는 자동저장이 동작하지 않도록 하는 전역 플래그.
-       기록 초기화 버튼 클릭 시 true로 세우고 location.reload() — reload 과정에서
-       pagehide/visibilitychange 핸들러가 메모리 내 G/C를 다시 저장해 초기화를
-       무효화하던 버그(v25) 방지. */
-    window.__hdResetting=false;
-    let hdStorageOK=true;
-    try{localStorage.setItem('__hd_t','1');localStorage.removeItem('__hd_t');}catch(e){hdStorageOK=false;}
-    function hdCollectSave(){
-      const cC=JSON.parse(JSON.stringify(C));
-      try{Object.values(cC.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){console.warn('[hd] npc history trim failed',e);}
-      const customs={};
-      customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=recipes[id];});
-      return {v:1,savedAt:Date.now(),G:JSON.parse(JSON.stringify(G)),C:cC,customs,customRecipeIds:customRecipeIds.slice(),customSequence};
-    }
-    function hdSave(){if(window.__hdResetting||!hdStorageOK)return;try{localStorage.setItem(HD_SAVE_KEY,JSON.stringify(hdCollectSave()));}catch(e){console.warn('[hd] local save failed',e);}}
-    function hdLoad(){
-      if(!hdStorageOK)return false;
-      let d=null;
-      try{d=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){return false;}
-      if(!d||d.v!==1||!d.G||!d.C)return false;
-      try{
-        Object.keys(G).forEach(k=>delete G[k]);Object.assign(G,d.G);
-        Object.keys(C).forEach(k=>delete C[k]);Object.assign(C,d.C);
-        customRecipeIds.length=0;
-        Object.keys(d.customs||{}).forEach(id=>{recipes[id]=d.customs[id];});
-        (d.customRecipeIds||[]).forEach(id=>{if(recipes[id]&&customRecipeIds.indexOf(id)<0)customRecipeIds.push(id);});
-        customSequence=d.customSequence||(customRecipeIds.length+1);
-        return true;
-      }catch(e){return false;}
-    }
-    const hdRestored=hdLoad();
-    setInterval(hdSave,15000);
-    window.addEventListener('pagehide',hdSave);
-    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')hdSave();});
-    /* reset-save button: 네이티브 설정 행의 #wipeSaveBtn에 연결 (없으면 HUD에 폴백 생성) */
-    (function(){
-      let b=document.getElementById('wipeSaveBtn');
-      if(!b){
-        const sb=document.getElementById('soundBtn');if(!sb)return;
-        b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
-        sb.after(b);
+/* ===== Hop & Dream save system (GitHub Pages / self-hosted) ===== */
+/* ⚠️ DO NOT DELETE — 이 블록은 독립 IIFE(window.hdSaveSys) 모듈 경계.
+   - IIFE를 풀거나 window.hdSaveSys 노출을 지우면 firebase/gift 호출부 4곳이
+     깨지고, 전역 이름 충돌(hdCollect 사건, v40)이 재발할 수 있음.
+   - 외부에서 사용: window.hdSaveSys.{KEY,save,load,collect,saveNow}, window.__hdResetting
+   - 그 외 모든 식별자는 IIFE 내부에 격리 → 아티팩트와 이름 충돌 불가
+     (2026-10-12 hdCollect 충돌 교훈: 인젝션의 hdCollect가 아티팩트의
+      hdCollect(list,item,limit) 배열 유틸을 덮어써 히스토리 오염 발생.
+      → 인젝션 측은 hdCollectSave로 이름 변경 + IIFE 격리로 재발 방지)
+   - 게임 전역(G,C,recipes,customRecipeIds 등)은 런타임에 참조하므로
+     부트 앵커 앞 삽입 위치를 유지할 것.
+   - v52 강화 (3차 플레이테스트 "새로고침 시 1시간 진행 소실" 대응):
+     ① 순환 참조 안전 직렬화 — C/G에 순환 참조가 생겨도 JSON.stringify가
+        던지지 않고 순환 필드만 버리고 저장 계속 (기존: throw → catch가
+        저장 전체를 삼켜 15초 자동저장이 전부 무력화되는 구조적 취약성).
+     ② 섹션별 폴백 — G/C/customs를 각각 try/catch로 수집, 한 섹션이
+        깨져도 나머지 섹션은 저장.
+     ③ 저장 상태 표시 + 수동 저장 버튼 — HUD에 "자동저장됨 HH:MM" 표시,
+        실패 시 "⚠️ 저장 실패"로 눈에 보이게 함 (무표시 소실 방지).
+     ④ 저장 스로틀 (2초) — syncHud 같은 빈번한 호출 지점에서 save()를
+        불러도 2초에 1회로 합쳐짐. 수동 저장은 스로틀 우회. */
+window.hdSaveSys=(function(){
+  'use strict';
+  const HD_SAVE_KEY='hopDreamSaveV1';
+  /* 초기화(기록 초기화) 중에는 자동저장이 동작하지 않도록 하는 전역 플래그.
+     기록 초기화 버튼 클릭 시 true로 세우고 location.reload() — reload 과정에서
+     pagehide/visibilitychange 핸들러가 메모리 내 G/C를 다시 저장해 초기화를
+     무효화하던 버그(v25) 방지. */
+  window.__hdResetting=false;
+  let hdStorageOK=true;
+  try{localStorage.setItem('__hd_t','1');localStorage.removeItem('__hd_t');}catch(e){hdStorageOK=false;}
+  /* 순환 참조 안전 직렬화: 순환 필드는 버리고 나머지는 저장. DOM 노드·함수는
+     JSON.stringify가 이미 버리므로 별도 처리 없음. */
+  function hdSafeStringify(value){
+    const seen=new WeakSet();
+    return JSON.stringify(value,function(k,v){
+      if(v!==null&&typeof v==='object'){
+        if(seen.has(v))return undefined;
+        seen.add(v);
       }
-      b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){window.__hdResetting=true;try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){console.warn('[hd] local wipe failed',e);}location.reload();}});
-    })();
-    if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
-    /* 외부 인터페이스: 이 4개만 밖에서 씀 */
-    return {KEY:HD_SAVE_KEY,save:hdSave,load:hdLoad,collect:hdCollectSave};
+      return v;
+    });
+  }
+  function hdDeepClone(value){
+    try{return JSON.parse(hdSafeStringify(value));}catch(e){return undefined;}
+  }
+  function hdCollectSave(){
+    let gClone,cClone;
+    try{gClone=hdDeepClone(G);}catch(e){console.warn('[hd] G clone failed',e);gClone={};}
+    try{
+      cClone=hdDeepClone(C)||{};
+      try{Object.values(cClone.npcs||{}).forEach(n=>{if(Array.isArray(n.history)&&n.history.length>20)n.history=n.history.slice(-20);});}catch(e){console.warn('[hd] npc history trim failed',e);}
+    }catch(e){console.warn('[hd] C clone failed',e);cClone={};}
+    const customs={};
+    try{customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=hdDeepClone(recipes[id]);});}catch(e){console.warn('[hd] customs clone failed',e);}
+    return {v:1,savedAt:Date.now(),G:gClone,C:cClone,customs,customRecipeIds:(customRecipeIds||[]).slice(),customSequence};
+  }
+  /* 저장 상태 표시 (HUD) — 저장 성공/실패를 눈에 보이게 함 */
+  let hdStatusEl=null,hdLastSaveAt=0,hdLastSaveOK=true;
+  function hdSaveStatus(ok){
+    try{
+      if(!hdStatusEl){
+        hdStatusEl=document.getElementById('hdSaveStatus');
+        if(!hdStatusEl){
+          const anchor=document.getElementById('hudDate')||document.getElementById('dayCounter');
+          if(!anchor)return;
+          hdStatusEl=document.createElement('span');
+          hdStatusEl.id='hdSaveStatus';
+          hdStatusEl.style.cssText='font-size:.62rem;opacity:.75;margin-left:6px;white-space:nowrap;';
+          anchor.after(hdStatusEl);
+        }
+      }
+      if(ok){
+        const d=new Date(hdLastSaveAt);
+        hdStatusEl.textContent='· 자동저장됨 '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+        hdStatusEl.style.color='';
+        hdStatusEl.title='진행 상황이 자동 저장되었습니다. 클릭하면 지금 저장합니다.';
+      }else{
+        hdStatusEl.textContent='· ⚠️ 저장 실패';
+        hdStatusEl.style.color='#ff6b6b';
+        hdStatusEl.title='자동 저장에 실패했습니다. 수동 저장 버튼을 눌러보세요.';
+      }
+      if(!hdStatusEl.dataset.bound){
+        hdStatusEl.dataset.bound='1';
+        hdStatusEl.style.cursor='pointer';
+        hdStatusEl.addEventListener('click',function(){hdSave(true);});
+      }
+    }catch(e){/* 상태 표시 실패는 저장 자체를 막지 않음 */}
+  }
+  function hdSave(force){
+    if(window.__hdResetting||!hdStorageOK)return false;
+    const now=Date.now();
+    if(!force&&now-hdLastSaveAt<2000)return true; /* 2초 스로틀 */
+    try{
+      const payload=hdCollectSave();
+      const text=hdSafeStringify(payload);
+      if(!text)throw new Error('empty payload');
+      localStorage.setItem(HD_SAVE_KEY,text);
+      /* 쓰기 검증: 다시 읽어 파싱되는지 확인 */
+      const check=JSON.parse(localStorage.getItem(HD_SAVE_KEY));
+      if(!check||check.v!==1)throw new Error('verify failed');
+      hdLastSaveAt=now;hdLastSaveOK=true;
+      hdSaveStatus(true);
+      return true;
+    }catch(e){
+      hdLastSaveOK=false;
+      console.warn('[hd] local save failed',e);
+      hdSaveStatus(false);
+      return false;
+    }
+  }
+  function hdLoad(){
+    if(!hdStorageOK)return false;
+    let d=null;
+    try{d=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){return false;}
+    if(!d||d.v!==1||!d.G||!d.C)return false;
+    try{
+      Object.keys(G).forEach(k=>delete G[k]);Object.assign(G,d.G);
+      Object.keys(C).forEach(k=>delete C[k]);Object.assign(C,d.C);
+      customRecipeIds.length=0;
+      Object.keys(d.customs||{}).forEach(id=>{recipes[id]=d.customs[id];});
+      (d.customRecipeIds||[]).forEach(id=>{if(recipes[id]&&customRecipeIds.indexOf(id)<0)customRecipeIds.push(id);});
+      customSequence=d.customSequence||(customRecipeIds.length+1);
+      return true;
+    }catch(e){return false;}
+  }
+  const hdRestored=hdLoad();
+  setInterval(hdSave,15000);
+  window.addEventListener('pagehide',function(){hdSave(true);});
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')hdSave(true);});
+  /* 수동 저장 버튼: HUD에 "💾 저장" 버튼 추가 (클릭 시 즉시 저장) */
+  (function(){
+    try{
+      if(document.getElementById('hdManualSaveBtn'))return;
+      const anchor=document.getElementById('hudDate')||document.getElementById('dayCounter');
+      if(!anchor)return;
+      const b=document.createElement('button');
+      b.id='hdManualSaveBtn';b.type='button';b.textContent='💾 저장';
+      b.title='지금 진행 상황을 저장합니다';
+      b.style.cssText='font-size:.62rem;padding:2px 6px;margin-left:6px;border-radius:6px;cursor:pointer;';
+      b.addEventListener('click',function(){const ok=hdSave(true);b.textContent=ok?'✓ 저장됨':'⚠️ 저장 실패';setTimeout(function(){b.textContent='💾 저장';},2000);});
+      anchor.after(b);
+    }catch(e){/* 버튼 생성 실패는 저장 자체를 막지 않음 */}
   })();
-  /* ===== end save system ===== */
+  /* reset-save button: 네이티브 설정 행의 #wipeSaveBtn에 연결 (없으면 HUD에 폴백 생성) */
+  (function(){
+    let b=document.getElementById('wipeSaveBtn');
+    if(!b){
+      const sb=document.getElementById('soundBtn');if(!sb)return;
+      b=document.createElement('button');b.className='hud-btn';b.id='wipeSaveBtn';b.textContent='기록 초기화';b.title='저장된 기록을 지우고 처음부터 시작';
+      sb.after(b);
+    }
+    b.addEventListener('click',()=>{if(confirm('저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작할까요?')){window.__hdResetting=true;try{localStorage.removeItem(HD_SAVE_KEY);}catch(e){console.warn('[hd] local wipe failed',e);}location.reload();}});
+  })();
+  if(hdRestored){const bn=document.getElementById('batchNotice');if(bn)bn.textContent='저장된 기록을 불러왔습니다. 이어서 플레이하세요.';}
+  /* 외부 인터페이스 */
+  return {KEY:HD_SAVE_KEY,save:hdSave,saveNow:function(){return hdSave(true);},load:hdLoad,collect:hdCollectSave};
+})();
+/* ===== end save system ===== */
 
-    /* ===== Hop & Dream Firebase cloud sync (Google 로그인 · 선택사항) ===== */
+/* ===== Hop & Dream Firebase cloud sync (Google 로그인 · 선택사항) ===== */
     /* localStorage 저장 시스템은 그대로 두고, 그 위에 얹는 동기화 레이어 */
     (function(){
       'use strict';
@@ -2421,7 +2520,7 @@ service cloud.firestore {
         isReady: function(){ return fbReady; }
       };
     })();
-/* ===== Hop & Dream gift + nickname system ===== */
+    /* ===== Hop & Dream gift + nickname system ===== */
     (function(){
       'use strict';
       window.hdGiftNickname = '';
@@ -2957,7 +3056,7 @@ service cloud.firestore {
   $('#fermentBtn').addEventListener('click',startFerment);$('#recipeListBtn').addEventListener('click',()=>go(0));$('#restartBtn').addEventListener('click',reset);
 })();
 </script>
-<script>
+  <script>
     /* PWA: 서비스워커 등록 (오프라인 플레이). 수동 주입 — 소스 파일 deploy/pwa-injection.js 참조 */
     if('serviceWorker' in navigator){
       window.addEventListener('load',function(){
