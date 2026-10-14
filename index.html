@@ -3450,7 +3450,7 @@ function handleEmptyCta(action){if(action==='board-write'){switchCommunityTab('b
     var btn=document.getElementById('updateReloadBtn');
     if(btn)btn.addEventListener('click',function(){
       btn.disabled=true;btn.textContent='업데이트 중…';
-      var go=function(){location.reload()};
+      /* V76-FIX-UPDATE-BANNER: HTTP 캐시를 우회해 새 index.html로 이동한다. */var go=function(){location.href=location.pathname+'?_hdv='+Date.now()};
       var jobs=[];
       if('serviceWorker' in navigator){jobs.push(navigator.serviceWorker.getRegistrations().then(function(regs){return Promise.all(regs.map(function(r){return r.unregister().catch(function(){})}))}).catch(function(){}))}
       if(window.caches&&caches.keys){jobs.push(caches.keys().then(function(keys){return Promise.all(keys.map(function(k){return caches.delete(k).catch(function(){return false})}))}).catch(function(){}))}
