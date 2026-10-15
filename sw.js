@@ -4,7 +4,7 @@
  * 안 바뀌는 문제 (3차 플레이테스트에서 v2.1.0이 계속 뜸). 네비게이션만
  * 네트워크 우선으로 바꾸고, 이미지·에셋은 cache-first 유지 (오프라인 보존).
  * 네트워크 실패 시 캐시 폴백 유지. */
-const CACHE = 'hop-dream-v91';
+const CACHE = 'hop-dream-v93';
 const ASSETS = [
   './',
   './index.html',
