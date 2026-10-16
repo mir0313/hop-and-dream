@@ -631,7 +631,8 @@
     .hd-resume-dialog{background:var(--panel);border:3px solid var(--line);box-shadow:6px 6px 0 var(--shadow);padding:20px;max-width:420px;width:100%;text-align:center}
     .hd-resume-dialog h2{margin:0 0 10px;font-size:1.05rem}
     .hd-resume-dialog p{margin:0 0 16px;color:var(--ink);font-weight:600;line-height:1.6}
-    #hdManualSaveBtn{min-height:44px;min-width:76px;padding:9px 12px;line-height:1.2;white-space:nowrap;overflow:visible}
+    /* V100-FIX-SAVE-TARGET: 배포 저장 인젝션의 작은 인라인 글자/패딩보다 우선해 44px 터치 영역을 보장 */
+    #hdManualSaveBtn{display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box;height:44px!important;min-height:44px!important;min-width:76px;padding:9px 12px!important;font-size:.72rem!important;line-height:1.2!important;white-space:nowrap;overflow:visible}
     .hd-resume-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 </style>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
