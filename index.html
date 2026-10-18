@@ -7,6 +7,9 @@
   <link rel="icon" href="data:," />
   <title>홉 앤 드림 — 양조 시뮬레이션</title>
   <style>
+    /* V110-FONT-FIX: Galmuri11은 Google Fonts에 없어 css2 link가 400 → assets/fonts의 woff2(OFL-1.1)를 직접 번들. 깨진 link는 아래 head에서 제거됨 */
+    @font-face{font-family:"Galmuri11";src:url("assets/fonts/Galmuri11.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:"Galmuri11";src:url("assets/fonts/Galmuri11-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
     /* V110-P0-4: 폰트 @import → <link> 전환 (head 참조) — @import는 CSS 파싱을 블로킹하므로 제거 */
     :root{
       --bg:#f3edcf;--panel:#fff9df;--panel2:#e7ddb9;--ink:#1c2c25;--muted:#526057;
@@ -666,9 +669,7 @@ html.hd-title-open,html.hd-title-open body{overflow:hidden!important}
 </style>
   <!-- V110-P0-4: 성능 — Firebase compat SDK 3종은 defer로 파서 블로킹 해제, storage SDK는 초기 로드 제외(아래 firebase IIFE의 ensureStorageScript가 첫 호출 시 지연 로드) -->
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Galmuri11&display=swap" rel="stylesheet">
+  <!-- V110-FONT-FIX: Galmuri11은 Google Fonts에 없어 css2 link가 HTTP 400 → <link>와 fonts용 preconnect 제거, assets/fonts의 woff2(@font-face)로 번들 -->
   <script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
