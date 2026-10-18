@@ -7,7 +7,7 @@
   <link rel="icon" href="data:," />
   <title>홉 앤 드림 — 양조 시뮬레이션</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Galmuri11&display=swap');
+    /* V110-P0-4: 폰트 @import → <link> 전환 (head 참조) — @import는 CSS 파싱을 블로킹하므로 제거 */
     :root{
       --bg:#f3edcf;--panel:#fff9df;--panel2:#e7ddb9;--ink:#1c2c25;--muted:#526057;
       --line:#1c2c25;--green:#236b48;--green2:#3e9363;--amber:#d98922;--gold:#f2bd3d;
@@ -664,10 +664,14 @@ html.hd-title-open,html.hd-title-open body{overflow:hidden!important}
     /* Track3-pxicon: pixel icon sprite sizing */
     .pxicon{width:1.2em;height:1.2em;vertical-align:-0.2em;image-rendering:pixelated}
 </style>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
+  <!-- V110-P0-4: 성능 — Firebase compat SDK 3종은 defer로 파서 블로킹 해제, storage SDK는 초기 로드 제외(아래 firebase IIFE의 ensureStorageScript가 첫 호출 시 지연 로드) -->
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Galmuri11&display=swap" rel="stylesheet">
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#101a16">
   <link rel="apple-touch-icon" href="./icon-192.png">
@@ -863,7 +867,7 @@ html.hd-title-open,html.hd-title-open body{overflow:hidden!important}
       <div class="panel">
         <div class="control-block"><div class="control-head"><label>숙성 기간</label></div><div class="choices" data-group="aging"><button class="choice active" data-value="1">1주</button><button class="choice" data-value="2">2주</button><button class="choice" data-value="4">4주</button></div></div>
         <div class="control-block"><div class="control-head"><label>탄산 방식 <span class="term" tabindex="0" data-tip="병입은 소량의 당으로 병 안에서 재발효하고, 케그는 CO₂ 압력을 이용해 더 빠르고 정밀하게 탄산을 녹입니다.">?</span></label></div><div class="choices" data-group="carb"><button class="choice active" data-value="bottle">병입 탄산</button><button class="choice" data-value="keg">케그 강제 탄산</button></div></div>
-        <div class="note"><strong>BREWER NOTE /</strong> 에일은 보통 2주면 맛이 안정되기 시작합니다. 라거는 낮은 온도에서 더 길게 숙성할수록 황 화합물과 거친 향이 정돈돼요.</div>
+        <div class="note"><strong>BREWER NOTE /</strong> 에일은 보통 2주면 맛이 안정되기 시작합니다. 라거는 낮은 온도에서 더 길게 숙성할수록 황 화합물과 거친 향이 정돈돼요.<span id="agingWildHint"></span></div>
       </div>
     </div><aside class="side-card"></aside></div>
     <div class="nav"><button class="nav-btn back">← 이전</button><button class="nav-btn next" id="finishBtn">시음하기 →</button></div>
@@ -997,7 +1001,7 @@ html.hd-title-open,html.hd-title-open body{overflow:hidden!important}
 <div class="overlay achievement-popup-overlay" id="achievementPopup" hidden><section class="dialog achievement-popup" role="dialog" aria-modal="true" aria-labelledby="achievementPopupTitle"><div class="achievement-popup-icon" aria-hidden="true"><img src="assets/icons/icon-27.webp" class="pxicon" alt=""></div><small>ACHIEVEMENT UNLOCKED</small><h2 id="achievementPopupTitle"><img src="assets/icons/icon-27.webp" class="pxicon" alt=""> 업적 달성!</h2><div class="achievement-popup-name" id="achievementPopupName"></div><p class="achievement-popup-desc" id="achievementPopupDesc"></p><div class="achievement-popup-reward" id="achievementPopupReward"></div><button class="accept-btn" id="closeAchievementPopup">확인</button></section></div>
 <div class="overlay" id="seasonPopup" hidden><section class="dialog story-dialog season-popup" role="dialog" aria-modal="true" aria-labelledby="seasonPopupTitle"><span class="season-symbol" id="seasonPopupSymbol" aria-hidden="true"><img src="assets/icons/icon-22.webp" class="pxicon" alt=""></span><small class="story-kicker">SEASONAL BREWING EVENT</small><h2 id="seasonPopupTitle">가을이 왔어요!</h2><p id="seasonPopupCopy">가을 한정 레시피와 재료가 열렸습니다.</p><div class="story-actions"><button class="accept-btn" id="closeSeasonPopup">한정 레시피 보기</button><button class="decline-btn" id="dismissSeasonPopup">나중에</button></div></section></div>
 <div class="overlay" id="giftClaimOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="giftClaimTitle"><div class="dialog-head"><div><small>GIFT BOX</small><h2 id="giftClaimTitle"><img src="assets/icons/icon-25.webp" class="pxicon" alt=""> 선물함</h2></div><button class="close-btn" data-close="giftClaimOverlay" aria-label="선물함 닫기">닫기</button></div><div id="giftClaimList" class="settings-panel"></div><div class="admin-actions" style="margin-top:12px"><button class="admin-action" type="button" id="giftClaimBtn">수령하기</button></div></section></div>
-<div class="overlay" id="settingsOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><small class="story-kicker">GAME OPTIONS</small><!-- V88-FIX-L5: 설정 키커를 story-kicker 톤으로 통일 --><h2 id="settingsTitle">설정</h2></div><button class="close-btn" data-close="settingsOverlay" aria-label="설정 닫기">닫기</button></div><div class="settings-panel"><div class="settings-row"><div><strong>배경음악</strong><small>메인·양조·상점에서 서로 다른 루프가 재생됩니다.</small></div><button type="button" class="sound-switch" id="bgmToggle" aria-pressed="true" aria-label="배경음악 켜짐">켜짐</button></div><div class="settings-row"><div><strong>효과음</strong><small>버튼, 보상, 양조 결과, 업적 효과음입니다.</small></div><button type="button" class="sound-switch" id="sfxToggle" aria-pressed="true" aria-label="효과음 켜짐">켜짐</button></div><!-- V82-FIX-A11Y D-8: 토글 accessible name에 설정 대상 포함 --><div class="settings-row"><div><strong>타이밍 미니게임 속도</strong><small>드라이홉 투입·병입 헤드스페이스 미니게임의 바늘/충전 속도입니다. 기본 보통.</small></div><!-- V82-FIX-DIFFICULTY: 타이밍 미니게임 난이도(속도) 옵션 — 느리게/보통/빠르게 --><button type="button" class="sound-switch" id="miniSpeedBtn" aria-label="타이밍 미니게임 속도: 보통 (누르면 느리게·보통·빠르게 순환)">보통</button></div><span id="settingsSoundState" class="sr-only">모든 소리 켜짐</span><div class="settings-row"><div><strong>가이드 동반 양조</strong><small>민지와 함께 레시피 선택부터 시음까지 한 배치를 직접 양조합니다. 완료 보상은 한 번만 지급됩니다.</small></div><button type="button" class="settings-action" id="restartTutorialBtn">튜토리얼 다시 보기</button></div><div class="settings-row"><div><strong>버전 정보</strong><small>홉 앤 드림 양조 시뮬레이션</small></div><!-- /* V64-VERSION */ 설정 버전 표시를 v64로 변경. 하단 버전 확인 스크립트가 이 버튼 텍스트를 현재 버전으로 읽으므로 assets/version.json도 함께 v64로 맞춘다 --><!-- /* V65-VERSION */ 설정 버전 표시를 v65로 변경 --><!-- /* V66-VERSION */ 설정 버전 표시를 v66로 변경 --><!-- /* V67-VERSION */ 설정 버전 표시를 v67로 변경 --><!-- /* V68-VERSION */ 설정 버전 표시를 v68로 변경 --><!-- /* V69-VERSION */ 설정 버전 표시를 v69로 변경 --><!-- V70-VERSION: 설정 버전 표시를 v70으로 변경 --><!-- V71-VERSION: 설정 버전 표시를 v71로 변경 --><!-- V72-VERSION: 설정 버전 표시를 v72로 변경 --><!-- V73-VERSION: 설정 버전 표시를 v73으로 변경 --><!-- V78-VERSION: 설정 버전 표시를 v78로 변경 --><!-- V79-VERSION: 설정 버전 표시를 v79로 변경 --><!-- V82-FIX-BUGS: 설정 버전 표시를 v82로 변경 --><!-- V84-FIX-VERSION: 설정 버전 표시를 v84로 변경 — v83에서 라벨 stale로 "새 버전이 있어요" 배너가 상시 노출된 교훈. 배너는 이 라벨 텍스트와 version.json을 비교하므로 라벨을 배포 버전과 일치시켜야 함 --><!-- V86-VERSION: 설정 버전 표시를 v86으로 변경 --><!-- V88-VERSION: 설정 버전 표시를 v88로 변경 --><!-- V93-VERSION: 설정 버전 표시를 v93으로 변경 --><!-- V94-VERSION: 설정 버전 표시를 v94로 변경 --><!-- V95-VERSION: 설정 버전 표시를 v95로 변경 --><!-- V96-VERSION --><!-- V100-VERSION --><!-- V101-VERSION --><button type="button" class="version-trigger" id="versionNumber" aria-label="버전 109">v109</button><!-- V108-VERSION --><!-- V109-VERSION --></div><div class="settings-row"><div><strong>내 UID</strong><small id="settingsUidText">Google 로그인 후 이용 가능</small></div><button type="button" class="hud-btn" id="copyUidBtn" hidden>복사</button></div><div class="settings-row"><div><strong>선물함</strong><small>도착한 선물을 확인하고 수령합니다.</small></div><button type="button" class="settings-action" id="openGiftBoxBtn"><img src="assets/icons/icon-25.webp" class="pxicon" alt=""> 선물함</button></div><div class="settings-feedback" id="settingsGiftStatus" role="status"></div><!-- V62-FIX-3-ADMIN-ENTRY: 관리자 패널 진입점 명세 — 진입점은 이 설정 행의 '관리자 패널 열기' 버튼이며, 버전 버튼(id="versionNumber") 5회 연속 탭(handleVersionTap)도 같은 진입점으로 유지한다. 두 경로 모두 verifyAdminAccess()를 호출하고, 판정은 resolveAdminAccess(클레임 admin=true 우선 → 클레임 모름일 때만 config/admins 폴백, 클레임 캐시는 hookAdminClaimAuth가 로그인 상태 변화마다 갱신)가 맡는다. 13차에서 설정 대화에 '관리자 패널' 요소가 없어 진입 자체를 못 찾은 회귀가 있어, 숨은 5탭만으로는 부족해 보이는 진입점을 복원한다. -->
+<div class="overlay" id="settingsOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><small class="story-kicker">GAME OPTIONS</small><!-- V88-FIX-L5: 설정 키커를 story-kicker 톤으로 통일 --><h2 id="settingsTitle">설정</h2></div><button class="close-btn" data-close="settingsOverlay" aria-label="설정 닫기">닫기</button></div><div class="settings-panel"><div class="settings-row"><div><strong>배경음악</strong><small>메인·양조·상점에서 서로 다른 루프가 재생됩니다.</small></div><button type="button" class="sound-switch" id="bgmToggle" aria-pressed="true" aria-label="배경음악 켜짐">켜짐</button></div><div class="settings-row"><div><strong>효과음</strong><small>버튼, 보상, 양조 결과, 업적 효과음입니다.</small></div><button type="button" class="sound-switch" id="sfxToggle" aria-pressed="true" aria-label="효과음 켜짐">켜짐</button></div><!-- V82-FIX-A11Y D-8: 토글 accessible name에 설정 대상 포함 --><div class="settings-row"><div><strong>타이밍 미니게임 속도</strong><small>드라이홉 투입·병입 헤드스페이스 미니게임의 바늘/충전 속도입니다. 기본 보통.</small></div><!-- V82-FIX-DIFFICULTY: 타이밍 미니게임 난이도(속도) 옵션 — 느리게/보통/빠르게 --><button type="button" class="sound-switch" id="miniSpeedBtn" aria-label="타이밍 미니게임 속도: 보통 (누르면 느리게·보통·빠르게 순환)">보통</button></div><span id="settingsSoundState" class="sr-only">모든 소리 켜짐</span><div class="settings-row"><div><strong>가이드 동반 양조</strong><small>민지와 함께 레시피 선택부터 시음까지 한 배치를 직접 양조합니다. 완료 보상은 한 번만 지급됩니다.</small></div><button type="button" class="settings-action" id="restartTutorialBtn">튜토리얼 다시 보기</button></div><div class="settings-row"><div><strong>버전 정보</strong><small>홉 앤 드림 양조 시뮬레이션</small></div><!-- /* V64-VERSION */ 설정 버전 표시를 v64로 변경. 하단 버전 확인 스크립트가 이 버튼 텍스트를 현재 버전으로 읽으므로 assets/version.json도 함께 v64로 맞춘다 --><!-- /* V65-VERSION */ 설정 버전 표시를 v65로 변경 --><!-- /* V66-VERSION */ 설정 버전 표시를 v66로 변경 --><!-- /* V67-VERSION */ 설정 버전 표시를 v67로 변경 --><!-- /* V68-VERSION */ 설정 버전 표시를 v68로 변경 --><!-- /* V69-VERSION */ 설정 버전 표시를 v69로 변경 --><!-- V70-VERSION: 설정 버전 표시를 v70으로 변경 --><!-- V71-VERSION: 설정 버전 표시를 v71로 변경 --><!-- V72-VERSION: 설정 버전 표시를 v72로 변경 --><!-- V73-VERSION: 설정 버전 표시를 v73으로 변경 --><!-- V78-VERSION: 설정 버전 표시를 v78로 변경 --><!-- V79-VERSION: 설정 버전 표시를 v79로 변경 --><!-- V82-FIX-BUGS: 설정 버전 표시를 v82로 변경 --><!-- V84-FIX-VERSION: 설정 버전 표시를 v84로 변경 — v83에서 라벨 stale로 "새 버전이 있어요" 배너가 상시 노출된 교훈. 배너는 이 라벨 텍스트와 version.json을 비교하므로 라벨을 배포 버전과 일치시켜야 함 --><!-- V86-VERSION: 설정 버전 표시를 v86으로 변경 --><!-- V88-VERSION: 설정 버전 표시를 v88로 변경 --><!-- V93-VERSION: 설정 버전 표시를 v93으로 변경 --><!-- V94-VERSION: 설정 버전 표시를 v94로 변경 --><!-- V95-VERSION: 설정 버전 표시를 v95로 변경 --><!-- V96-VERSION --><!-- V100-VERSION --><!-- V101-VERSION --><button type="button" class="version-trigger" id="versionNumber" aria-label="버전 110">v110</button><!-- V108-VERSION --><!-- V109-VERSION --><!-- V110-VERSION --></div><div class="settings-row"><div><strong>내 UID</strong><small id="settingsUidText">Google 로그인 후 이용 가능</small></div><button type="button" class="hud-btn" id="copyUidBtn" hidden>복사</button></div><div class="settings-row"><div><strong>선물함</strong><small>도착한 선물을 확인하고 수령합니다.</small></div><button type="button" class="settings-action" id="openGiftBoxBtn"><img src="assets/icons/icon-25.webp" class="pxicon" alt=""> 선물함</button></div><div class="settings-feedback" id="settingsGiftStatus" role="status"></div><!-- V62-FIX-3-ADMIN-ENTRY: 관리자 패널 진입점 명세 — 진입점은 이 설정 행의 '관리자 패널 열기' 버튼이며, 버전 버튼(id="versionNumber") 5회 연속 탭(handleVersionTap)도 같은 진입점으로 유지한다. 두 경로 모두 verifyAdminAccess()를 호출하고, 판정은 resolveAdminAccess(클레임 admin=true 우선 → 클레임 모름일 때만 config/admins 폴백, 클레임 캐시는 hookAdminClaimAuth가 로그인 상태 변화마다 갱신)가 맡는다. 13차에서 설정 대화에 '관리자 패널' 요소가 없어 진입 자체를 못 찾은 회귀가 있어, 숨은 5탭만으로는 부족해 보이는 진입점을 복원한다. -->
 <div class="settings-row"><div><strong>관리자 패널</strong><small>관리자 권한이 있는 Google 계정으로 로그인했을 때 열립니다.</small></div><button type="button" class="settings-action" id="openAdminPanelBtn">관리자 패널 열기</button></div><div class="settings-row"><div><strong>닉네임</strong><small id="settingsNicknameText">설정되지 않음</small></div><div style="display:flex;gap:6px;align-items:center"><input id="nicknameInput" class="admin-select" style="width:110px" maxlength="12" placeholder="2~12자"><button type="button" class="hud-btn" id="setNicknameBtn">설정</button></div></div><div class="career-notice" id="nicknameStatus" role="status" style="padding:0 12px"></div><div class="settings-row" style="border-color:var(--red)"><div><strong>기록 초기화</strong><small>저장된 기록(자금·인벤토리·자작 레시피·커리어)을 모두 지우고 처음부터 시작합니다.</small></div><button type="button" class="admin-action negative" id="wipeSaveBtn">기록 초기화</button></div></div></section></div>
 <div class="overlay" id="adminLoginOverlay" hidden><section class="dialog story-dialog" role="dialog" aria-modal="true" aria-labelledby="adminLoginTitle"><!-- V63-FIX-ADMIN-CLOSE: 닫기 버튼이 없어 Esc/백드롭으로만 닫히고 권한 없음 판정 시 같은 다이얼로그가 다시 열리는 재시도 루프에 갇혔다. #adminOverlay·#settingsOverlay와 동일 패턴으로 dialog-head 안에 범용 data-close 핸들러가 바인딩되는 닫기 버튼을 추가한다 --><div class="dialog-head"><div><small class="story-kicker">RESTRICTED ACCESS</small><h2 id="adminLoginTitle">관리자 인증</h2></div><button class="close-btn" data-close="adminLoginOverlay" aria-label="관리자 인증 닫기">닫기</button></div><form class="admin-login-form" id="adminLoginForm"><p>Google 로그인 계정의 관리자 권한을 확인합니다.</p><button class="admin-action" type="submit">권한 다시 확인</button><div class="career-notice" id="adminLoginNotice" role="alert"></div></form></section></div>
 <div class="overlay" id="adminOverlay" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="adminTitle"><div class="dialog-head"><div><small>BREWERY CONTROL ROOM</small><h2 id="adminTitle">관리자 패널</h2></div><button class="close-btn" data-close="adminOverlay" aria-label="관리자 패널 닫기">닫기</button></div><div class="admin-grid"><section class="admin-control"><strong>자금</strong><p id="adminCashValue">현재 ₩100,000</p><button class="admin-action" type="button" id="adminAddCash">+ ₩1,000,000</button></section><section class="admin-control"><strong>레시피 · 상점 재료</strong><p>모든 레시피와 홉·몰트·효모·부재료를 엽니다.</p><button class="admin-action" type="button" id="adminUnlockRecipes">전체 해금</button></section><section class="admin-control"><strong>평판</strong><p id="adminReputationValue">현재 0</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-reputation="100">+100</button><button class="admin-action negative" type="button" data-admin-reputation="-100">-100</button></div></section><section class="admin-control"><strong>일수</strong><p id="adminDayValue">현재 1일</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-day="10">+10일</button><button class="admin-action negative" type="button" data-admin-day="-10">-10일</button></div></section><section class="admin-control"><strong>계절 변경</strong><p id="adminSeasonValue">실제 날짜 기준</p><select class="admin-select" id="adminSeasonSelect" aria-label="테스트 계절 선택"><option value="">실제 날짜 사용</option><option value="spring"><img src="assets/icons/icon-21.webp" class="pxicon" alt=""> 봄</option><option value="summer"><img src="assets/icons/icon-00.webp" class="pxicon" alt=""> 여름</option><option value="autumn"><img src="assets/icons/icon-22.webp" class="pxicon" alt=""> 가을</option><option value="winter"><img src="assets/icons/icon-16.webp" class="pxicon" alt=""> 겨울</option></select></section><section class="admin-control full"><strong>NPC 호감도</strong><label class="sr-only" for="adminNpcSelect">NPC 선택</label><select class="admin-select" id="adminNpcSelect"></select><p id="adminNpcValue">현재 호감도 0</p><div class="admin-actions"><button class="admin-action" type="button" data-admin-affection="1">+1</button><button class="admin-action negative" type="button" data-admin-affection="-1">-1</button></div></section><section class="admin-control full"><strong>Firestore Security Rules · 전체 파일</strong><p>Firebase 콘솔의 규칙 탭에 아래 내용을 통째로 붙여넣고 게시하세요.</p><textarea class="admin-rules" id="firestoreRulesText" readonly spellcheck="false">rules_version = '2';
@@ -1734,7 +1738,7 @@ service cloud.firestore {
       mainQuest:{done:{},claimed:{},flags:{},seenChapter:1},
       sideQuests:{day:0,base:{},bought:[],claimed:{},carry:{}}, /* V61-FIX-2-QUEST-REWARD-BTN */
       npcQuests:{active:{},completed:{},availableDay:{}},
-      recipeDrafts:{}
+      recipeDrafts:{},taproomDaily:{day:0,sales:{}}/* V110-P0-3: 손님별 탭룸 1일 1주문 상한 + 재방문 쿨다운(게임 내 1일). sales[손님]=마지막 판매 게임일 */
     });
     Object.keys(facilityInfo).forEach(id=>{const value=C.facilities[id];C.facilities[id]=value===true?1:value===false?0:Math.max(0,Math.min(facilityInfo[id].prices.length,Math.floor(+value||0)))});
     if(!taproomThemes[C.taproomTheme])C.taproomTheme='';
@@ -1752,7 +1756,7 @@ service cloud.firestore {
   function ingredientCost(usage){return Math.round(Object.entries(usage||{}).reduce((total,[id,q])=>{const item=shopItems.find(x=>x.id===dbIngredientId(id));return total+(item&&item.unit?item.price*((+q||0)/item.unit):0)},0))}
   function standardBatchCost(r,volume){if(!r)return 0;const scale=(+volume||20)/baseBatch(r),usage={};Object.entries(r.req||{}).forEach(([id,q])=>usage[id]=(usage[id]||0)+(+q||0)*scale);if(r.type==='neipa')usage.vitc=(usage.vitc||0)+4*((+volume||20)/20);return ingredientCost(usage)}
   function styleAverageBatchCost(r,volume){const group=saleStyleGroup(r),costs=Object.values(recipes).filter(x=>x&&x.req&&x.tier!=='custom'&&saleStyleGroup(x)===group).map(x=>standardBatchCost(x,volume)).filter(x=>x>0);return costs.length?Math.round(sum(costs)/costs.length):standardBatchCost(r,volume)}
-  function salePriceQuote(beer,withTaproom=true){ensureManagementState();const group=saleStyleGroup(beer),base=saleBasePrices[group]||6500,quality=Math.max(0,effectiveBeerScore(beer)-70)*100,units=Math.max(1,beer.initialUnits||Math.floor((beer.volume||20)*2)),actual=beer.actualIngredientCost||beer.brewCost||beer.styleAverageIngredientCost||0,average=beer.styleAverageIngredientCost||actual,actualPer=actual/units,averagePer=average/units,material=Math.max(0,(actualPer-averagePer)*.3),subtotal=base+quality+material,repMult=C.reputation>=600?1.2:C.reputation>=300?1.1:1,tapLevel=facilityLevel('taproom'),tapMult=withTaproom&&tapLevel?(tapLevel>=3?1.8:tapLevel===2?1.5:1.3):1,themeMult=withTaproom&&C.taproomTheme==='beergarden'&&currentSeason()==='summer'?1.1:1,collabMult=beer.collabNpc?1.2:1,fresh=freshnessInfo(beer),freshMult=fresh.mult,final=Math.round(subtotal*repMult*tapMult*themeMult*collabMult*freshMult/100)*100;return{group,style:saleStyleLabel(group),base,quality,material,subtotal,repMult,tapMult,themeMult,collabMult,freshMult,freshnessLoss:fresh.loss,final,actualPer,averagePer}}
+  function salePriceQuote(beer,withTaproom=true){ensureManagementState();const group=saleStyleGroup(beer),base=saleBasePrices[group]||6500,quality=Math.max(0,effectiveBeerScore(beer)-70)*25,/* V110-P0-2: 품질 계수 100→25 하향 — 잔당 가격이 배치 원가·탭룸 운영비 대비 과도하게 부풀려지던 문제 완화 */units=Math.max(1,beer.initialUnits||Math.floor((beer.volume||20)*2)),actual=beer.actualIngredientCost||beer.brewCost||beer.styleAverageIngredientCost||0,average=beer.styleAverageIngredientCost||actual,actualPer=actual/units,averagePer=average/units,material=Math.max(0,(actualPer-averagePer)*.3),subtotal=base+quality+material,repMult=C.reputation>=600?1.2:C.reputation>=300?1.1:1,tapLevel=facilityLevel('taproom'),tapMult=withTaproom&&tapLevel?(tapLevel>=3?1.8:tapLevel===2?1.5:1.3):1,themeMult=withTaproom&&C.taproomTheme==='beergarden'&&currentSeason()==='summer'?1.1:1,collabMult=beer.collabNpc?1.2:1,fresh=freshnessInfo(beer),freshMult=fresh.mult,final=Math.round(subtotal*repMult*tapMult*themeMult*collabMult*freshMult/100)*100;return{group,style:saleStyleLabel(group),base,quality,material,subtotal,repMult,tapMult,themeMult,collabMult,freshMult,freshnessLoss:fresh.loss,final,actualPer,averagePer}}
   function saleUnitPrice(beer,withTaproom=true){return salePriceQuote(beer,withTaproom).final}
   function hdCollect(list,item,limit=30){return[...(list||[]),item].slice(-limit)}
   const hiddenRecipeIds=['tropicalTempest','orchardGose','cherryTruffle','honeyCitrusSaison','midnightCacao'];
@@ -1790,7 +1794,7 @@ service cloud.firestore {
   let rewardLedger=[];
   function grantAchievementReward(reward){if(reward.cash)G.cash+=reward.cash;if(reward.item)G.inventory[reward.item]=(G.inventory[reward.item]||0)+reward.qty;if(reward.title&&!C.titles.includes(reward.title))C.titles.push(reward.title);if(reward.special)C.specialItems[reward.special]=true}
   /* V70-FIX-POPUP-QUEUE: 레시피 해금과 업적 축하를 동시에 열지 않고, 앞 다이얼로그가 닫힌 뒤 다음 항목을 표시한다. */
-  function showNextAchievement(){const overlay=$('#achievementPopup'),unlock=$('#recipeUnlockOverlay');if(unlock&&!unlock.hidden){setTimeout(showNextAchievement,240);return}if(!overlay||!overlay.hidden||!achievementQueue.length)return;const info=achievementQueue.shift();$('#achievementPopupName').textContent=info.name;$('#achievementPopupDesc').textContent=info.desc;$('#achievementPopupReward').textContent='보상 · '+achievementRewardText(info.reward);overlay.hidden=false;tone(880,.12,'square',.045);setTimeout(()=>tone(1175,.18,'triangle',.04),130);confetti();clearTimeout(achievementTimer);achievementTimer=null/* V102-FIX-5: 업적 다이얼로그 자동 닫힘 제거 — '확인' 버튼(closeAchievementPopup)으로만 닫는다 */}
+  function showNextAchievement(){const overlay=$('#achievementPopup'),unlock=$('#recipeUnlockOverlay');if(unlock&&!unlock.hidden){setTimeout(showNextAchievement,240);return}if(!overlay||!overlay.hidden||!achievementQueue.length)return;const info=achievementQueue.shift();$('#achievementPopupName').textContent=info.name;$('#achievementPopupDesc').textContent=info.desc;$('#achievementPopupReward').textContent='보상 · '+achievementRewardText(info.reward);overlay.hidden=false;if(!hdSfxPlay('achievement')){tone(880,.12,'square',.045);setTimeout(()=>tone(1175,.18,'triangle',.04),130);}confetti();clearTimeout(achievementTimer);achievementTimer=null/* V102-FIX-5: 업적 다이얼로그 자동 닫힘 제거 — '확인' 버튼(closeAchievementPopup)으로만 닫는다 */}
   function closeAchievementPopup(){clearTimeout(achievementTimer);const overlay=$('#achievementPopup');if(overlay)overlay.hidden=true;setTimeout(showNextAchievement,180)}
   function awardAchievement(id){ensureManagementState();const info=achievementInfo[id];if(!info)return false;if(C.achievements[id]){if(!C.achievements[id].reward){C.achievements[id].reward=achievementRewardText(info.reward);C.achievements[id].rewardDate=realDateKey();grantAchievementReward(info.reward);rewardLedger.push({source:'업적 · '+info.name,text:achievementRewardText(info.reward)});achievementQueue.push(info);showNextAchievement();syncHud();renderInventory()}return false}C.achievements[id]={day:C.day,date:realDateKey(),reward:achievementRewardText(info.reward)};grantAchievementReward(info.reward);rewardLedger.push({source:'업적 · '+info.name,text:achievementRewardText(info.reward)});achievementQueue.push(info);showNextAchievement();syncHud();renderInventory();return true}
   function collectionRate(){const hopRate=materialDB.hops.length?Object.keys(C.collections.hops).length/materialDB.hops.length:0,yeastRate=materialDB.yeasts.length?Object.keys(C.collections.yeasts).length/materialDB.yeasts.length:0;return(hopRate+yeastRate)/2}
@@ -2104,10 +2108,10 @@ function showToast(msg){const el=$('#hdToast');if(!el)return;el.innerHTML=pxicon
   function canStore(id,qty){return storageLoad()+storageWeight(id,qty)<=storageCapacity()+1e-9}
   function facilityMarkup(){ensureManagementState();const load=storageLoad(),cap=storageCapacity(),sales=C.shopSales;return `<section class="management-zone" aria-label="양조장 경영"><h3>시설 업그레이드</h3><div class="management-summary"><span class="management-chip">재료 보관 ${fmt(load)}/${cap}</span><span class="management-chip">500ml 판매 ${fmt(sales.units)}잔</span><span class="management-chip">매출 ${won(sales.revenue)}</span></div><div class="facility-grid">${Object.entries(facilityInfo).map(([id,f])=>{const level=facilityLevel(id),max=f.prices.length,nextPrice=f.prices[level],maxed=level>=max;return `<article class="facility-card ${level?'owned':''}"><span class="facility-level">${level?`Lv.${level}`:'미보유'} / Lv.${max}</span><strong>${f.name}</strong><p>${level?f.effects[level-1]:`Lv.1 · ${f.effects[0]}`}${!maxed&&level?`<span class="facility-next">다음 단계 · ${f.effects[level]}</span>`:''}</p><button class="facility-buy" data-facility="${id}" ${maxed||G.cash<nextPrice?'disabled':''}>${maxed?'최대 Lv':G.cash<nextPrice?`자금 부족 · ${won(nextPrice)}`:level?`Lv.${level+1} 업그레이드 (${won(nextPrice)})`:`시설 구매 (${won(nextPrice)})`}</button></article>`}).join('')}</div><section class="taproom-sales"><h4>단골 관리</h4><div class="management-summary">${Object.keys(regularPreferences).map(id=>`<span class="management-chip">${npcInfo[id].name} · ${regularPreferences[id].label} · 만족도 ${C.regulars[id]||0}/5</span>`).join('')}</div></section>${agingStatusMarkup()}${taproomMarkup()}</section>`}
   function renderBrewery(){ensureManagementState();const hall=$('#breweryEventHall');if(!hall)return;$('#breweryDay').textContent=`게임 DAY ${C.day} · BREWERY · 보유 자금 ${won(G.cash)}`;if(!C.breweryName){const isHead=C.rank==='head',hasFunds=G.cash>=3000000,repAffDone=C.reputation>=150&&maxAffection()>=80,scouted=C.rank!=='home',missionDone=C.missions.filter(x=>x.done).length,missionsCleared=['brewer','head'].includes(C.rank)||missionDone>=3;/* V80-FIX-FOUNDRY: 기존 잠금 조건 아래에 창업 5단계의 완료·미완료 현황을 덧붙인다. */hall.innerHTML=`<div class="career-goals brewery-lock"><article class="career-goal"><small>잠금 상태</small><strong>아직 내 양조장이 없습니다.</strong><p>헤드브루어로 승진하고 창업 자금 ${won(3000000)}을 마련하면 시설·판매·단골 관리가 열립니다.</p><button class="career-action" data-found-brewery ${isHead&&hasFunds?'':'disabled'}>${isHead&&hasFunds?'양조장 창업':'창업 조건 미달'}</button></article><article class="career-goal"><small>창업 조건</small><strong>현재 ${rankMeta().name} · 보유 ${won(G.cash)}</strong><ul class="founding-checklist"><li class="${isHead?'done':''}">헤드브루어 승진 ${isHead?'완료':`필요 · 평판 ${fmt(C.reputation)}/600 · 누적 양조 ${totalBatches()}/25 · 대회 입상 ${C.compWins||0}/2`}</li><li class="${hasFunds?'done':''}">창업 자금 ${won(3000000)} ${hasFunds?'확보 완료':`필요 · 현재 ${won(G.cash)}`}</li></ul><p class="roadmap-note"><strong>창업 여정 5단계 현황</strong></p><ul class="founding-checklist"><li class="${repAffDone?'done':''}">① 평판·호감도 ${repAffDone?'완료':`미완료 · 평판 ${fmt(C.reputation)}/150 · 최고 호감도 ${fmt(maxAffection())}/80`}</li><li class="${scouted?'done':''}">② 조수 양조사 스카우트 ${scouted?'완료':'미완료'}</li><li class="${missionsCleared?'done':''}">③ 양조 미션 ${missionsCleared?'완료':`미완료 · ${missionDone}/3`}</li><li class="${isHead?'done':''}">④ 헤드브루어 승진 ${isHead?'완료':headEligible()?'미완료 · 승진 가능':'미완료'}</li><li class="${hasFunds?'done':''}">⑤ 창업 자금 ${hasFunds?'완료':`미완료 · ${won(G.cash)}/${won(3000000)}`}</li></ul></article></div>`;if(rankLevel(C.rank)>=1){const f=facilityInfo.insulation,lvl=facilityLevel('insulation'),price=f.prices[lvl];hall.innerHTML+=`<div class="brewery-columns"><article class="brewery-card"><small>창업 전 준비</small><h3>발효조 단열재 Lv.1</h3><p>${lvl>=1?'구매 완료 · 창업 후 Lv.2로 업그레이드할 수 있습니다.':'조수 양조사 이상 해금 · 창업 전에는 Lv.1까지만 구매할 수 있습니다.'}</p><button class="facility-buy" data-facility="insulation" ${lvl>=1||G.cash<price?'disabled':''}>${lvl>=1?'Lv.1 보유 중':'구매 '+won(price)}</button></article></div>`}return}const owned=Object.values(C.facilities).filter(x=>(x===true?1:+x||0)>0).length;hall.innerHTML=`<div class="career-goals"><article class="career-goal"><small>운영 중</small><strong>${C.breweryName}</strong><span>시설 ${owned}/${Object.keys(facilityInfo).length} · 판매 ${fmt(C.shopSales.units)}잔 · 누적 매출 ${won(C.shopSales.revenue)}</span></article></div>${facilityMarkup()}`}
-  function taproomMarkup(){if(!facilityLevel('taproom'))return'<section class="taproom-sales"><h4>탭룸 직접 판매</h4><!-- V79-FIX-SELL-FLOW: 탭룸 미보유 상태에서도 맞춤 의뢰 게시판 진입점 제공 --><button type="button" class="career-action" data-goto-orders>판매/납품하기 → NPC 맞춤 의뢰 게시판</button><p class="empty-record">탭룸을 구매하면 완성 맥주를 500ml 단위로 단골에게 판매할 수 있습니다.</p></section>';const theme=taproomThemes[C.taproomTheme],style=theme?`style="background-image:linear-gradient(90deg,rgba(20,10,6,.2),rgba(20,10,6,.2)),url('${theme.image}')"`:'',picker=`<div class="theme-picker"><div class="theme-heading"><strong>탭룸 인테리어</strong><small>변경 비용 ${won(100000)} · ${theme?theme.name:'기본 인테리어'}</small></div><div class="theme-grid">${Object.entries(taproomThemes).map(([id,t])=>`<button class="theme-choice ${C.taproomTheme===id?'active':''}" data-taproom-theme="${id}" aria-pressed="${C.taproomTheme===id}" style="background-image:linear-gradient(0deg,rgba(20,10,6,.1),rgba(20,10,6,.1)),url('${t.image}')" ${C.taproomTheme!==id&&G.cash<100000?'disabled':''}><span>${t.name}</span><small>${t.copy}</small></button>`).join('')}</div></div>`,beers=(C.finishedBeers||[]).filter(b=>(C.beerStock[b.id]||0)>0&&!C.oakAging[b.id]);if(!beers.length)return`<section class="taproom-sales taproom-themed" ${style}>${picker}<h4>탭룸 직접 판매</h4><!-- V79-FIX-SELL-FLOW: 재고 없음 상태에서도 맞춤 의뢰 게시판 진입점 제공 --><button type="button" class="career-action" data-goto-orders>판매/납품하기 → NPC 맞춤 의뢰 게시판</button><p class="empty-record">판매할 완성 맥주 재고가 없습니다. 새 배치를 완성해 주세요.</p></section>`;const options=beers.map(b=>`<option value="${b.id}">${b.name} · ${C.beerStock[b.id]}잔 · ${won(saleUnitPrice(b))}</option>`).join(''),initial=beers[0];return `<section class="taproom-sales taproom-themed" ${style}>${picker}<h4>탭룸 직접 판매 · 500ml</h4><!-- V79-FIX-SELL-FLOW: 판매 재고 상태에서 맞춤 의뢰 게시판 진입점 제공 --><button type="button" class="career-action" data-goto-orders>판매/납품하기 → NPC 맞춤 의뢰 게시판</button><div class="sale-grid">${Object.keys(regularPreferences).map(id=>{const sat=C.regulars[id]||0,n=npcInfo[id],qty=sat>0?2:1;return `<div class="sale-row" data-sale-row="${id}"><div class="sale-customer"><strong>${n.name}${sat>=5?'<span class="vip-badge">VIP 단골</span>':''}</strong><small>선호 ${regularPreferences[id].label} · 만족도 ${sat}/5 · 이번 구매 ${qty}잔</small></div><select data-sale-select aria-label="${n.name}에게 판매할 맥주">${options}</select><button class="sale-btn" data-sale-customer="${id}" aria-label="${n.name}에게 선택한 맥주 판매">판매</button><div class="sale-price-breakdown" data-price-breakdown aria-live="polite">${priceBreakdownMarkup(initial)}</div></div>`}).join('')}</div></section>`}
+  function taproomMarkup(){if(!facilityLevel('taproom'))return'<section class="taproom-sales"><h4>탭룸 직접 판매</h4><!-- V79-FIX-SELL-FLOW: 탭룸 미보유 상태에서도 맞춤 의뢰 게시판 진입점 제공 --><button type="button" class="career-action" data-goto-orders>판매/납품하기 → NPC 맞춤 의뢰 게시판</button><p class="empty-record">탭룸을 구매하면 완성 맥주를 500ml 단위로 단골에게 판매할 수 있습니다.</p></section>';const theme=taproomThemes[C.taproomTheme],style=theme?`style="background-image:linear-gradient(90deg,rgba(20,10,6,.2),rgba(20,10,6,.2)),url('${theme.image}')"`:'',picker=`<div class="theme-picker"><div class="theme-heading"><strong>탭룸 인테리어</strong><small>변경 비용 ${won(100000)} · ${theme?theme.name:'기본 인테리어'}</small></div><div class="theme-grid">${Object.entries(taproomThemes).map(([id,t])=>`<button class="theme-choice ${C.taproomTheme===id?'active':''}" data-taproom-theme="${id}" aria-pressed="${C.taproomTheme===id}" style="background-image:linear-gradient(0deg,rgba(20,10,6,.1),rgba(20,10,6,.1)),url('${t.image}')" ${C.taproomTheme!==id&&G.cash<100000?'disabled':''}><span>${t.name}</span><small>${t.copy}</small></button>`).join('')}</div></div>`,beers=(C.finishedBeers||[]).filter(b=>(C.beerStock[b.id]||0)>0&&!C.oakAging[b.id]);if(!beers.length)return`<section class="taproom-sales taproom-themed" ${style}>${picker}<h4>탭룸 직접 판매</h4><!-- V79-FIX-SELL-FLOW: 재고 없음 상태에서도 맞춤 의뢰 게시판 진입점 제공 --><button type="button" class="career-action" data-goto-orders>판매/납품하기 → NPC 맞춤 의뢰 게시판</button><p class="empty-record">판매할 완성 맥주 재고가 없습니다. 새 배치를 완성해 주세요.</p></section>`;const options=beers.map(b=>`<option value="${b.id}">${b.name} · ${C.beerStock[b.id]}잔 · ${won(saleUnitPrice(b))}</option>`).join(''),initial=beers[0];return `<section class="taproom-sales taproom-themed" ${style}>${picker}<h4>탭룸 직접 판매 · 500ml</h4><!-- V79-FIX-SELL-FLOW: 판매 재고 상태에서 맞춤 의뢰 게시판 진입점 제공 --><button type="button" class="career-action" data-goto-orders>판매/납품하기 → NPC 맞춤 의뢰 게시판</button><div class="sale-grid">${Object.keys(regularPreferences).map(id=>{const sat=C.regulars[id]||0,n=npcInfo[id],qty=sat>0?2:1,soldToday=(((C.taproomDaily||{}).sales||{})[id]||0)>=C.day;/* V110-P0-3: 손님별 1일 1주문 — 오늘 이미 판매한 손님은 버튼 비활성화 */return `<div class="sale-row" data-sale-row="${id}"><div class="sale-customer"><strong>${n.name}${sat>=5?'<span class="vip-badge">VIP 단골</span>':''}</strong><small>선호 ${regularPreferences[id].label} · 만족도 ${sat}/5 · 이번 구매 ${qty}잔${soldToday?' · 오늘 판매 완료 · 내일 다시 방문':''}</small></div><select data-sale-select aria-label="${n.name}에게 판매할 맥주">${options}</select><button class="sale-btn" data-sale-customer="${id}" aria-label="${n.name}에게 선택한 맥주 판매"${soldToday?' disabled':''}>판매</button><div class="sale-price-breakdown" data-price-breakdown aria-live="polite">${priceBreakdownMarkup(initial)}</div></div>`}).join('')}</div></section>`}
   function buyFacility(id){ensureManagementState();const f=facilityInfo[id],level=facilityLevel(id),earlyInsulation=id==='insulation'&&!C.breweryName&&level===0&&rankLevel(C.rank)>=1;if(!f||(!C.breweryName&&!earlyInsulation)||level>=f.prices.length)return;const price=f.prices[level];if(G.cash<price)return;askPurchase(`<strong>${f.name} ${level?`Lv.${level+1} 업그레이드`:'시설 구매'}</strong>에 ${won(price)}을 사용할까요?<br>구매 후 보유 자금은 ${won(G.cash-price)}입니다.`,()=>{if(G.cash<price||facilityLevel(id)!==level)return;G.cash-=price;C.facilities[id]=level+1;syncHud();renderBrewery();renderInventory();renderShop();try{syncAll()}catch(e){}/* V102-FIX-2: 구매 즉시 발효조 화면 단열 배지(#classicInsulationBadge)를 동기화한다 */$('#breweryManageNotice').textContent=`${f.name} Lv.${level+1} ${level?'업그레이드':'구매'} 완료 · ${f.effects[level]}`;const shopNotice=$('#shopNotice');if(shopNotice)shopNotice.textContent=`${f.name} Lv.${level+1} ${level?'업그레이드':'구매'} 완료 · ${f.effects[level]}`;tone(659,.18,'triangle',.05)},'시설 구매 확인')}
   function selectTaproomTheme(id){ensureManagementState();if(!taproomThemes[id]||!facilityLevel('taproom')||C.taproomTheme===id)return;if(G.cash<100000){$('#breweryManageNotice').textContent='테마 변경에는 ₩100,000이 필요합니다.';return}askPurchase(`<strong>탭룸 테마 변경</strong> · ${taproomThemes[id].name}<br>변경 비용 ${won(100000)} · 변경 후 보유 자금은 ${won(G.cash-100000)}입니다.`,()=>{if(G.cash<100000||C.taproomTheme===id)return;G.cash-=100000;C.taproomTheme=id;syncHud();renderBrewery();$('#breweryManageNotice').textContent=`탭룸 테마를 ${taproomThemes[id].name}(으)로 변경했습니다. · ${taproomThemes[id].copy}`;tone(587,.16,'triangle',.04)},'테마 변경 확인','변경하기')}
-  function sellTaproomBeer(customer){ensureManagementState();if(!C.breweryName||!facilityLevel('taproom'))return;const row=document.querySelector(`[data-sale-row="${customer}"]`),id=row&&row.querySelector('select').value,beer=(C.finishedBeers||[]).find(b=>b.id===id);if(!beer)return;const qty=(C.regulars[customer]||0)>0?2:1,stock=C.beerStock[id]||0;if(stock<qty){$('#breweryManageNotice').textContent=`재고가 ${stock}잔뿐이라 이번 주문 ${qty}잔을 판매할 수 없습니다.`;return}const quote=salePriceQuote(beer,true),unit=quote.final,revenue=unit*qty,liked=preferredBeer(customer,beer);C.pricing.lastQuote={day:C.day,beer:id,...quote};C.beerStock[id]=stock-qty;G.cash+=revenue;C.shopSales.units+=qty;C.shopSales.revenue+=revenue;C.shopSales.history=hdCollect(C.shopSales.history,{day:C.day,customer,beer:id,qty,unitPrice:unit,revenue,pricing:quote});let gain=liked?1:0,bonus=[];if(liked&&facilityLevel('tastingRoom')&&Math.random()<.5){gain++;bonus.push('시음실')}if(liked&&facilityLevel('taproom')>=2&&Math.random()<.25){gain++;bonus.push('단골 방문')}if(liked&&facilityLevel('taproom')>=3&&(C.regulars[customer]||0)>=3&&Math.random()<.25){gain++;bonus.push('VIP')}if(liked&&C.taproomTheme==='modern'&&['minji','jamie','doyoon'].includes(customer)&&Math.random()<.25){gain++;bonus.push('모던 테마')}if(gain)C.regulars[customer]=Math.min(5,(C.regulars[customer]||0)+gain);syncHud();renderBrewery();$('#breweryManageNotice').textContent=`${npcInfo[customer].name}에게 ${beer.name} ${qty}잔 판매 · 잔당 ${won(unit)} · 총 ${won(revenue)}${gain?` · 선호 스타일 만족도 +${gain}${bonus.length?' ('+bonus.join(' · ')+')':''}`:''}`;tone(523,.14,'triangle',.04);updateAchievements()}
+  function sellTaproomBeer(customer){ensureManagementState();if(!C.breweryName||!facilityLevel('taproom'))return;const _td=C.taproomDaily=C.taproomDaily||{day:0,sales:{}};if((_td.sales[customer]||0)>=C.day){$('#breweryManageNotice').textContent=`${npcInfo[customer].name}님은 오늘 이미 구매했습니다. 내일 다시 찾아옵니다.`;return;}/* V110-P0-3: 손님별 1일 1주문 상한 + 재방문 쿨다운(게임 내 1일 — C.day는 양조 정산마다 1씩 증가) */const row=document.querySelector(`[data-sale-row="${customer}"]`),id=row&&row.querySelector('select').value,beer=(C.finishedBeers||[]).find(b=>b.id===id);if(!beer)return;const qty=(C.regulars[customer]||0)>0?2:1,stock=C.beerStock[id]||0;if(stock<qty){$('#breweryManageNotice').textContent=`재고가 ${stock}잔뿐이라 이번 주문 ${qty}잔을 판매할 수 없습니다.`;return}const quote=salePriceQuote(beer,true),unit=quote.final,revenue=unit*qty,liked=preferredBeer(customer,beer);C.pricing.lastQuote={day:C.day,beer:id,...quote};C.beerStock[id]=stock-qty;G.cash+=revenue;C.shopSales.units+=qty;C.shopSales.revenue+=revenue;C.shopSales.history=hdCollect(C.shopSales.history,{day:C.day,customer,beer:id,qty,unitPrice:unit,revenue,pricing:quote});let gain=liked?1:0,bonus=[];if(liked&&facilityLevel('tastingRoom')&&Math.random()<.5){gain++;bonus.push('시음실')}if(liked&&facilityLevel('taproom')>=2&&Math.random()<.25){gain++;bonus.push('단골 방문')}if(liked&&facilityLevel('taproom')>=3&&(C.regulars[customer]||0)>=3&&Math.random()<.25){gain++;bonus.push('VIP')}if(liked&&C.taproomTheme==='modern'&&['minji','jamie','doyoon'].includes(customer)&&Math.random()<.25){gain++;bonus.push('모던 테마')}if(gain)C.regulars[customer]=Math.min(5,(C.regulars[customer]||0)+gain);_td.day=C.day;_td.sales[customer]=C.day;/* V110-P0-3: 판매 기록 — 다음 게임일까지 이 손님에게 재판매 불가 */syncHud();renderBrewery();$('#breweryManageNotice').textContent=`${npcInfo[customer].name}에게 ${beer.name} ${qty}잔 판매 · 잔당 ${won(unit)} · 총 ${won(revenue)}${gain?` · 선호 스타일 만족도 +${gain}${bonus.length?' ('+bonus.join(' · ')+')':''}`:''}`;if(!hdSfxPlay('cash'))tone(523,.14,'triangle',.04);updateAchievements()}
   function fairStockSale(beers){ensureManagementState();let units=0,revenue=0;beers.forEach(beer=>{const qty=Math.min(4,C.beerStock[beer.id]||0);if(!qty)return;const quote=salePriceQuote(beer,false),earned=quote.final*qty;C.pricing.lastQuote={day:C.day,beer:beer.id,...quote};C.beerStock[beer.id]-=qty;units+=qty;revenue+=earned});if(units){G.cash+=revenue;C.shopSales.units+=units;C.shopSales.revenue+=revenue;C.shopSales.history=hdCollect(C.shopSales.history,{day:C.day,customer:'expo',beer:'mixed',qty:units,revenue})}return{units,revenue}}
   function fairAdvance(){C.nextFairDay=(C.nextFairDay||20)+20;while(C.nextFairDay<=C.day)C.nextFairDay+=20;C.fairNpcAvailable=true;C.fairNpcDay=C.day}
   function expoIdea(){const pool=['저온 발효 시트러스 필스너','오크 숙성 벨지안 다크 에일','로컬 과일 사워','세션 스트렝스 헤이지 IPA','로스티드 몰트 콜드 IPA','허브·스파이스 팜하우스 에일'].filter(x=>!C.recipeIdeas.includes(x));return pool.length?pool[Math.floor(Math.random()*pool.length)]:null}
@@ -2259,9 +2263,60 @@ function showToast(msg){const el=$('#hdToast');if(!el)return;el.innerHTML=pxicon
   }
   function drawVenue(canvas,id,t=0){drawVenueScene(canvas,id,t)}
   function tone(freq,dur=.06,type='square',gain=.035,delay=0){if(muted||(C.audio&&C.audio.sfx===false))return;try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime+delay;o.type=type;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+dur)}catch(e){}}
-  function clickSound(){tone(210,.045,'square',.025)}
-  function stepSound(){[330,440,550].forEach((f,i)=>tone(f,.09,'square',.03,i*.07))}
-  function resultSound(score){(score>=75?[392,523,659]:[392,330,262]).forEach((f,i)=>tone(f,.16,'triangle',.045,i*.1))}
+  function clickSound(){if(!hdSfxPlay('click'))tone(210,.045,'square',.025)}
+  function stepSound(){if(hdSfxPlay('click'))return;[330,440,550].forEach((f,i)=>tone(f,.09,'square',.03,i*.07))}
+  function resultSound(score){if(hdSfxPlay(score>=75?'success':'fail'))return;(score>=75?[392,523,659]:[392,330,262]).forEach((f,i)=>tone(f,.16,'triangle',.045,i*.1))}
+  /* V110-P0-6: 코드 합성 칩튠 오디오 — BGM 3곡(메인·양조·상점) + SFX 5종을 assets/audio/*.mp3로 재생한다.
+     tone()/bgmTone() 오실레이터는 mp3 로드·재생 실패 시 폴백으로 유지한다. */
+  const hdAudioFiles={bgm:{main:'assets/audio/bgm-main.mp3',brew:'assets/audio/bgm-brew.mp3',shop:'assets/audio/bgm-shop.mp3'},
+    sfx:{click:'assets/audio/sfx-click.mp3',success:'assets/audio/sfx-success.mp3',fail:'assets/audio/sfx-fail.mp3',cash:'assets/audio/sfx-cash.mp3',achievement:'assets/audio/sfx-achievement.mp3'}};
+  let hdBgmEl=null,hdBgmSceneKey='',hdBgmOscTimer=null;const hdBgmMp3Dead={},hdSfxPool={};
+  function hdBgmEnabled(){return!muted&&C.audio&&C.audio.bgm;}
+  function hdBgmStop(){
+    try{if(hdBgmEl){hdBgmEl.pause();hdBgmEl=null;}}catch(e){hdBgmEl=null;}
+    if(hdBgmOscTimer){clearInterval(hdBgmOscTimer);hdBgmOscTimer=null;}
+    hdBgmSceneKey='';
+  }
+  function hdBgmOscFallback(scene){
+    /* mp3 재생 불가 시 기존 오실레이터 루프 폴백 */
+    hdBgmStop();
+    if(!hdBgmEnabled())return;
+    hdBgmSceneKey=scene;
+    const notes={main:[261.6,329.6,392,329.6],brew:[220,293.7,330,293.7],shop:[392,493.9,523.3,493.9]};
+    let step=0;
+    hdBgmOscTimer=setInterval(function(){
+      if(!hdBgmEnabled()){hdBgmStop();return;}
+      const seq=notes[scene]||notes.main;
+      bgmTone(seq[step++%seq.length]);
+    },620);
+  }
+  function hdBgmStart(){
+    hdBgmStop();
+    if(!hdBgmEnabled())return;
+    const scene=bgmScene(),src=(hdAudioFiles.bgm||{})[scene]||hdAudioFiles.bgm.main;
+    hdBgmSceneKey=scene;
+    if(hdBgmMp3Dead[scene]){hdBgmOscFallback(scene);return;}
+    try{
+      const el=new Audio();
+      el.addEventListener('error',function(){hdBgmMp3Dead[scene]=1;hdBgmOscFallback(scene);},{once:true});
+      el.src=src;el.loop=true;el.volume=.45;el.preload='auto';
+      hdBgmEl=el;
+      const p=el.play();
+      if(p&&typeof p.catch==='function')p.catch(function(){/* 자동재생 차단 등 — 다음 인터랙션에서 재시도 */hdBgmEl=null;hdBgmSceneKey='';});
+    }catch(e){hdBgmEl=null;hdBgmOscFallback(scene);}
+  }
+  function hdSfxPlay(name){
+    if(muted||!C.audio||C.audio.sfx===false)return false;
+    try{
+      const src=(hdAudioFiles.sfx||{})[name];if(!src)return false;
+      let el=hdSfxPool[name];
+      if(!el){el=new Audio();el.preload='auto';el.src=src;hdSfxPool[name]=el;}
+      try{el.currentTime=0;}catch(e){}
+      const p=el.play();
+      if(p&&typeof p.catch==='function')p.catch(function(){});
+      return true;
+    }catch(e){return false;}
+  }
   function cashAnimate(from,to){const el=$('#hudCash'),start=performance.now(),dur=500;el.classList.remove('coin-flash');void el.offsetWidth;el.classList.add('coin-flash');function tick(t){const p=Math.min(1,(t-start)/dur);el.textContent=won(Math.round(from+(to-from)*p));if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)}
   function animateScore(target){const el=$('#fitScore');el.textContent=target;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;el.classList.remove('score-pop');void el.offsetWidth;el.classList.add('score-pop')}
   function confetti(score){if(score<90||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const panel=$('.result-panel');for(let i=0;i<34;i++){const q=document.createElement('i');q.className='confetti-piece';q.style.left=(Math.random()*100)+'%';q.style.background=['#ffc34f','#df782d','#7da653','#fff0bd'][i%4];q.style.setProperty('--x',(Math.random()*180-90)+'px');q.style.animationDelay=(Math.random()*.45)+'s';panel.appendChild(q);setTimeout(()=>q.remove(),2400)}}
@@ -2533,8 +2588,17 @@ function showToast(msg){const el=$('#hdToast');if(!el)return;el.innerHTML=pxicon
   let versionTapCount=0,versionTapTimer=null,adminLoginCloseTimer=null;
   function bgmTone(freq,dur=.32,gain=.012){if(muted||!C.audio.bgm)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime;o.type='triangle';o.frequency.value=freq;g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+dur)}catch(e){}}
   function bgmScene(){return!$('#shopOverlay').hidden?'shop':screenKey()==='0'?'main':'brew'}
-  function startBgm(){clearInterval(bgmTimer);if(muted||!C.audio.bgm)return;const notes={main:[261.6,329.6,392,329.6],brew:[220,293.7,330,293.7],shop:[392,493.9,523.3,493.9]};bgmStep=0;bgmTimer=setInterval(()=>{const seq=notes[bgmScene()]||notes.main;bgmTone(seq[bgmStep++%seq.length])},620)}
-  function updateSettingsState(){ensureManagementState();const allOff=muted;$('#settingsSoundState').textContent=allOff?'모든 소리 꺼짐':`배경음악 ${C.audio.bgm?'켜짐':'꺼짐'} · 효과음 ${C.audio.sfx?'켜짐':'꺼짐'}`;$('#bgmToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.bgm));$('#bgmToggle').textContent=!allOff&&C.audio.bgm?'켜짐':'꺼짐';$('#bgmToggle').setAttribute('aria-label','배경음악 '+(!allOff&&C.audio.bgm?'켜짐':'꺼짐'));$('#sfxToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.sfx));$('#sfxToggle').textContent=!allOff&&C.audio.sfx?'켜짐':'꺼짐';$('#sfxToggle').setAttribute('aria-label','효과음 '+(!allOff&&C.audio.sfx?'켜짐':'꺼짐'));/* V82-FIX-A11Y D-8: 토글 상태 변경 시에도 대상 포함 이름 유지 *//* V82-FIX-DIFFICULTY: 타이밍 미니게임 속도 옵션 표시 */const _msb=document.getElementById('miniSpeedBtn');if(_msb){const _msl=miniSpeedLabels[C.miniSpeed]||miniSpeedLabels.normal;_msb.textContent=_msl;_msb.setAttribute('aria-label','타이밍 미니게임 속도: '+_msl+' (누르면 느리게·보통·빠르게 순환)')}if(allOff||!C.audio.bgm)clearInterval(bgmTimer);else startBgm();try{const t=document.getElementById('settingsUidText'),b=document.getElementById('copyUidBtn');if(window.hdFb&&window.hdFb.isReady()){const u=window.hdFb.getUser();if(t&&b&&u&&u.uid){t.textContent=u.uid;b.hidden=false}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}const nt=document.getElementById('settingsNicknameText');if(nt)nt.textContent=window.hdGiftNickname||'설정되지 않음'}catch(e){console.warn('[hd] settings state update failed',e);}}
+  function startBgm(){
+    /* V110-P0-6: mp3 BGM 루프(장면별 곡: 메인·양조·상점) + 2초 장면 감시로 곡 전환. mp3 재생 실패 시 오실레이터 폴백(hdBgmOscFallback). */
+    if(bgmTimer)clearInterval(bgmTimer);
+    if(!hdBgmEnabled()){hdBgmStop();}
+    else if(bgmScene()!==hdBgmSceneKey){hdBgmStart();}
+    bgmTimer=setInterval(function(){
+      if(!hdBgmEnabled()){hdBgmStop();return;}
+      if(bgmScene()!==hdBgmSceneKey)hdBgmStart();
+    },2000);
+  }
+  function updateSettingsState(){ensureManagementState();const allOff=muted;$('#settingsSoundState').textContent=allOff?'모든 소리 꺼짐':`배경음악 ${C.audio.bgm?'켜짐':'꺼짐'} · 효과음 ${C.audio.sfx?'켜짐':'꺼짐'}`;$('#bgmToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.bgm));$('#bgmToggle').textContent=!allOff&&C.audio.bgm?'켜짐':'꺼짐';$('#bgmToggle').setAttribute('aria-label','배경음악 '+(!allOff&&C.audio.bgm?'켜짐':'꺼짐'));$('#sfxToggle').setAttribute('aria-pressed',String(!allOff&&C.audio.sfx));$('#sfxToggle').textContent=!allOff&&C.audio.sfx?'켜짐':'꺼짐';$('#sfxToggle').setAttribute('aria-label','효과음 '+(!allOff&&C.audio.sfx?'켜짐':'꺼짐'));/* V82-FIX-A11Y D-8: 토글 상태 변경 시에도 대상 포함 이름 유지 *//* V82-FIX-DIFFICULTY: 타이밍 미니게임 속도 옵션 표시 */const _msb=document.getElementById('miniSpeedBtn');if(_msb){const _msl=miniSpeedLabels[C.miniSpeed]||miniSpeedLabels.normal;_msb.textContent=_msl;_msb.setAttribute('aria-label','타이밍 미니게임 속도: '+_msl+' (누르면 느리게·보통·빠르게 순환)')}if(allOff||!C.audio.bgm){clearInterval(bgmTimer);hdBgmStop();}/* V110-P0-6: 음소거·BGM 끄기 시 mp3도 정지 */else startBgm();try{const t=document.getElementById('settingsUidText'),b=document.getElementById('copyUidBtn');if(window.hdFb&&window.hdFb.isReady()){const u=window.hdFb.getUser();if(t&&b&&u&&u.uid){t.textContent=u.uid;b.hidden=false}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}}else if(t&&b){t.textContent='Google 로그인 후 이용 가능';b.hidden=true}const nt=document.getElementById('settingsNicknameText');if(nt)nt.textContent=window.hdGiftNickname||'설정되지 않음'}catch(e){console.warn('[hd] settings state update failed',e);}}
   function giftBoxLabel(g){if(g.type==='funds')return `자금 ${won(+g.amount||0)}`;if(g.type==='ingredient'){const meta=itemMeta[g.id];return `재료 ${meta?meta[0]:g.id} ${+g.qty||0}${meta?meta[1]:''}`}if(g.type==='recipe')return `레시피 ${recipes[g.id]?recipes[g.id].name:g.id}`;return '선물'}
   function openGiftBoxFromSettings(){
     const status=$('#settingsGiftStatus'),list=$('#giftClaimList'),title=$('#giftClaimTitle');let h=null,user=null;
@@ -2645,6 +2709,19 @@ S.ingredients=migrateQuantityMap(S.ingredients);const baseKeys=Object.keys(recom
   function hopProfileScore(){const r=current();return Math.round((ratioScore(r.wp,S.wpHops)+ratioScore(r.dh1,S.dh1Hops)+ratioScore(r.dh2,S.dh2Hops))/3)}
   /* V70-FIX-VITC-WIRING: 병입 단계의 하드코딩 0/2/4/6g 선택지와 4g 문구를 현재 배치 용량 기준 권장량 및 S.vitc 실제값에 연결한다. 결과 비교표의 기존 4×배치배율·S.vitc 경로와 동일한 값을 쓴다. */
   function renderVitcChoices(){if(!S.recipe||!isNeipa())return;const rec=roundQty(4*batchScale(current())),values=[0,roundQty(rec*.5),rec,roundQty(rec*1.5),roundQty(S.vitc)].filter((v,i,a)=>a.indexOf(v)===i).sort((a,b)=>a-b),el=$('#vitcChoices'),note=$('#vitcNote');if(el)el.innerHTML=values.map(v=>`<button class="choice${Math.abs(v-S.vitc)<.0001?' active':''}" data-value="${fmt(v)}" aria-pressed="${Math.abs(v-S.vitc)<.0001}">${fmt(v)}g${Math.abs(v-rec)<.0001?' · 권장':''}</button>`).join('');if(note)note.innerHTML=`<strong>BREWER NOTE /</strong> 비타민C 권장량은 ${fmt(rec)}g (${S.batchVolume}L 기준). 병을 빠르게 채우고 즉시 캡핑하세요. 헤드스페이스가 클수록 산소 리스크가 커집니다.`}
+  /* V110-P0-1: 숙성 기간 선택지를 레시피에 따라 동적 렌더링 — 와일드 발효 레시피(람빅류 6종, r.wildFerment)에는 12주 옵션을 제공해 권장 숙성 기간 달성이 가능하도록 한다.
+     권장 감점 로직(classicCalc의 (recWeeks−S.aging)×3)은 변경하지 않는다. 선례: renderVitcChoices. */
+  function renderAgingChoices(){
+    const el=document.querySelector('[data-group="aging"]');
+    const r=(typeof current==='function')?current():null;
+    const wild=!!(r&&r.wildFerment);
+    if(el){
+      const weeks=wild?[1,2,4,12]:[1,2,4];
+      el.innerHTML=weeks.map(w=>`<button class="choice${S.aging===w?' active':''}" data-value="${w}" aria-pressed="${S.aging===w}">${w}주</button>`).join('');
+    }
+    const hint=document.getElementById('agingWildHint');
+    if(hint)hint.textContent=wild?' 와일드 에일은 12주 장기 숙성이 권장됩니다.':'';
+  }
   function syncAll(){
     if(!S.recipe)return;const r=current();$('#adjustBatchTag').textContent=`RECIPE LAB · ${S.batchVolume} L`;$('#mashTemp').value=S.mashTemp;$('#mashTempOut').textContent=fmtT(S.mashTemp)+'°C';$('#mashCanvasLabel').textContent=fmtT(S.mashTemp)+'°C · 당화조 가열 중';$('#mashRec').textContent='권장 '+r.mash+'°';
     $('#mashNote').innerHTML=r.type==='neipa'?'<strong>BREWER NOTE /</strong> NEIPA는 바디감과 헤이즈를 위해 67°C에 안착합니다.':'<strong>BREWER NOTE /</strong> 64~67°C는 베타·알파 아밀레이스가 균형 있게 작동하는 구간입니다. 45분은 효율이 조금 낮을 수 있고, 90분은 전환을 충분히 마무리합니다.';
@@ -2652,7 +2729,7 @@ S.ingredients=migrateQuantityMap(S.ingredients);const baseKeys=Object.keys(recom
     if(r.type==='classic'){
       $('#hopTotal').textContent=fmt(r.totalHop*batchScale(r));['hop60','hop15','hop0'].forEach((id,i)=>{const el=$('#'+id),slot=r.hopSlots?r.hopSlots[i]:[r.hop,r.alpha];el.value=fmt(S.hops[i]);$('#'+id+'Name').textContent=slot[0]+' · AA '+slot[1]+'% · 권장 '+fmt(r.split[i]*batchScale(r))+'g'});
       $('#yeastName').textContent=r.yeast;$('#fermRec').textContent=(r.ferm[0]===r.ferm[1]?r.ferm[0]:r.ferm[0]+'~'+r.ferm[1])+'°C';$('#fermTemp').value=S.fermTemp;$('#fermTempOut').textContent=fmtT(S.fermTemp)+'°C';$('#fermentCanvasLabel').textContent=fermCanvasLabel();$('#dryHopName').textContent=r.dryHop||r.hop;/* V70-FIX-DH-COPY: 기본 APA는 결과표와 동일하게 드라이호핑을 선택 사항으로 안내한다. 향·점수 계산은 변경하지 않는다. */$('#dryHopRec').textContent=r.dryRec!=null?'권장 '+fmt(r.dryRec*batchScale(r))+'g ('+S.batchVolume+'L 기준)':S.recipe==='apa'?'선택 사항 · 기본 0g ('+S.batchVolume+'L 기준)':'권장 안 함';$('#dryAmountInput').value=fmt(roundHopQty(S.dryAmount));$('#dryHopTotal').textContent=fmt(roundHopQty(S.dryAmount));
-      syncChoice('boilTime',S.boilTime);syncChoice('dryTiming',S.dryTiming);syncChoice('aging',S.aging);syncChoice('carb',S.carb);updateHops();updateFermWarning();updateAroma();
+      syncChoice('boilTime',S.boilTime);syncChoice('dryTiming',S.dryTiming);renderAgingChoices();syncChoice('aging',S.aging);syncChoice('carb',S.carb);updateHops();updateFermWarning();updateAroma();
     }else{
       $('#nYeastName').textContent=r.yeast;$('#nFermTemp').value=S.nFermTemp;$('#nFermTempOut').textContent=fmtT(S.nFermTemp)+'°C';$('#nFermentCanvasLabel').textContent=fmtT(S.nFermTemp)+'°C · DAY 3 · KRAUSEN';$('#dh2Temp').value=S.dh2Temp;$('#dh2TempOut').textContent=fmtT(S.dh2Temp)+'°C';$('#dry2CanvasLabel').textContent=fmtT(S.dh2Temp)+'°C · COLD-SIDE HOPS';$('#wpTimeOut').textContent=S.wpTime+'분';$('#restTemp').value=S.restTemp;$('#restTempOut').textContent=fmtT(S.restTemp)+'°C';$('#headspace').value=S.headspace;$('#headspaceOut').textContent=S.headspace.toFixed(1)+'cm';
       syncChoice('wpTime',S.wpTime);syncChoice('restEnabled',S.restEnabled);syncChoice('restHours',S.restHours);syncChoice('dh2Time',S.dh2Time);syncChoice('crash',S.crash);renderVitcChoices();syncChoice('vitc',S.vitc);hopEditor('#wpHops',r.wp,S.wpHops,'wp');hopEditor('#dh1Hops',r.dh1,S.dh1Hops,'dh1');hopEditor('#dh2Hops',r.dh2,S.dh2Hops,'dh2');updateRestRisk();updateOxidationRisk();try{updateFermWeatherLine();}catch(e){}
@@ -3026,6 +3103,27 @@ if(tab==='share'){const c=communityContext(),ok=!!(c&&c.user&&c.user.uid),pane=$
 window.hdSaveSys=(function(){
   'use strict';
   const HD_SAVE_KEY='hopDreamSaveV1';
+  /* V110-P0-5: 저장 버전별 마이그레이션 테이블. 현재 저장 버전은 1.
+     저장 스키마를 바꿀 때는 HD_SAVE_VERSION을 올리고 HD_MIGRATIONS[새 버전]에
+     (구 페이로드)=>신 페이로드 함수를 등록한다. 알 수 없는 버전·파싱 실패는
+     조용히 초기화하지 않고 아래 hdLoad에서 백업+안내한다. */
+  const HD_SAVE_VERSION=1;
+  const HD_MIGRATIONS={1:function(d){return d;}};
+  function hdMigrate(d){
+    if(!d||typeof d.v!=='number')return null;
+    if(d.v>HD_SAVE_VERSION)return null; /* 코드보다 최신 저장 — 마이그레이션 불가 */
+    let cur=d;
+    for(let v=d.v;v<HD_SAVE_VERSION;v++){
+      const fn=HD_MIGRATIONS[v+1];
+      if(typeof fn!=='function')return null;
+      try{cur=fn(cur)||cur;}catch(e){return null;}
+    }
+    cur.v=HD_SAVE_VERSION;
+    return cur;
+  }
+  function hdBackupCorrupt(raw){
+    try{localStorage.setItem(HD_SAVE_KEY+'.corrupt.'+Date.now(),String(raw).slice(0,2000000));}catch(e){/* 백업 실패도 조용히 */}
+  }
   /* 초기화(기록 초기화) 중에는 자동저장이 동작하지 않도록 하는 전역 플래그.
      기록 초기화 버튼 클릭 시 true로 세우고 location.reload() — reload 과정에서
      pagehide/visibilitychange 핸들러가 메모리 내 G/C를 다시 저장해 초기화를
@@ -3057,7 +3155,7 @@ window.hdSaveSys=(function(){
     }catch(e){console.warn('[hd] C clone failed',e);cClone={};}
     const customs={};
     try{customRecipeIds.forEach(id=>{if(recipes[id])customs[id]=hdDeepClone(recipes[id]);});}catch(e){console.warn('[hd] customs clone failed',e);}
-    return {v:1,savedAt:Date.now(),G:gClone,C:cClone,customs,customRecipeIds:(customRecipeIds||[]).slice(),customSequence};
+    return {v:HD_SAVE_VERSION,savedAt:Date.now(),G:gClone,C:cClone,customs,customRecipeIds:(customRecipeIds||[]).slice(),customSequence};
   }
   /* v61 저장 롤백 가드 (V61-SAVE-GUARD): 이 인스턴스가 마지막으로 쓰거나
      읽은(채택한) savedAt. 다른 인스턴스가 더 최신 페이로드를 쓴 뒤에는
@@ -3096,7 +3194,7 @@ window.hdSaveSys=(function(){
       stage='verify';
       /* 쓰기 검증: 다시 읽어 파싱 + 방금 쓴 savedAt 일치까지 확인 (v61 강화) */
       const check=JSON.parse(localStorage.getItem(HD_SAVE_KEY));
-      if(!check||check.v!==1)throw new Error('verify failed');
+      if(!check||check.v!==HD_SAVE_VERSION)throw new Error('verify failed');
       if(check.savedAt!==payload.savedAt)throw new Error('savedAt mismatch after write');
       hdLastKnownSavedAt=payload.savedAt;
     }catch(e){
@@ -3207,9 +3305,17 @@ window.hdSaveSys=(function(){
   }
   function hdLoad(){
     if(!hdStorageOK)return false;
-    let d=null;
-    try{d=JSON.parse(localStorage.getItem(HD_SAVE_KEY));}catch(e){return false;}
-    if(!d||d.v!==1||!d.G||!d.C)return false;
+    let d=null,raw=null;
+    try{raw=localStorage.getItem(HD_SAVE_KEY);d=raw?JSON.parse(raw):null;}catch(e){d=null;}
+    if(d===null&&raw){
+      /* V110-P0-5: 파싱 실패 — 기존 값을 hopDreamSaveV1.corrupt.<timestamp> 키에 백업하고 사용자에게 안내 문구를 표시한다 (조용한 초기화 금지) */
+      hdBackupCorrupt(raw);
+      console.warn('[hd] save parse failed — corrupt backup written');
+      try{if(typeof showToast==='function')showToast('저장 데이터를 읽지 못했습니다. 손상된 기록은 별도로 백업했습니다. 처음부터 시작합니다.');}catch(_){}
+      return false;
+    }
+    d=hdMigrate(d);
+    if(!d||!d.G||!d.C)return false;
     /* 로드한 savedAt을 이 인스턴스의 기준점으로 삼음 (V88-FIX-L8: 후퇴 방지 — 더 큰 값일 때만 갱신) */
     if(typeof d.savedAt==='number'&&d.savedAt>hdLastKnownSavedAt)hdLastKnownSavedAt=d.savedAt;
     try{
@@ -3281,6 +3387,18 @@ window.hdSaveSys=(function(){
         appId:"1:189988567134:web:653aaa1437eb704a5e5ccf"
       };
       var auth=null,db=null,storage=null,hdUser=null,fbReady=false;
+      /* V110-P0-4: firebase-storage-compat.js 지연 로더 — 초기 <script>에서 제외된 storage SDK를 getStorage() 첫 호출 시 동적 삽입한다 */
+      var storageScriptPending=null;
+      function ensureStorageScript(cb){
+        if(typeof firebase!=='undefined'&&firebase.storage){cb();return;}
+        if(storageScriptPending){storageScriptPending.push(cb);return;}
+        storageScriptPending=[cb];
+        var s=document.createElement('script');
+        s.src='https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js';
+        s.onload=function(){var cbs=storageScriptPending;storageScriptPending=null;cbs.forEach(function(f){try{f();}catch(e){}});};
+        s.onerror=function(){storageScriptPending=null;};
+        document.head.appendChild(s);
+      }
       /* V82-FIX-SAVE: 이 탭이 클라우드에 푸시한 스냅샷의 savedAt.
          동기화 시 자신의 낡은 푸시 스냅샷을 채택해 메모리·로컬을 롤백하던
          경쟁 조건 방지용 (hdCloudSync의 own-push skip에서 사용). */
@@ -3291,7 +3409,7 @@ window.hdSaveSys=(function(){
         try{
           if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
           auth=firebase.auth();db=firebase.firestore();
-          try{storage=firebase.storage();}catch(e){storage=null;}
+          /* V110-P0-4: storage는 초기 로드에서 제외 — getStorage() 첫 호출 시 지연 로드한다 */
           fbReady=true;
           auth.getRedirectResult().catch(function(e){console.warn('[hd] getRedirectResult failed',e);});
           auth.onAuthStateChanged(function(user){
@@ -3473,7 +3591,14 @@ window.hdSaveSys=(function(){
         getUser: function(){ return hdUser; },
         getDb: function(){ return db; },
         getAuth: function(){ return auth; },
-        getStorage: function(){ return storage; },
+        getStorage: function(){
+          /* V110-P0-4: storage SDK 지연 로드 — 첫 호출 시 firebase-storage-compat.js를 동적 삽입한다 (동기 반환 API 유지) */
+          if(storage)return storage;
+          if(typeof firebase==='undefined')return null;
+          if(firebase.storage){try{storage=firebase.storage();}catch(e){storage=null;}}
+          else{ensureStorageScript(function(){try{if(firebase.storage)storage=firebase.storage();}catch(e){storage=null;}});}
+          return storage;
+        },
         isReady: function(){ return fbReady; }
       };
     })();
@@ -4119,6 +4244,51 @@ function handleEmptyCta(action){if(action==='board-write'){switchCommunityTab('b
 (function(){
   var shown=false,dismissedVersion=null;
   function currentVersion(){var el=document.getElementById('versionNumber');var txt=el?String(el.textContent||'').trim():'';return txt.replace(/^v/i,'')}
+  /* V110-P0-7: 경량 자작 에러 리포팅 — window.onerror/unhandledrejection 수집 → Firestore errorReports 컬렉션에 기록 + 사용자에게 토스트 안내.
+     별도 유료 서비스 도입 없음. 수집 항목: 종류·메시지·발생 위치(파일/행/열)·스택(2000자)·게임 버전·UA·URL·발생 시각·(로그인 시)UID.
+     폭주 방지: 세션당 최대 20건, 토스트는 30초에 1회. 리포팅 자체의 실패는 조용히 무시(무한 루프 방지).
+     ※ Firestore 보안 규칙에 errorReports 컬렉션 쓰기 허용이 필요할 수 있음 — 미르 확인 필요. */
+  (function(){
+    'use strict';
+    var lastToastAt=0,reported=0;
+    function errPayload(kind,msg,src,line,col,stack){
+      var ver='?';
+      try{ver=String(currentVersion()||'?');}catch(e){}
+      return{kind:String(kind||'error').slice(0,24),message:String(msg||'').slice(0,500),
+        source:String(src||'').slice(0,300),line:+line||0,col:+col||0,stack:String(stack||'').slice(0,2000),
+        version:ver,ua:String(navigator.userAgent||'').slice(0,300),url:String(location.href||'').slice(0,300),at:new Date().toISOString()};
+    }
+    function errSend(p){
+      try{
+        if(reported>=20)return;
+        var h=window.hdFb;
+        if(!h||typeof h.isReady!=='function'||!h.isReady())return;
+        var db=h.getDb&&h.getDb();
+        if(!db||!db.collection)return;
+        reported++;
+        var uid=null;
+        try{var u=h.getUser&&h.getUser();uid=u&&u.uid?u.uid:null;}catch(e){}
+        db.collection('errorReports').add(Object.assign({uid:uid},p)).catch(function(){});
+      }catch(e){/* 리포팅 실패는 조용히 무시 */}
+    }
+    function errToast(){
+      var now=Date.now();
+      if(now-lastToastAt<30000)return;
+      lastToastAt=now;
+      try{
+        /* V110-P0-7: 이 블록은 메인 IIFE 밖에 있어 showToast()를 직접 호출할 수 없으므로 #hdToast 엘리먼트를 직접 조작한다 */
+        var el=document.getElementById('hdToast');
+        if(el){el.textContent='오류가 발생했습니다. 개발팀에 자동으로 보고되었습니다.';el.hidden=false;
+          clearTimeout(window.__hdErrToastT);window.__hdErrToastT=setTimeout(function(){el.hidden=true;},4200);}
+      }catch(e){}
+    }
+    window.addEventListener('error',function(ev){
+      try{errSend(errPayload('error',ev.message,ev.filename,ev.lineno,ev.colno,ev.error&&ev.error.stack));errToast();}catch(e){}
+    });
+    window.addEventListener('unhandledrejection',function(ev){
+      try{var r=ev.reason,msg=r?(r.message||String(r)):'';errSend(errPayload('unhandledrejection',msg,'','','',r&&r.stack));errToast();}catch(e){}
+    });
+  })();
   function showBanner(remote){
     if(shown||dismissedVersion===String(remote))return;shown=true;
     var banner=document.getElementById('updateBanner');if(!banner)return;
